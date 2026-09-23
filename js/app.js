@@ -2,14 +2,13 @@ const WHATSAPP = "573164570484";
 
 const I18N = {
   es: {
-    welcomeEyebrow: "Exportación de tilapia y mojarra",
+    welcomeEyebrow: "Portafolio de productos para el mercado internacional",
     enterHint: "Toca el logo para entrar",
     welcomeLede:
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
     productsTitle: "¿Qué producto desea?",
-    productsLede: "Selecciona una tarjeta. Cada una abre su propio flujo de pedido.",
+    productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
     back: "← Volver",
-    presentation: "¿Cómo lo desea?",
     packaging: "Tipo de empaque",
     quantity: "Cantidad",
     unit: "Unidad",
@@ -23,37 +22,40 @@ const I18N = {
     sendWhatsapp: "Enviar pedido por WhatsApp",
     disclaimer: "Esto no confirma una venta ni un pago. Solo envía la solicitud al vendedor.",
     footerNote: "Pedido de cotización · no es una compra",
+    guest: "un cliente del catálogo",
     fields: {
       product: "Producto",
-      presentation: "Presentación",
       packaging: "Empaque",
       quantity: "Cantidad",
       destination: "Destino",
       client: "Cliente",
     },
     units: { kg: "kg", cajas: "cajas", unidades: "unidades" },
-    products: {
-      mojarra: {
-        name: "Mojarra entera",
-        blurb: "Entera, lista para exportación.",
-        lede: "Elige si la quieres fresca o congelada, el empaque y a dónde debe llegar.",
+    groups: {
+      entera: {
+        name: "Tilapia entera",
+        lede: "Indica empaque, cantidad y destino.",
+        options: {
+          fresco: "Tilapia entera fresca",
+          congelado: "Tilapia entera congelada",
+        },
       },
       filete: {
         name: "Filete de tilapia",
-        blurb: "Filete fresco o congelado.",
-        lede: "Indica presentación, empaque y ciudad o país de destino.",
+        lede: "Indica empaque, cantidad y destino.",
+        options: {
+          fresco: "Filete fresco",
+          congelado: "Filete congelado",
+        },
       },
-      piel: {
-        name: "Piel de tilapia",
-        blurb: "Piel para usos industriales y de exportación.",
-        lede: "Selecciona el tratamiento, el empaque y el destino.",
+      subproductos: {
+        name: "Subproductos",
+        lede: "Indica empaque, cantidad y destino.",
+        options: {
+          pieles: "Pieles de tilapia",
+          cabezas: "Cabezas de tilapia",
+        },
       },
-    },
-    presentations: {
-      fresco: "Fresco",
-      congelado: "Congelado",
-      salada: "Salada",
-      seca: "Seca",
     },
     packs: {
       caja5: "Caja 5 kg",
@@ -66,21 +68,19 @@ const I18N = {
     wa: (o) =>
       `Hola, soy ${o.who}. Quiero cotizar con CI Piscícola Botero SA:\n` +
       `• Producto: ${o.product}\n` +
-      `• Presentación: ${o.presentation}\n` +
       `• Empaque: ${o.packaging}\n` +
       `• Cantidad: ${o.qty} ${o.unit}\n` +
       `• Destino: ${o.city}, ${o.country}\n` +
       `Este mensaje es una solicitud de pedido, no una compra confirmada.`,
   },
   en: {
-    welcomeEyebrow: "Tilapia and mojarra exports",
+    welcomeEyebrow: "Product portfolio for the international market",
     enterHint: "Tap the logo to enter",
     welcomeLede:
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
     productsTitle: "Which product do you want?",
-    productsLede: "Select a card. Each one opens its own order flow.",
+    productsLede: "First choose the type and how you want it. Then set packing and destination.",
     back: "← Back",
-    presentation: "How would you like it?",
     packaging: "Packaging",
     quantity: "Quantity",
     unit: "Unit",
@@ -94,37 +94,40 @@ const I18N = {
     sendWhatsapp: "Send request on WhatsApp",
     disclaimer: "This does not confirm a sale or a payment. It only sends the request to the seller.",
     footerNote: "Quote request · not a purchase",
+    guest: "a catalog client",
     fields: {
       product: "Product",
-      presentation: "Presentation",
       packaging: "Packaging",
       quantity: "Quantity",
       destination: "Destination",
       client: "Client",
     },
     units: { kg: "kg", cajas: "boxes", unidades: "units" },
-    products: {
-      mojarra: {
-        name: "Whole mojarra",
-        blurb: "Whole fish, export ready.",
-        lede: "Choose fresh or frozen, packing, and where it should arrive.",
+    groups: {
+      entera: {
+        name: "Whole tilapia",
+        lede: "Set packing, quantity and destination.",
+        options: {
+          fresco: "Fresh whole tilapia",
+          congelado: "Frozen whole tilapia",
+        },
       },
       filete: {
         name: "Tilapia fillet",
-        blurb: "Fresh or frozen fillet.",
-        lede: "Set presentation, packing, and destination city or country.",
+        lede: "Set packing, quantity and destination.",
+        options: {
+          fresco: "Fresh fillet",
+          congelado: "Frozen fillet",
+        },
       },
-      piel: {
-        name: "Tilapia skin",
-        blurb: "Skin for industrial and export uses.",
-        lede: "Choose treatment, packing, and destination.",
+      subproductos: {
+        name: "By-products",
+        lede: "Set packing, quantity and destination.",
+        options: {
+          pieles: "Tilapia skins",
+          cabezas: "Tilapia heads",
+        },
       },
-    },
-    presentations: {
-      fresco: "Fresh",
-      congelado: "Frozen",
-      salada: "Salted",
-      seca: "Dried",
     },
     packs: {
       caja5: "5 kg box",
@@ -137,29 +140,171 @@ const I18N = {
     wa: (o) =>
       `Hello, this is ${o.who}. I would like a quote from CI Piscícola Botero SA:\n` +
       `• Product: ${o.product}\n` +
-      `• Presentation: ${o.presentation}\n` +
       `• Packaging: ${o.packaging}\n` +
       `• Quantity: ${o.qty} ${o.unit}\n` +
       `• Destination: ${o.city}, ${o.country}\n` +
       `This message is a request, not a confirmed purchase.`,
   },
+  pt: {
+    welcomeEyebrow: "Portfólio de produtos para o mercado internacional",
+    enterHint: "Toque no logo para entrar",
+    welcomeLede:
+      "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
+    productsTitle: "Qual produto deseja?",
+    productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
+    back: "← Voltar",
+    packaging: "Tipo de embalagem",
+    quantity: "Quantidade",
+    unit: "Unidade",
+    city: "Cidade",
+    country: "País",
+    clientName: "Nome do cliente (opcional)",
+    clientCompany: "Empresa (opcional)",
+    reviewOrder: "Ver resumo do pedido",
+    summaryTitle: "Resumo para o vendedor",
+    summaryLede: "Revise os dados. Ao enviar, o WhatsApp abre com esta mensagem.",
+    sendWhatsapp: "Enviar pedido pelo WhatsApp",
+    disclaimer: "Isto não confirma uma venda nem um pagamento. Só envia o pedido ao vendedor.",
+    footerNote: "Pedido de cotação · não é uma compra",
+    guest: "um cliente do catálogo",
+    fields: {
+      product: "Produto",
+      packaging: "Embalagem",
+      quantity: "Quantidade",
+      destination: "Destino",
+      client: "Cliente",
+    },
+    units: { kg: "kg", cajas: "caixas", unidades: "unidades" },
+    groups: {
+      entera: {
+        name: "Tilápia inteira",
+        lede: "Indique embalagem, quantidade e destino.",
+        options: {
+          fresco: "Tilápia inteira fresca",
+          congelado: "Tilápia inteira congelada",
+        },
+      },
+      filete: {
+        name: "Filé de tilápia",
+        lede: "Indique embalagem, quantidade e destino.",
+        options: {
+          fresco: "Filé fresco",
+          congelado: "Filé congelado",
+        },
+      },
+      subproductos: {
+        name: "Subprodutos",
+        lede: "Indique embalagem, quantidade e destino.",
+        options: {
+          pieles: "Peles de tilápia",
+          cabezas: "Cabeças de tilápia",
+        },
+      },
+    },
+    packs: {
+      caja5: "Caixa 5 kg",
+      caja10: "Caixa 10 kg",
+      caja20: "Caixa 20 kg",
+      vacio: "Bolsa a vácuo",
+      master: "Master carton",
+      saco: "Saco",
+    },
+    wa: (o) =>
+      `Olá, sou ${o.who}. Quero cotar com a CI Piscícola Botero SA:\n` +
+      `• Produto: ${o.product}\n` +
+      `• Embalagem: ${o.packaging}\n` +
+      `• Quantidade: ${o.qty} ${o.unit}\n` +
+      `• Destino: ${o.city}, ${o.country}\n` +
+      `Esta mensagem é uma solicitação de pedido, não uma compra confirmada.`,
+  },
+  zh: {
+    welcomeEyebrow: "国际市场产品组合",
+    enterHint: "点击标志进入",
+    welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
+    productsTitle: "您需要哪类产品？",
+    productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
+    back: "← 返回",
+    packaging: "包装方式",
+    quantity: "数量",
+    unit: "单位",
+    city: "城市",
+    country: "国家",
+    clientName: "客户姓名（选填）",
+    clientCompany: "公司（选填）",
+    reviewOrder: "查看询盘摘要",
+    summaryTitle: "发给销售的摘要",
+    summaryLede: "请核对信息。发送后将在 WhatsApp 打开此消息。",
+    sendWhatsapp: "通过 WhatsApp 发送询盘",
+    disclaimer: "这不会确认成交或付款，只是把询盘发给销售人员。",
+    footerNote: "询价请求 · 并非购买",
+    guest: "目录客户",
+    fields: {
+      product: "产品",
+      packaging: "包装",
+      quantity: "数量",
+      destination: "目的地",
+      client: "客户",
+    },
+    units: { kg: "公斤", cajas: "箱", unidades: "件" },
+    groups: {
+      entera: {
+        name: "整条罗非鱼",
+        lede: "请填写包装、数量和目的地。",
+        options: {
+          fresco: "整条鲜罗非鱼",
+          congelado: "整条冻罗非鱼",
+        },
+      },
+      filete: {
+        name: "罗非鱼鱼片",
+        lede: "请填写包装、数量和目的地。",
+        options: {
+          fresco: "鲜鱼片",
+          congelado: "冻鱼片",
+        },
+      },
+      subproductos: {
+        name: "副产品",
+        lede: "请填写包装、数量和目的地。",
+        options: {
+          pieles: "罗非鱼皮",
+          cabezas: "罗非鱼头",
+        },
+      },
+    },
+    packs: {
+      caja5: "5公斤箱",
+      caja10: "10公斤箱",
+      caja20: "20公斤箱",
+      vacio: "真空袋",
+      master: "外箱",
+      saco: "袋装",
+    },
+    wa: (o) =>
+      `您好，我是 ${o.who}。希望向 CI Piscícola Botero SA 询价：\n` +
+      `• 产品：${o.product}\n` +
+      `• 包装：${o.packaging}\n` +
+      `• 数量：${o.qty} ${o.unit}\n` +
+      `• 目的地：${o.city}, ${o.country}\n` +
+      `此消息仅为询盘，不是已确认的采购。`,
+  },
 };
 
-const CATALOG = {
-  mojarra: {
-    presentations: ["fresco", "congelado"],
+const GROUPS = {
+  entera: {
     packs: ["caja10", "caja20", "vacio", "master"],
-    art: fishArt("#00a7e1"),
+    options: ["fresco", "congelado"],
+    art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
   },
   filete: {
-    presentations: ["fresco", "congelado"],
     packs: ["caja5", "caja10", "vacio", "master"],
-    art: filletArt("#e3066a"),
+    options: ["fresco", "congelado"],
+    art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
   },
-  piel: {
-    presentations: ["fresco", "salada", "seca", "congelado"],
+  subproductos: {
     packs: ["caja10", "saco", "vacio", "master"],
-    art: skinArt("#10233a"),
+    options: ["pieles", "cabezas"],
+    art: (option) => (option === "cabezas" ? headArt("#10233a") : skinArt("#10233a")),
   },
 };
 
@@ -172,10 +317,12 @@ const DESTINATIONS = [
   { city: "Madrid", country: "España" },
 ];
 
+const LANG_HTML = { es: "es", en: "en", pt: "pt", zh: "zh-CN" };
+
 const state = {
   lang: "es",
-  product: null,
-  presentation: null,
+  group: null,
+  option: null,
   packaging: null,
   order: null,
 };
@@ -211,17 +358,26 @@ function skinArt(color) {
   </svg>`;
 }
 
+function headArt(color) {
+  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
+    <path d="M40 78c10-34 48-50 88-38 18 6 28 22 34 38-8 24-28 38-62 40-32 2-54-12-60-40Z" fill="${color}"/>
+    <circle cx="78" cy="70" r="7" fill="#fff"/>
+    <circle cx="76" cy="70" r="3.5" fill="#00a7e1"/>
+    <path d="M58 92c10 8 28 10 42 6" stroke="#e3066a" stroke-width="4" stroke-linecap="round"/>
+  </svg>`;
+}
+
 function applyI18n() {
-  document.documentElement.lang = state.lang;
+  document.documentElement.lang = LANG_HTML[state.lang];
+  document.documentElement.classList.toggle("is-zh", state.lang === "zh");
   document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.dataset.i18n;
-    el.textContent = t()[key];
+    el.textContent = t()[el.dataset.i18n];
   });
   document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.lang === state.lang);
   });
   renderProducts();
-  if (state.product) fillConfig();
+  if (state.group && state.option) fillConfig();
   if (state.order) renderTicket();
 }
 
@@ -233,33 +389,36 @@ function showStage(name) {
 }
 
 function renderProducts() {
-  const copy = t().products;
-  $("#productCards").innerHTML = Object.keys(CATALOG)
-    .map(
-      (id) => `<button class="card" type="button" data-product="${id}">
-        ${CATALOG[id].art}
-        <h3>${copy[id].name}</h3>
-        <p>${copy[id].blurb}</p>
-      </button>`
-    )
+  const dict = t().groups;
+  $("#productCards").innerHTML = Object.keys(GROUPS)
+    .map((id) => {
+      const group = GROUPS[id];
+      const copy = dict[id];
+      const options = group.options
+        .map(
+          (option) => `<button class="choice" type="button" data-group="${id}" data-option="${option}">
+            ${group.art(option)}
+            <span>${copy.options[option]}</span>
+          </button>`
+        )
+        .join("");
+      return `<article class="family">
+        <h3>${copy.name}</h3>
+        <div class="choices">${options}</div>
+      </article>`;
+    })
     .join("");
 }
 
 function fillConfig() {
-  const id = state.product;
+  const id = state.group;
   const dict = t();
-  $("#configTitle").textContent = dict.products[id].name;
-  $("#configLede").textContent = dict.products[id].lede;
-  $("#configArt").innerHTML = CATALOG[id].art;
+  const groupCopy = dict.groups[id];
+  $("#configTitle").textContent = groupCopy.options[state.option];
+  $("#configLede").textContent = groupCopy.lede;
+  $("#configArt").innerHTML = GROUPS[id].art(state.option);
 
-  $("#presentationChips").innerHTML = CATALOG[id].presentations
-    .map(
-      (key) =>
-        `<button type="button" class="chip ${state.presentation === key ? "is-on" : ""}" data-presentation="${key}">${dict.presentations[key]}</button>`
-    )
-    .join("");
-
-  $("#packagingChips").innerHTML = CATALOG[id].packs
+  $("#packagingChips").innerHTML = GROUPS[id].packs
     .map(
       (key) =>
         `<button type="button" class="chip ${state.packaging === key ? "is-on" : ""}" data-packaging="${key}">${dict.packs[key]}</button>`
@@ -282,28 +441,25 @@ function renderTicket() {
   const o = state.order;
   $("#ticket").innerHTML = `<dl>
     <dt>${dict.fields.product}</dt><dd>${o.product}</dd>
-    <dt>${dict.fields.presentation}</dt><dd>${o.presentation}</dd>
     <dt>${dict.fields.packaging}</dt><dd>${o.packaging}</dd>
     <dt>${dict.fields.quantity}</dt><dd>${o.qty} ${o.unit}</dd>
     <dt>${dict.fields.destination}</dt><dd>${o.city}, ${o.country}</dd>
     <dt>${dict.fields.client}</dt><dd>${o.who}</dd>
   </dl>`;
-  const msg = dict.wa(o);
-  $("#waBtn").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  $("#waBtn").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(dict.wa(o))}`;
 }
 
 function collectOrder() {
   const dict = t();
   const whoParts = [$("#clientName").value.trim(), $("#clientCompany").value.trim()].filter(Boolean);
   return {
-    product: dict.products[state.product].name,
-    presentation: dict.presentations[state.presentation],
+    product: dict.groups[state.group].options[state.option],
     packaging: dict.packs[state.packaging],
     qty: $("#qty").value,
     unit: dict.units[$("#unit").value],
     city: $("#city").value.trim(),
     country: $("#country").value.trim(),
-    who: whoParts.join(" · ") || (state.lang === "es" ? "un cliente del catálogo" : "a catalog client"),
+    who: whoParts.join(" · ") || dict.guest,
   };
 }
 
@@ -316,7 +472,8 @@ $("#enterBtn").addEventListener("click", () => {
 });
 
 $("#homeBtn").addEventListener("click", () => {
-  state.product = null;
+  state.group = null;
+  state.option = null;
   showStage("welcome");
 });
 
@@ -324,20 +481,13 @@ $("#backToProducts").addEventListener("click", () => showStage("products"));
 $("#backToConfig").addEventListener("click", () => showStage("config"));
 
 $("#productCards").addEventListener("click", (event) => {
-  const card = event.target.closest("[data-product]");
+  const card = event.target.closest("[data-group]");
   if (!card) return;
-  state.product = card.dataset.product;
-  state.presentation = CATALOG[state.product].presentations[0];
-  state.packaging = CATALOG[state.product].packs[0];
+  state.group = card.dataset.group;
+  state.option = card.dataset.option;
+  state.packaging = GROUPS[state.group].packs[0];
   fillConfig();
   showStage("config");
-});
-
-$("#presentationChips").addEventListener("click", (event) => {
-  const chip = event.target.closest("[data-presentation]");
-  if (!chip) return;
-  state.presentation = chip.dataset.presentation;
-  fillConfig();
 });
 
 $("#packagingChips").addEventListener("click", (event) => {
@@ -363,7 +513,7 @@ document.querySelector(".lang").addEventListener("click", (event) => {
 
 $("#orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!state.presentation || !state.packaging) return;
+  if (!state.group || !state.option || !state.packaging) return;
   state.order = collectOrder();
   renderTicket();
   showStage("summary");
