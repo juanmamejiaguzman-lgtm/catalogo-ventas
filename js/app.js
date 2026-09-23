@@ -1,26 +1,5 @@
 const WHATSAPP = "573164570484";
 
-const SOCIALS = [
-  {
-    id: "youtube",
-    href: "https://www.youtube.com/watch?v=MnM2skg9Bl4",
-    label: "YouTube",
-    icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 12.2s0-3.2-.4-4.6c-.2-.9-.9-1.6-1.8-1.8C19.2 5.4 12 5.4 12 5.4s-7.2 0-8.8.4c-.9.2-1.6.9-1.8 1.8C1 9 1 12.2 1 12.2s0 3.2.4 4.6c.2.9.9 1.6 1.8 1.8 1.6.4 8.8.4 8.8.4s7.2 0 8.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.4.4-4.6.4-4.6zM9.8 15.6V8.8l6.2 3.4-6.2 3.4z"/></svg>`,
-  },
-  {
-    id: "instagram",
-    href: "https://www.instagram.com/piscicolabotero/",
-    label: "Instagram",
-    icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm0 7.9A3.1 3.1 0 1 1 15.1 12 3.1 3.1 0 0 1 12 15.1zm6.2-8.2a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1zM12 4.6c-2.1 0-2.4 0-3.2.1a5 5 0 0 0-1.7.3 3.3 3.3 0 0 0-1.9 1.9 5 5 0 0 0-.3 1.7c-.1.8-.1 1.1-.1 3.2s0 2.4.1 3.2a5 5 0 0 0 .3 1.7 3.3 3.3 0 0 0 1.9 1.9 5 5 0 0 0 1.7.3c.8.1 1.1.1 3.2.1s2.4 0 3.2-.1a5 5 0 0 0 1.7-.3 3.3 3.3 0 0 0 1.9-1.9 5 5 0 0 0 .3-1.7c.1-.8.1-1.1.1-3.2s0-2.4-.1-3.2a5 5 0 0 0-.3-1.7 3.3 3.3 0 0 0-1.9-1.9 5 5 0 0 0-1.7-.3c-.8-.1-1.1-.1-3.2-.1zm0 1.8c2.1 0 2.3 0 3.1.1a3.2 3.2 0 0 1 1.1.2 1.5 1.5 0 0 1 .9.9 3.2 3.2 0 0 1 .2 1.1c.1.8.1 1 .1 3.1s0 2.3-.1 3.1a3.2 3.2 0 0 1-.2 1.1 1.5 1.5 0 0 1-.9.9 3.2 3.2 0 0 1-1.1.2c-.8.1-1 .1-3.1.1s-2.3 0-3.1-.1a3.2 3.2 0 0 1-1.1-.2 1.5 1.5 0 0 1-.9-.9 3.2 3.2 0 0 1-.2-1.1c-.1-.8-.1-1-.1-3.1s0-2.3.1-3.1a3.2 3.2 0 0 1 .2-1.1 1.5 1.5 0 0 1 .9-.9 3.2 3.2 0 0 1 1.1-.2c.8-.1 1-.1 3.1-.1z"/></svg>`,
-  },
-  {
-    id: "facebook",
-    href: "https://www.facebook.com/share/1HkViYQRPa/?mibextid=wwXIfr",
-    label: "Facebook",
-    icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.2 8.5V6.7c0-.6.4-.8 1-.8h1.5V3h-2.6C11.3 3 10 4.6 10 7.1v1.4H8v3h2V21h3.2v-9.5h2.3l.5-3h-2.8z"/></svg>`,
-  },
-];
-
 const I18N = {
   es: {
     welcomeEyebrow: "Portafolio de productos para el mercado internacional",
@@ -405,41 +384,13 @@ function applyI18n() {
   document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.lang === state.lang);
   });
-  renderSocials();
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute("aria-label", t()[el.dataset.i18nAria]);
+  });
   renderProducts();
   if (state.group && state.option) fillConfig();
   if (state.order) renderTicket();
 }
-
-function renderSocials() {
-  const label = t().socialLabel;
-  const html = SOCIALS.map(
-    (item) => `<a class="social" data-network="${item.id}" href="${item.href}" target="_blank" rel="noopener noreferrer">
-      ${item.icon}<span>${item.label}</span>
-    </a>`
-  ).join("");
-  ["#socialsWelcome", "#socialsProducts"].forEach((sel) => {
-    const el = $(sel);
-    if (!el) return;
-    el.setAttribute("aria-label", label);
-    el.innerHTML = html;
-  });
-}
-
-function openExternal(event) {
-  const link = event.target.closest("a[href]");
-  if (!link) return;
-  const url = link.href;
-  if (!/^https?:/.test(url)) return;
-  event.preventDefault();
-  event.stopPropagation();
-  const opened = window.open(url, "_blank", "noopener,noreferrer");
-  if (!opened) window.location.assign(url);
-}
-
-document.addEventListener("click", (event) => {
-  if (event.target.closest(".socials a, .video-frame")) openExternal(event);
-});
 
 function showStage(name) {
   document.querySelectorAll(".stage").forEach((el) => {
