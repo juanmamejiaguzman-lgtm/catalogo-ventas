@@ -426,6 +426,21 @@ function renderSocials() {
   });
 }
 
+function openExternal(event) {
+  const link = event.target.closest("a[href]");
+  if (!link) return;
+  const url = link.href;
+  if (!/^https?:/.test(url)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  const opened = window.open(url, "_blank", "noopener,noreferrer");
+  if (!opened) window.location.assign(url);
+}
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest(".socials a, .video-frame")) openExternal(event);
+});
+
 function showStage(name) {
   document.querySelectorAll(".stage").forEach((el) => {
     el.classList.toggle("is-active", el.dataset.stage === name);
@@ -564,25 +579,5 @@ $("#orderForm").addEventListener("submit", (event) => {
   showStage("summary");
 });
 
-function bindVideo() {
-  const frame = $("#videoFrame");
-  if (!frame || frame.dataset.bound) return;
-  frame.dataset.bound = "1";
-  const play = () => {
-    frame.innerHTML = `<iframe src="https://www.youtube.com/embed/MnM2skg9Bl4?autoplay=1" title="CI Piscícola Botero SA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-    frame.removeAttribute("role");
-    frame.removeAttribute("tabindex");
-    frame.style.cursor = "default";
-  };
-  frame.addEventListener("click", play);
-  frame.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      play();
-    }
-  });
-}
-
 applyI18n();
-bindVideo();
 renderProducts();

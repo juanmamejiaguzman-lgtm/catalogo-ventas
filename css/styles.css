@@ -232,13 +232,22 @@ html.is-zh h3 {
   color: var(--magenta-deep);
 }
 
+.video-stage,
+.socials {
+  position: relative;
+  z-index: 3;
+}
+
 .video-frame {
   position: relative;
+  display: block;
   aspect-ratio: 16 / 9;
   border-radius: 28px;
   overflow: hidden;
   background: #081422;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   box-shadow:
     0 0 0 3px rgba(227, 6, 106, 0.35),
     0 0 0 8px rgba(0, 167, 225, 0.12),
