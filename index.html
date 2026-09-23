@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CI Piscícola Botero SA — Catálogo</title>
+    <meta name="description" content="Catálogo de exportación: mojarra entera, filete de tilapia y piel de tilapia. Elige producto, empaque y destino." />
+    <meta property="og:title" content="CI Piscícola Botero SA — Catálogo" />
+    <meta property="og:description" content="Mojarra entera, filete de tilapia y piel de tilapia. Arme su pedido y envíelo por WhatsApp." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://juanmamejiaguzman-lgtm.github.io/catalogo-ventas/" />
+    <meta property="og:image" content="https://juanmamejiaguzman-lgtm.github.io/catalogo-ventas/assets/logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="waves" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button class="brand brand--mini" id="homeBtn" type="button" hidden>
+        <img src="assets/logo.png" alt="Botero" />
+      </button>
+      <p class="company" id="companyLabel">CI Piscícola Botero SA</p>
+      <div class="lang" role="group" aria-label="Idioma">
+        <button type="button" data-lang="es" class="is-active">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="stage is-active" id="stage-welcome" data-stage="welcome">
+        <p class="eyebrow" data-i18n="welcomeEyebrow"></p>
+        <h1 class="sr-only">CI Piscícola Botero SA</h1>
+        <button class="logo-wrap" id="enterBtn" type="button">
+          <span class="ripple"></span>
+          <span class="ripple delay"></span>
+          <img class="logo" src="assets/logo.png" alt="Botero" />
+          <span class="logo-hint" data-i18n="enterHint"></span>
+        </button>
+        <p class="lede" data-i18n="welcomeLede"></p>
+      </section>
+
+      <section class="stage" id="stage-products" data-stage="products">
+        <h2 data-i18n="productsTitle"></h2>
+        <p class="lede" data-i18n="productsLede"></p>
+        <div class="cards" id="productCards"></div>
+      </section>
+
+      <section class="stage" id="stage-config" data-stage="config">
+        <button class="back" id="backToProducts" type="button" data-i18n="back"></button>
+        <div class="config-hero">
+          <div class="config-art" id="configArt"></div>
+          <div>
+            <h2 id="configTitle"></h2>
+            <p class="lede" id="configLede"></p>
+          </div>
+        </div>
+        <form class="config" id="orderForm">
+          <fieldset>
+            <legend data-i18n="presentation"></legend>
+            <div class="chips" id="presentationChips"></div>
+          </fieldset>
+          <fieldset>
+            <legend data-i18n="packaging"></legend>
+            <div class="chips" id="packagingChips"></div>
+          </fieldset>
+          <fieldset class="grid-2">
+            <label>
+              <span data-i18n="quantity"></span>
+              <input type="number" id="qty" min="1" step="1" value="100" required />
+            </label>
+            <label>
+              <span data-i18n="unit"></span>
+              <select id="unit"></select>
+            </label>
+          </fieldset>
+          <fieldset class="grid-2">
+            <label>
+              <span data-i18n="city"></span>
+              <input type="text" id="city" autocomplete="address-level2" required />
+            </label>
+            <label>
+              <span data-i18n="country"></span>
+              <input type="text" id="country" autocomplete="country-name" required />
+            </label>
+          </fieldset>
+          <div class="dest-suggest" id="destSuggest"></div>
+          <fieldset class="grid-2">
+            <label>
+              <span data-i18n="clientName"></span>
+              <input type="text" id="clientName" autocomplete="name" />
+            </label>
+            <label>
+              <span data-i18n="clientCompany"></span>
+              <input type="text" id="clientCompany" autocomplete="organization" />
+            </label>
+          </fieldset>
+          <button class="cta" type="submit" data-i18n="reviewOrder"></button>
+        </form>
+      </section>
+
+      <section class="stage" id="stage-summary" data-stage="summary">
+        <button class="back" id="backToConfig" type="button" data-i18n="back"></button>
+        <h2 data-i18n="summaryTitle"></h2>
+        <p class="lede" data-i18n="summaryLede"></p>
+        <article class="ticket" id="ticket"></article>
+        <a class="cta cta--wa" id="waBtn" href="#" target="_blank" rel="noopener">
+          <span data-i18n="sendWhatsapp"></span>
+        </a>
+        <p class="fineprint" data-i18n="disclaimer"></p>
+      </section>
+    </main>
+
+    <footer>
+      <span>CI Piscícola Botero SA</span>
+      <span class="dot"></span>
+      <span data-i18n="footerNote"></span>
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
