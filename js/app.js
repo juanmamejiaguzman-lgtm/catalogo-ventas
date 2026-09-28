@@ -10,6 +10,9 @@ const I18N = {
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
     productsTitle: "¿Qué producto desea?",
     productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
+    colorTitle: "¿Tilapia entera roja o negra?",
+    colorLede: "Cuando elijas el color, armamos el pedido.",
+    process: "Presentación",
     back: "← Volver",
     packaging: "Tipo de empaque",
     quantity: "Cantidad",
@@ -27,6 +30,9 @@ const I18N = {
     guest: "un cliente del catálogo",
     fields: {
       product: "Producto",
+      color: "Color",
+      process: "Presentación",
+      scientific: "Nombre científico",
       packaging: "Empaque",
       quantity: "Cantidad",
       destination: "Destino",
@@ -36,7 +42,8 @@ const I18N = {
     groups: {
       entera: {
         name: "Tilapia entera",
-        lede: "Indica empaque, cantidad y destino.",
+        sci: "Oreochromis niloticus · Oreochromis spp.",
+        lede: "Indica presentación, empaque, cantidad y destino.",
         options: {
           fresco: "Tilapia entera fresca",
           congelado: "Tilapia entera congelada",
@@ -44,6 +51,7 @@ const I18N = {
       },
       filete: {
         name: "Filete de tilapia",
+        sci: "Oreochromis niloticus",
         lede: "Indica empaque, cantidad y destino.",
         options: {
           fresco: "Filete fresco",
@@ -52,6 +60,7 @@ const I18N = {
       },
       subproductos: {
         name: "Subproductos",
+        sci: "Oreochromis niloticus",
         lede: "Indica empaque, cantidad y destino.",
         options: {
           pieles: "Pieles de tilapia",
@@ -67,9 +76,25 @@ const I18N = {
       master: "Master carton",
       saco: "Saco",
     },
+    colors: {
+      roja: "Tilapia entera roja",
+      negra: "Tilapia entera negra",
+    },
+    colorSci: {
+      roja: "Oreochromis spp.",
+      negra: "Oreochromis niloticus",
+    },
+    processes: {
+      sesa: "SESA — Sin escamas y sin agallas",
+      ceca: "CECA — Con escamas y con agallas",
+      seca: "SECA — Sin escamas y con agallas",
+    },
     wa: (o) =>
       `Hola, soy ${o.who}. Quiero cotizar con CI Piscícola Botero SA:\n` +
       `• Producto: ${o.product}\n` +
+      (o.color ? `• Color: ${o.color}\n` : "") +
+      (o.process ? `• Presentación: ${o.process}\n` : "") +
+      `• Nombre científico: ${o.scientific}\n` +
       `• Empaque: ${o.packaging}\n` +
       `• Cantidad: ${o.qty} ${o.unit}\n` +
       `• Destino: ${o.city}, ${o.country}\n` +
@@ -84,6 +109,9 @@ const I18N = {
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
     productsTitle: "Which product do you want?",
     productsLede: "First choose the type and how you want it. Then set packing and destination.",
+    colorTitle: "Red or black whole tilapia?",
+    colorLede: "After you choose the color, we build the order.",
+    process: "Presentation",
     back: "← Back",
     packaging: "Packaging",
     quantity: "Quantity",
@@ -101,6 +129,9 @@ const I18N = {
     guest: "a catalog client",
     fields: {
       product: "Product",
+      color: "Color",
+      process: "Presentation",
+      scientific: "Scientific name",
       packaging: "Packaging",
       quantity: "Quantity",
       destination: "Destination",
@@ -110,7 +141,8 @@ const I18N = {
     groups: {
       entera: {
         name: "Whole tilapia",
-        lede: "Set packing, quantity and destination.",
+        sci: "Oreochromis niloticus · Oreochromis spp.",
+        lede: "Set presentation, packing, quantity and destination.",
         options: {
           fresco: "Fresh whole tilapia",
           congelado: "Frozen whole tilapia",
@@ -118,6 +150,7 @@ const I18N = {
       },
       filete: {
         name: "Tilapia fillet",
+        sci: "Oreochromis niloticus",
         lede: "Set packing, quantity and destination.",
         options: {
           fresco: "Fresh fillet",
@@ -126,6 +159,7 @@ const I18N = {
       },
       subproductos: {
         name: "By-products",
+        sci: "Oreochromis niloticus",
         lede: "Set packing, quantity and destination.",
         options: {
           pieles: "Tilapia skins",
@@ -141,9 +175,25 @@ const I18N = {
       master: "Master carton",
       saco: "Sack",
     },
+    colors: {
+      roja: "Red whole tilapia",
+      negra: "Black whole tilapia",
+    },
+    colorSci: {
+      roja: "Oreochromis spp.",
+      negra: "Oreochromis niloticus",
+    },
+    processes: {
+      sesa: "SESA — Scaled and gills removed",
+      ceca: "CECA — With scales and gills",
+      seca: "SECA — Scaled, with gills",
+    },
     wa: (o) =>
       `Hello, this is ${o.who}. I would like a quote from CI Piscícola Botero SA:\n` +
       `• Product: ${o.product}\n` +
+      (o.color ? `• Color: ${o.color}\n` : "") +
+      (o.process ? `• Presentation: ${o.process}\n` : "") +
+      `• Scientific name: ${o.scientific}\n` +
       `• Packaging: ${o.packaging}\n` +
       `• Quantity: ${o.qty} ${o.unit}\n` +
       `• Destination: ${o.city}, ${o.country}\n` +
@@ -158,6 +208,9 @@ const I18N = {
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
     productsTitle: "Qual produto deseja?",
     productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
+    colorTitle: "Tilápia inteira vermelha ou preta?",
+    colorLede: "Depois de escolher a cor, montamos o pedido.",
+    process: "Apresentação",
     back: "← Voltar",
     packaging: "Tipo de embalagem",
     quantity: "Quantidade",
@@ -175,6 +228,9 @@ const I18N = {
     guest: "um cliente do catálogo",
     fields: {
       product: "Produto",
+      color: "Cor",
+      process: "Apresentação",
+      scientific: "Nome científico",
       packaging: "Embalagem",
       quantity: "Quantidade",
       destination: "Destino",
@@ -184,7 +240,8 @@ const I18N = {
     groups: {
       entera: {
         name: "Tilápia inteira",
-        lede: "Indique embalagem, quantidade e destino.",
+        sci: "Oreochromis niloticus · Oreochromis spp.",
+        lede: "Indique apresentação, embalagem, quantidade e destino.",
         options: {
           fresco: "Tilápia inteira fresca",
           congelado: "Tilápia inteira congelada",
@@ -192,6 +249,7 @@ const I18N = {
       },
       filete: {
         name: "Filé de tilápia",
+        sci: "Oreochromis niloticus",
         lede: "Indique embalagem, quantidade e destino.",
         options: {
           fresco: "Filé fresco",
@@ -200,6 +258,7 @@ const I18N = {
       },
       subproductos: {
         name: "Subprodutos",
+        sci: "Oreochromis niloticus",
         lede: "Indique embalagem, quantidade e destino.",
         options: {
           pieles: "Peles de tilápia",
@@ -215,9 +274,25 @@ const I18N = {
       master: "Master carton",
       saco: "Saco",
     },
+    colors: {
+      roja: "Tilápia inteira vermelha",
+      negra: "Tilápia inteira preta",
+    },
+    colorSci: {
+      roja: "Oreochromis spp.",
+      negra: "Oreochromis niloticus",
+    },
+    processes: {
+      sesa: "SESA — Sem escamas e sem guelras",
+      ceca: "CECA — Com escamas e com guelras",
+      seca: "SECA — Sem escamas e com guelras",
+    },
     wa: (o) =>
       `Olá, sou ${o.who}. Quero cotar com a CI Piscícola Botero SA:\n` +
       `• Produto: ${o.product}\n` +
+      (o.color ? `• Cor: ${o.color}\n` : "") +
+      (o.process ? `• Apresentação: ${o.process}\n` : "") +
+      `• Nome científico: ${o.scientific}\n` +
       `• Embalagem: ${o.packaging}\n` +
       `• Quantidade: ${o.qty} ${o.unit}\n` +
       `• Destino: ${o.city}, ${o.country}\n` +
@@ -231,6 +306,9 @@ const I18N = {
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
+    colorTitle: "整条红罗非鱼还是黑罗非鱼？",
+    colorLede: "选定颜色后，再填写订单。",
+    process: "加工方式",
     back: "← 返回",
     packaging: "包装方式",
     quantity: "数量",
@@ -248,6 +326,9 @@ const I18N = {
     guest: "目录客户",
     fields: {
       product: "产品",
+      color: "颜色",
+      process: "加工方式",
+      scientific: "学名",
       packaging: "包装",
       quantity: "数量",
       destination: "目的地",
@@ -257,7 +338,8 @@ const I18N = {
     groups: {
       entera: {
         name: "整条罗非鱼",
-        lede: "请填写包装、数量和目的地。",
+        sci: "Oreochromis niloticus · Oreochromis spp.",
+        lede: "请填写加工方式、包装、数量和目的地。",
         options: {
           fresco: "整条鲜罗非鱼",
           congelado: "整条冻罗非鱼",
@@ -265,6 +347,7 @@ const I18N = {
       },
       filete: {
         name: "罗非鱼鱼片",
+        sci: "Oreochromis niloticus",
         lede: "请填写包装、数量和目的地。",
         options: {
           fresco: "鲜鱼片",
@@ -273,6 +356,7 @@ const I18N = {
       },
       subproductos: {
         name: "副产品",
+        sci: "Oreochromis niloticus",
         lede: "请填写包装、数量和目的地。",
         options: {
           pieles: "罗非鱼皮",
@@ -288,9 +372,25 @@ const I18N = {
       master: "外箱",
       saco: "袋装",
     },
+    colors: {
+      roja: "整条红罗非鱼",
+      negra: "整条黑罗非鱼",
+    },
+    colorSci: {
+      roja: "Oreochromis spp.",
+      negra: "Oreochromis niloticus",
+    },
+    processes: {
+      sesa: "SESA — 去鳞去鳃",
+      ceca: "CECA — 带鳞带鳃",
+      seca: "SECA — 去鳞留鳃",
+    },
     wa: (o) =>
       `您好，我是 ${o.who}。希望向 CI Piscícola Botero SA 询价：\n` +
       `• 产品：${o.product}\n` +
+      (o.color ? `• 颜色：${o.color}\n` : "") +
+      (o.process ? `• 加工方式：${o.process}\n` : "") +
+      `• 学名：${o.scientific}\n` +
       `• 包装：${o.packaging}\n` +
       `• 数量：${o.qty} ${o.unit}\n` +
       `• 目的地：${o.city}, ${o.country}\n` +
@@ -302,7 +402,10 @@ const GROUPS = {
   entera: {
     packs: ["caja10", "caja20", "vacio", "master"],
     options: ["fresco", "congelado"],
+    colors: ["roja", "negra"],
+    processes: ["sesa", "ceca", "seca"],
     art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
+    colorArt: (color) => fishArt(color === "roja" ? "#e3066a" : "#1b2430"),
   },
   filete: {
     packs: ["caja5", "caja10", "vacio", "master"],
@@ -331,6 +434,8 @@ const state = {
   lang: "es",
   group: null,
   option: null,
+  color: null,
+  process: null,
   packaging: null,
   order: null,
 };
@@ -388,7 +493,8 @@ function applyI18n() {
     el.setAttribute("aria-label", t()[el.dataset.i18nAria]);
   });
   renderProducts();
-  if (state.group && state.option) fillConfig();
+  if (state.group === "entera") renderColors();
+  if (state.group && state.option && (state.group !== "entera" || state.color)) fillConfig();
   if (state.order) renderTicket();
 }
 
@@ -415,9 +521,30 @@ function renderProducts() {
         .join("");
       return `<article class="family">
         <h3>${copy.name}</h3>
+        <p class="sci">${copy.sci}</p>
         <div class="choices">${options}</div>
       </article>`;
     })
+    .join("");
+}
+
+function scientificName() {
+  const dict = t();
+  if (state.group === "entera" && state.color) return dict.colorSci[state.color];
+  return dict.groups[state.group].sci;
+}
+
+function renderColors() {
+  const dict = t();
+  $("#colorContext").textContent = dict.groups.entera.options[state.option] || "";
+  $("#colorCards").innerHTML = GROUPS.entera.colors
+    .map(
+      (color) => `<button class="choice" type="button" data-color="${color}">
+        ${GROUPS.entera.colorArt(color)}
+        <span>${dict.colors[color]}</span>
+        <small class="sci">${dict.colorSci[color]}</small>
+      </button>`
+    )
     .join("");
 }
 
@@ -425,9 +552,26 @@ function fillConfig() {
   const id = state.group;
   const dict = t();
   const groupCopy = dict.groups[id];
-  $("#configTitle").textContent = groupCopy.options[state.option];
+  const title = [groupCopy.options[state.option], id === "entera" && state.color ? dict.colors[state.color] : ""]
+    .filter(Boolean)
+    .join(" · ");
+  $("#configTitle").textContent = title;
+  $("#configSci").textContent = scientificName();
   $("#configLede").textContent = groupCopy.lede;
-  $("#configArt").innerHTML = GROUPS[id].art(state.option);
+  $("#configArt").innerHTML = id === "entera" && state.color ? GROUPS.entera.colorArt(state.color) : GROUPS[id].art(state.option);
+
+  const processField = $("#processField");
+  const needsProcess = id === "entera";
+  processField.hidden = !needsProcess;
+  if (needsProcess) {
+    if (!state.process) state.process = GROUPS.entera.processes[0];
+    $("#processChips").innerHTML = GROUPS.entera.processes
+      .map(
+        (key) =>
+          `<button type="button" class="chip ${state.process === key ? "is-on" : ""}" data-process="${key}">${dict.processes[key]}</button>`
+      )
+      .join("");
+  }
 
   $("#packagingChips").innerHTML = GROUPS[id].packs
     .map(
@@ -452,6 +596,9 @@ function renderTicket() {
   const o = state.order;
   $("#ticket").innerHTML = `<dl>
     <dt>${dict.fields.product}</dt><dd>${o.product}</dd>
+    ${o.color ? `<dt>${dict.fields.color}</dt><dd>${o.color}</dd>` : ""}
+    ${o.process ? `<dt>${dict.fields.process}</dt><dd>${o.process}</dd>` : ""}
+    <dt>${dict.fields.scientific}</dt><dd class="sci">${o.scientific}</dd>
     <dt>${dict.fields.packaging}</dt><dd>${o.packaging}</dd>
     <dt>${dict.fields.quantity}</dt><dd>${o.qty} ${o.unit}</dd>
     <dt>${dict.fields.destination}</dt><dd>${o.city}, ${o.country}</dd>
@@ -465,6 +612,9 @@ function collectOrder() {
   const whoParts = [$("#clientName").value.trim(), $("#clientCompany").value.trim()].filter(Boolean);
   return {
     product: dict.groups[state.group].options[state.option],
+    color: state.group === "entera" ? dict.colors[state.color] : "",
+    process: state.group === "entera" ? dict.processes[state.process] : "",
+    scientific: scientificName(),
     packaging: dict.packs[state.packaging],
     qty: $("#qty").value,
     unit: dict.units[$("#unit").value],
@@ -485,10 +635,16 @@ $("#enterBtn").addEventListener("click", () => {
 $("#homeBtn").addEventListener("click", () => {
   state.group = null;
   state.option = null;
+  state.color = null;
+  state.process = null;
   showStage("welcome");
 });
 
-$("#backToProducts").addEventListener("click", () => showStage("products"));
+$("#backToProducts").addEventListener("click", () => {
+  if (state.group === "entera") showStage("color");
+  else showStage("products");
+});
+$("#backToProductsFromColor").addEventListener("click", () => showStage("products"));
 $("#backToConfig").addEventListener("click", () => showStage("config"));
 
 $("#productCards").addEventListener("click", (event) => {
@@ -496,9 +652,32 @@ $("#productCards").addEventListener("click", (event) => {
   if (!card) return;
   state.group = card.dataset.group;
   state.option = card.dataset.option;
+  state.color = null;
+  state.process = null;
   state.packaging = GROUPS[state.group].packs[0];
+  if (state.group === "entera") {
+    renderColors();
+    showStage("color");
+    return;
+  }
   fillConfig();
   showStage("config");
+});
+
+$("#colorCards").addEventListener("click", (event) => {
+  const card = event.target.closest("[data-color]");
+  if (!card) return;
+  state.color = card.dataset.color;
+  state.process = GROUPS.entera.processes[0];
+  fillConfig();
+  showStage("config");
+});
+
+$("#processChips").addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-process]");
+  if (!chip) return;
+  state.process = chip.dataset.process;
+  fillConfig();
 });
 
 $("#packagingChips").addEventListener("click", (event) => {
@@ -525,6 +704,7 @@ document.querySelector(".lang").addEventListener("click", (event) => {
 $("#orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
   if (!state.group || !state.option || !state.packaging) return;
+  if (state.group === "entera" && (!state.color || !state.process)) return;
   state.order = collectOrder();
   renderTicket();
   showStage("summary");

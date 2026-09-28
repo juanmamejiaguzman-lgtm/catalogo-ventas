@@ -362,8 +362,26 @@ html.is-zh h3 {
 
 .family h3 {
   font-family: Fraunces, Georgia, serif;
-  margin: 0 0 14px;
+  margin: 0 0 4px;
   font-size: 1.4rem;
+}
+
+.sci {
+  margin: 0 0 12px;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.choice .sci {
+  display: block;
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
+.cards-2 {
+  grid-template-columns: 1fr 1fr;
 }
 
 .choices {
@@ -627,6 +645,7 @@ footer {
 
 @media (max-width: 840px) {
   .cards,
+  .cards-2,
   .grid-2,
   .ticket dl {
     grid-template-columns: 1fr;

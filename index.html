@@ -81,16 +81,29 @@
         <div class="cards" id="productCards"></div>
       </section>
 
+      <section class="stage" id="stage-color" data-stage="color">
+        <button class="back" id="backToProductsFromColor" type="button" data-i18n="back"></button>
+        <h2 data-i18n="colorTitle"></h2>
+        <p class="lede" id="colorContext"></p>
+        <p class="lede" data-i18n="colorLede"></p>
+        <div class="cards cards-2" id="colorCards"></div>
+      </section>
+
       <section class="stage" id="stage-config" data-stage="config">
         <button class="back" id="backToProducts" type="button" data-i18n="back"></button>
         <div class="config-hero">
           <div class="config-art" id="configArt"></div>
           <div>
             <h2 id="configTitle"></h2>
+            <p class="sci" id="configSci"></p>
             <p class="lede" id="configLede"></p>
           </div>
         </div>
         <form class="config" id="orderForm">
+          <fieldset id="processField" hidden>
+            <legend data-i18n="process"></legend>
+            <div class="chips" id="processChips"></div>
+          </fieldset>
           <fieldset>
             <legend data-i18n="packaging"></legend>
             <div class="chips" id="packagingChips"></div>
