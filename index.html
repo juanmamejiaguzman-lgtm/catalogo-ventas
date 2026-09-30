@@ -28,11 +28,17 @@
         <img src="assets/logo.png" alt="Botero" />
       </button>
       <p class="company" id="companyLabel">CI Piscícola Botero SA</p>
-      <div class="lang" role="group" aria-label="Idioma">
-        <button type="button" data-lang="es" class="is-active">ES</button>
-        <button type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="pt">PT</button>
-        <button type="button" data-lang="zh">中文</button>
+      <div class="controls">
+        <div class="lang" id="massSwitch" role="group" data-i18n-aria="massLabel">
+          <button type="button" data-mass="kg" class="is-active">kg</button>
+          <button type="button" data-mass="lb">lb</button>
+        </div>
+        <div class="lang" role="group" aria-label="Idioma">
+          <button type="button" data-lang="es" class="is-active">ES</button>
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="pt">PT</button>
+          <button type="button" data-lang="zh">中文</button>
+        </div>
       </div>
     </header>
 
@@ -126,18 +132,36 @@
             <legend data-i18n="size"></legend>
             <div class="chips" id="sizeChips"></div>
           </fieldset>
-          <fieldset>
+          <fieldset id="packPrimaryField" hidden>
+            <legend data-i18n="packPrimary"></legend>
+            <div class="chips" id="packPrimaryChips"></div>
+          </fieldset>
+          <fieldset id="packSecondaryField" hidden>
+            <legend data-i18n="packSecondary"></legend>
+            <div class="chips" id="packSecondaryChips"></div>
+          </fieldset>
+          <fieldset id="packFixedField" hidden>
             <legend data-i18n="packaging"></legend>
-            <div class="chips" id="packagingChips"></div>
+            <div class="chips" id="packFixedChips"></div>
           </fieldset>
           <fieldset class="grid-2">
             <label>
               <span data-i18n="quantity"></span>
-              <input type="number" id="qty" min="1" step="1" value="100" required />
+              <input type="number" id="qty" min="1" step="0.01" value="100" required />
             </label>
             <label>
               <span data-i18n="unit"></span>
               <select id="unit"></select>
+            </label>
+          </fieldset>
+          <fieldset class="grid-2">
+            <label>
+              <span data-i18n="clientName"></span>
+              <input type="text" id="clientName" autocomplete="name" required />
+            </label>
+            <label>
+              <span data-i18n="clientCompany"></span>
+              <input type="text" id="clientCompany" autocomplete="organization" required />
             </label>
           </fieldset>
           <fieldset class="grid-2">
@@ -151,14 +175,10 @@
             </label>
           </fieldset>
           <div class="dest-suggest" id="destSuggest"></div>
-          <fieldset class="grid-2">
+          <fieldset>
             <label>
-              <span data-i18n="clientName"></span>
-              <input type="text" id="clientName" autocomplete="name" />
-            </label>
-            <label>
-              <span data-i18n="clientCompany"></span>
-              <input type="text" id="clientCompany" autocomplete="organization" />
+              <span data-i18n="clientEmail"></span>
+              <input type="email" id="clientEmail" autocomplete="email" required />
             </label>
           </fieldset>
           <button class="cta" type="submit" data-i18n="reviewOrder"></button>

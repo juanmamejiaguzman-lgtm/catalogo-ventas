@@ -71,6 +71,13 @@ body {
   color: var(--muted);
 }
 
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .brand {
   border: 0;
   background: transparent;
