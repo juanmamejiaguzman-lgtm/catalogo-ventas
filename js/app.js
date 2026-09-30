@@ -6,6 +6,13 @@ const SIZE_RANGES = {
   t550: [550, 750],
 };
 
+const FILLET_SIZE_LABELS = {
+  oz35: "3 - 5 oz",
+  oz46: "4 - 6 oz",
+  oz79: "7 - 9 oz",
+  oz9up: "9 UP",
+};
+
 const I18N = {
   es: {
     welcomeEyebrow: "Portafolio de productos para el mercado internacional",
@@ -23,8 +30,8 @@ const I18N = {
     size: "Talla",
     back: "← Volver",
     packaging: "Tipo de empaque",
-    packPrimary: "Empaque primario",
-    packSecondary: "Empaque secundario",
+    packPrimaryTitle: "Empaque primario",
+    packSecondaryTitle: "Empaque secundario",
     quantity: "Cantidad",
     unit: "Unidad",
     city: "Ciudad",
@@ -139,8 +146,8 @@ const I18N = {
     size: "Size",
     back: "← Back",
     packaging: "Packaging",
-    packPrimary: "Primary packaging",
-    packSecondary: "Secondary packaging",
+    packPrimaryTitle: "Primary packaging",
+    packSecondaryTitle: "Secondary packaging",
     quantity: "Quantity",
     unit: "Unit",
     city: "City",
@@ -255,8 +262,8 @@ const I18N = {
     size: "Tamanho",
     back: "← Voltar",
     packaging: "Tipo de embalagem",
-    packPrimary: "Embalagem primária",
-    packSecondary: "Embalagem secundária",
+    packPrimaryTitle: "Embalagem primária",
+    packSecondaryTitle: "Embalagem secundária",
     quantity: "Quantidade",
     unit: "Unidade",
     city: "Cidade",
@@ -370,8 +377,8 @@ const I18N = {
     size: "规格",
     back: "← 返回",
     packaging: "包装方式",
-    packPrimary: "内包装",
-    packSecondary: "外包装",
+    packPrimaryTitle: "内包装",
+    packSecondaryTitle: "外包装",
     quantity: "数量",
     unit: "单位",
     city: "城市",
@@ -485,7 +492,7 @@ const GROUPS = {
   },
   filete: {
     options: ["fresco", "congelado"],
-    sizes: ["t80", "t350", "t550"],
+    sizes: ["oz35", "oz46", "oz79", "oz9up"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
@@ -540,6 +547,7 @@ function formatKg(kg) {
 }
 
 function sizeLabel(key) {
+  if (FILLET_SIZE_LABELS[key]) return FILLET_SIZE_LABELS[key];
   const [from, to] = SIZE_RANGES[key];
   if (state.mass === "lb") {
     return `${roundMass(from / 453.59237)} - ${roundMass(to / 453.59237)} lb`;
@@ -711,7 +719,7 @@ function fillConfig() {
   const sizes = group.sizes;
   sizeField.hidden = !sizes;
   if (sizes) {
-    if (!state.size) state.size = sizes[0];
+    if (!state.size || !sizes.includes(state.size)) state.size = sizes[0];
     renderChips($("#sizeChips"), sizes, state.size, "size", sizeLabel);
   }
 
