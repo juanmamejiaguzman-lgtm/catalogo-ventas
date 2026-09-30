@@ -1,4 +1,7 @@
 const WHATSAPP = "573164570484";
+const WA_SIGN =
+  "\n\n" +
+  "\u{1F41F}  CI Pisc\u00edcola Botero SA  \u{1F30A}\u{1F420}";
 const KG_TO_LB = 2.2046226218;
 const SIZE_RANGES = {
   t80: [80, 350],
@@ -116,19 +119,20 @@ const I18N = {
       seca: "SECA — Sin escamas y con agallas",
     },
     wa: (o) =>
-      `👋 Hola, soy ${o.name}.\n` +
-      `🏢 Empresa: ${o.company}\n` +
-      `📧 Correo: ${o.email}\n\n` +
-      `Quiero cotizar con CI Piscícola Botero SA 🐟\n\n` +
-      `🐠 Producto: ${o.product}\n` +
-      (o.color ? `🎨 Color: ${o.color}\n` : "") +
-      (o.process ? `✂️ Presentación: ${o.process}\n` : "") +
-      (o.size ? `📏 Talla: ${o.size}\n` : "") +
-      `🔬 Nombre científico: ${o.scientific}\n` +
-      (o.packSecondary ? `📦 Empaque primario: ${o.packPrimary}\n🧊 Empaque secundario: ${o.packSecondary}\n` : `📦 Empaque: ${o.packPrimary}\n`) +
-      `⚖️ Cantidad: ${o.qty}\n` +
-      `📍 Destino: ${o.city}, ${o.country}\n\n` +
-      `✨ Este mensaje es una solicitud de pedido, no una compra confirmada.`,
+      `Hola, soy ${o.name}.\n` +
+      `Empresa: ${o.company}\n` +
+      `Correo: ${o.email}\n\n` +
+      `Quiero cotizar con CI Piscícola Botero SA:\n\n` +
+      `Producto: ${o.product}\n` +
+      (o.color ? `Color: ${o.color}\n` : "") +
+      (o.process ? `Presentación: ${o.process}\n` : "") +
+      (o.size ? `Talla: ${o.size}\n` : "") +
+      `Nombre científico: ${o.scientific}\n` +
+      (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : `Empaque: ${o.packPrimary}\n`) +
+      `Cantidad: ${o.qty}\n` +
+      `Destino: ${o.city}, ${o.country}\n\n` +
+      `Este mensaje es una solicitud de pedido, no una compra confirmada.` +
+      WA_SIGN,
   },
   en: {
     welcomeEyebrow: "Product portfolio for the international market",
@@ -232,19 +236,20 @@ const I18N = {
       seca: "SECA — Scaled, with gills",
     },
     wa: (o) =>
-      `👋 Hello, this is ${o.name}.\n` +
-      `🏢 Company: ${o.company}\n` +
-      `📧 Email: ${o.email}\n\n` +
-      `I would like a quote from CI Piscícola Botero SA 🐟\n\n` +
-      `🐠 Product: ${o.product}\n` +
-      (o.color ? `🎨 Color: ${o.color}\n` : "") +
-      (o.process ? `✂️ Presentation: ${o.process}\n` : "") +
-      (o.size ? `📏 Size: ${o.size}\n` : "") +
-      `🔬 Scientific name: ${o.scientific}\n` +
-      (o.packSecondary ? `📦 Primary packaging: ${o.packPrimary}\n🧊 Secondary packaging: ${o.packSecondary}\n` : `📦 Packaging: ${o.packPrimary}\n`) +
-      `⚖️ Quantity: ${o.qty}\n` +
-      `📍 Destination: ${o.city}, ${o.country}\n\n` +
-      `✨ This message is a request, not a confirmed purchase.`,
+      `Hello, this is ${o.name}.\n` +
+      `Company: ${o.company}\n` +
+      `Email: ${o.email}\n\n` +
+      `I would like a quote from CI Piscícola Botero SA:\n\n` +
+      `Product: ${o.product}\n` +
+      (o.color ? `Color: ${o.color}\n` : "") +
+      (o.process ? `Presentation: ${o.process}\n` : "") +
+      (o.size ? `Size: ${o.size}\n` : "") +
+      `Scientific name: ${o.scientific}\n` +
+      (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : `Packaging: ${o.packPrimary}\n`) +
+      `Quantity: ${o.qty}\n` +
+      `Destination: ${o.city}, ${o.country}\n\n` +
+      `This message is a request, not a confirmed purchase.` +
+      WA_SIGN,
   },
   pt: {
     welcomeEyebrow: "Portfólio de produtos para o mercado internacional",
@@ -348,19 +353,20 @@ const I18N = {
       seca: "SECA — Sem escamas e com guelras",
     },
     wa: (o) =>
-      `👋 Olá, sou ${o.name}.\n` +
-      `🏢 Empresa: ${o.company}\n` +
-      `📧 E-mail: ${o.email}\n\n` +
-      `Quero cotar com a CI Piscícola Botero SA 🐟\n\n` +
-      `🐠 Produto: ${o.product}\n` +
-      (o.color ? `🎨 Cor: ${o.color}\n` : "") +
-      (o.process ? `✂️ Apresentação: ${o.process}\n` : "") +
-      (o.size ? `📏 Tamanho: ${o.size}\n` : "") +
-      `🔬 Nome científico: ${o.scientific}\n` +
-      (o.packSecondary ? `📦 Embalagem primária: ${o.packPrimary}\n🧊 Embalagem secundária: ${o.packSecondary}\n` : `📦 Embalagem: ${o.packPrimary}\n`) +
-      `⚖️ Quantidade: ${o.qty}\n` +
-      `📍 Destino: ${o.city}, ${o.country}\n\n` +
-      `✨ Esta mensagem é uma solicitação de pedido, não uma compra confirmada.`,
+      `Olá, sou ${o.name}.\n` +
+      `Empresa: ${o.company}\n` +
+      `E-mail: ${o.email}\n\n` +
+      `Quero cotar com a CI Piscícola Botero SA:\n\n` +
+      `Produto: ${o.product}\n` +
+      (o.color ? `Cor: ${o.color}\n` : "") +
+      (o.process ? `Apresentação: ${o.process}\n` : "") +
+      (o.size ? `Tamanho: ${o.size}\n` : "") +
+      `Nome científico: ${o.scientific}\n` +
+      (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : `Embalagem: ${o.packPrimary}\n`) +
+      `Quantidade: ${o.qty}\n` +
+      `Destino: ${o.city}, ${o.country}\n\n` +
+      `Esta mensagem é uma solicitação de pedido, não uma compra confirmada.` +
+      WA_SIGN,
   },
   zh: {
     welcomeEyebrow: "国际市场产品组合",
@@ -463,19 +469,20 @@ const I18N = {
       seca: "SECA — 去鳞留鳃",
     },
     wa: (o) =>
-      `👋 您好，我是 ${o.name}。\n` +
-      `🏢 公司：${o.company}\n` +
-      `📧 邮箱：${o.email}\n\n` +
-      `希望向 CI Piscícola Botero SA 询价 🐟\n\n` +
-      `🐠 产品：${o.product}\n` +
-      (o.color ? `🎨 颜色：${o.color}\n` : "") +
-      (o.process ? `✂️ 加工方式：${o.process}\n` : "") +
-      (o.size ? `📏 规格：${o.size}\n` : "") +
-      `🔬 学名：${o.scientific}\n` +
-      (o.packSecondary ? `📦 内包装：${o.packPrimary}\n🧊 外包装：${o.packSecondary}\n` : `📦 包装：${o.packPrimary}\n`) +
-      `⚖️ 数量：${o.qty}\n` +
-      `📍 目的地：${o.city}, ${o.country}\n\n` +
-      `✨ 此消息仅为询盘，不是已确认的采购。`,
+      `您好，我是 ${o.name}。\n` +
+      `公司：${o.company}\n` +
+      `邮箱：${o.email}\n\n` +
+      `希望向 CI Piscícola Botero SA 询价：\n\n` +
+      `产品：${o.product}\n` +
+      (o.color ? `颜色：${o.color}\n` : "") +
+      (o.process ? `加工方式：${o.process}\n` : "") +
+      (o.size ? `规格：${o.size}\n` : "") +
+      `学名：${o.scientific}\n` +
+      (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : `包装：${o.packPrimary}\n`) +
+      `数量：${o.qty}\n` +
+      `目的地：${o.city}, ${o.country}\n\n` +
+      `此消息仅为询盘，不是已确认的采购。` +
+      WA_SIGN,
   },
 };
 
@@ -801,7 +808,7 @@ function renderTicket() {
     <dt>${dict.fields.company}</dt><dd>${o.company}</dd>
     <dt>${dict.fields.email}</dt><dd>${o.email}</dd>
   </dl>`;
-  $("#waBtn").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(dict.wa(o))}`;
+  $("#waBtn").href = `https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(dict.wa(o))}`;
 }
 
 function collectOrder() {
