@@ -323,8 +323,21 @@ html.is-zh h3 {
 }
 
 .social svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.social[data-network="youtube"] {
+  color: #c81e3a;
+}
+
+.social[data-network="instagram"] {
+  color: #c13584;
+}
+
+.social[data-network="facebook"] {
+  color: #1877f2;
 }
 
 .social:hover,

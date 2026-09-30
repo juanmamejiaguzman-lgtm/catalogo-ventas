@@ -13,6 +13,7 @@ const I18N = {
     colorTitle: "¿Tilapia entera roja o negra?",
     colorLede: "Cuando elijas el color, armamos el pedido.",
     process: "Presentación",
+    size: "Talla",
     back: "← Volver",
     packaging: "Tipo de empaque",
     quantity: "Cantidad",
@@ -32,6 +33,7 @@ const I18N = {
       product: "Producto",
       color: "Color",
       process: "Presentación",
+      size: "Talla",
       scientific: "Nombre científico",
       packaging: "Empaque",
       quantity: "Cantidad",
@@ -43,7 +45,7 @@ const I18N = {
       entera: {
         name: "Tilapia entera",
         sci: "Oreochromis niloticus · Oreochromis spp.",
-        lede: "Indica presentación, empaque, cantidad y destino.",
+        lede: "Indica presentación, talla, empaque, cantidad y destino.",
         options: {
           fresco: "Tilapia entera fresca",
           congelado: "Tilapia entera congelada",
@@ -52,7 +54,7 @@ const I18N = {
       filete: {
         name: "Filete de tilapia",
         sci: "Oreochromis niloticus",
-        lede: "Indica empaque, cantidad y destino.",
+        lede: "Indica talla, empaque, cantidad y destino.",
         options: {
           fresco: "Filete fresco",
           congelado: "Filete congelado",
@@ -89,11 +91,17 @@ const I18N = {
       ceca: "CECA — Con escamas y con agallas",
       seca: "SECA — Sin escamas y con agallas",
     },
+    sizes: {
+      t80: "80 - 350 gr",
+      t350: "350 - 550 gr",
+      t550: "550 - 750 gr",
+    },
     wa: (o) =>
       `Hola, soy ${o.who}. Quiero cotizar con CI Piscícola Botero SA:\n` +
       `• Producto: ${o.product}\n` +
       (o.color ? `• Color: ${o.color}\n` : "") +
       (o.process ? `• Presentación: ${o.process}\n` : "") +
+      (o.size ? `• Talla: ${o.size}\n` : "") +
       `• Nombre científico: ${o.scientific}\n` +
       `• Empaque: ${o.packaging}\n` +
       `• Cantidad: ${o.qty} ${o.unit}\n` +
@@ -112,6 +120,7 @@ const I18N = {
     colorTitle: "Red or black whole tilapia?",
     colorLede: "After you choose the color, we build the order.",
     process: "Presentation",
+    size: "Size",
     back: "← Back",
     packaging: "Packaging",
     quantity: "Quantity",
@@ -131,6 +140,7 @@ const I18N = {
       product: "Product",
       color: "Color",
       process: "Presentation",
+      size: "Size",
       scientific: "Scientific name",
       packaging: "Packaging",
       quantity: "Quantity",
@@ -142,7 +152,7 @@ const I18N = {
       entera: {
         name: "Whole tilapia",
         sci: "Oreochromis niloticus · Oreochromis spp.",
-        lede: "Set presentation, packing, quantity and destination.",
+        lede: "Set presentation, size, packing, quantity and destination.",
         options: {
           fresco: "Fresh whole tilapia",
           congelado: "Frozen whole tilapia",
@@ -151,7 +161,7 @@ const I18N = {
       filete: {
         name: "Tilapia fillet",
         sci: "Oreochromis niloticus",
-        lede: "Set packing, quantity and destination.",
+        lede: "Set size, packing, quantity and destination.",
         options: {
           fresco: "Fresh fillet",
           congelado: "Frozen fillet",
@@ -188,11 +198,17 @@ const I18N = {
       ceca: "CECA — With scales and gills",
       seca: "SECA — Scaled, with gills",
     },
+    sizes: {
+      t80: "80 - 350 gr",
+      t350: "350 - 550 gr",
+      t550: "550 - 750 gr",
+    },
     wa: (o) =>
       `Hello, this is ${o.who}. I would like a quote from CI Piscícola Botero SA:\n` +
       `• Product: ${o.product}\n` +
       (o.color ? `• Color: ${o.color}\n` : "") +
       (o.process ? `• Presentation: ${o.process}\n` : "") +
+      (o.size ? `• Size: ${o.size}\n` : "") +
       `• Scientific name: ${o.scientific}\n` +
       `• Packaging: ${o.packaging}\n` +
       `• Quantity: ${o.qty} ${o.unit}\n` +
@@ -211,6 +227,7 @@ const I18N = {
     colorTitle: "Tilápia inteira vermelha ou preta?",
     colorLede: "Depois de escolher a cor, montamos o pedido.",
     process: "Apresentação",
+    size: "Tamanho",
     back: "← Voltar",
     packaging: "Tipo de embalagem",
     quantity: "Quantidade",
@@ -230,6 +247,7 @@ const I18N = {
       product: "Produto",
       color: "Cor",
       process: "Apresentação",
+      size: "Tamanho",
       scientific: "Nome científico",
       packaging: "Embalagem",
       quantity: "Quantidade",
@@ -241,7 +259,7 @@ const I18N = {
       entera: {
         name: "Tilápia inteira",
         sci: "Oreochromis niloticus · Oreochromis spp.",
-        lede: "Indique apresentação, embalagem, quantidade e destino.",
+        lede: "Indique apresentação, tamanho, embalagem, quantidade e destino.",
         options: {
           fresco: "Tilápia inteira fresca",
           congelado: "Tilápia inteira congelada",
@@ -250,7 +268,7 @@ const I18N = {
       filete: {
         name: "Filé de tilápia",
         sci: "Oreochromis niloticus",
-        lede: "Indique embalagem, quantidade e destino.",
+        lede: "Indique tamanho, embalagem, quantidade e destino.",
         options: {
           fresco: "Filé fresco",
           congelado: "Filé congelado",
@@ -287,11 +305,17 @@ const I18N = {
       ceca: "CECA — Com escamas e com guelras",
       seca: "SECA — Sem escamas e com guelras",
     },
+    sizes: {
+      t80: "80 - 350 gr",
+      t350: "350 - 550 gr",
+      t550: "550 - 750 gr",
+    },
     wa: (o) =>
       `Olá, sou ${o.who}. Quero cotar com a CI Piscícola Botero SA:\n` +
       `• Produto: ${o.product}\n` +
       (o.color ? `• Cor: ${o.color}\n` : "") +
       (o.process ? `• Apresentação: ${o.process}\n` : "") +
+      (o.size ? `• Tamanho: ${o.size}\n` : "") +
       `• Nome científico: ${o.scientific}\n` +
       `• Embalagem: ${o.packaging}\n` +
       `• Quantidade: ${o.qty} ${o.unit}\n` +
@@ -309,6 +333,7 @@ const I18N = {
     colorTitle: "整条红罗非鱼还是黑罗非鱼？",
     colorLede: "选定颜色后，再填写订单。",
     process: "加工方式",
+    size: "规格",
     back: "← 返回",
     packaging: "包装方式",
     quantity: "数量",
@@ -328,6 +353,7 @@ const I18N = {
       product: "产品",
       color: "颜色",
       process: "加工方式",
+      size: "规格",
       scientific: "学名",
       packaging: "包装",
       quantity: "数量",
@@ -339,7 +365,7 @@ const I18N = {
       entera: {
         name: "整条罗非鱼",
         sci: "Oreochromis niloticus · Oreochromis spp.",
-        lede: "请填写加工方式、包装、数量和目的地。",
+        lede: "请填写加工方式、规格、包装、数量和目的地。",
         options: {
           fresco: "整条鲜罗非鱼",
           congelado: "整条冻罗非鱼",
@@ -348,7 +374,7 @@ const I18N = {
       filete: {
         name: "罗非鱼鱼片",
         sci: "Oreochromis niloticus",
-        lede: "请填写包装、数量和目的地。",
+        lede: "请填写规格、包装、数量和目的地。",
         options: {
           fresco: "鲜鱼片",
           congelado: "冻鱼片",
@@ -385,11 +411,17 @@ const I18N = {
       ceca: "CECA — 带鳞带鳃",
       seca: "SECA — 去鳞留鳃",
     },
+    sizes: {
+      t80: "80 - 350 gr",
+      t350: "350 - 550 gr",
+      t550: "550 - 750 gr",
+    },
     wa: (o) =>
       `您好，我是 ${o.who}。希望向 CI Piscícola Botero SA 询价：\n` +
       `• 产品：${o.product}\n` +
       (o.color ? `• 颜色：${o.color}\n` : "") +
       (o.process ? `• 加工方式：${o.process}\n` : "") +
+      (o.size ? `• 规格：${o.size}\n` : "") +
       `• 学名：${o.scientific}\n` +
       `• 包装：${o.packaging}\n` +
       `• 数量：${o.qty} ${o.unit}\n` +
@@ -404,12 +436,14 @@ const GROUPS = {
     options: ["fresco", "congelado"],
     colors: ["roja", "negra"],
     processes: ["sesa", "ceca", "seca"],
+    sizes: ["t80", "t350", "t550"],
     art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
     colorArt: (color) => fishArt(color === "roja" ? "#e3066a" : "#1b2430"),
   },
   filete: {
     packs: ["caja5", "caja10", "vacio", "master"],
     options: ["fresco", "congelado"],
+    sizes: ["t80", "t350", "t550"],
     art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
   },
   subproductos: {
@@ -436,6 +470,7 @@ const state = {
   option: null,
   color: null,
   process: null,
+  size: null,
   packaging: null,
   order: null,
 };
@@ -573,6 +608,20 @@ function fillConfig() {
       .join("");
   }
 
+  const sizeField = $("#sizeField");
+  const sizes = GROUPS[id].sizes;
+  const needsSize = Boolean(sizes);
+  sizeField.hidden = !needsSize;
+  if (needsSize) {
+    if (!state.size) state.size = sizes[0];
+    $("#sizeChips").innerHTML = sizes
+      .map(
+        (key) =>
+          `<button type="button" class="chip ${state.size === key ? "is-on" : ""}" data-size="${key}">${dict.sizes[key]}</button>`
+      )
+      .join("");
+  }
+
   $("#packagingChips").innerHTML = GROUPS[id].packs
     .map(
       (key) =>
@@ -598,6 +647,7 @@ function renderTicket() {
     <dt>${dict.fields.product}</dt><dd>${o.product}</dd>
     ${o.color ? `<dt>${dict.fields.color}</dt><dd>${o.color}</dd>` : ""}
     ${o.process ? `<dt>${dict.fields.process}</dt><dd>${o.process}</dd>` : ""}
+    ${o.size ? `<dt>${dict.fields.size}</dt><dd>${o.size}</dd>` : ""}
     <dt>${dict.fields.scientific}</dt><dd class="sci">${o.scientific}</dd>
     <dt>${dict.fields.packaging}</dt><dd>${o.packaging}</dd>
     <dt>${dict.fields.quantity}</dt><dd>${o.qty} ${o.unit}</dd>
@@ -614,6 +664,7 @@ function collectOrder() {
     product: dict.groups[state.group].options[state.option],
     color: state.group === "entera" ? dict.colors[state.color] : "",
     process: state.group === "entera" ? dict.processes[state.process] : "",
+    size: GROUPS[state.group].sizes ? dict.sizes[state.size] : "",
     scientific: scientificName(),
     packaging: dict.packs[state.packaging],
     qty: $("#qty").value,
@@ -637,6 +688,7 @@ $("#homeBtn").addEventListener("click", () => {
   state.option = null;
   state.color = null;
   state.process = null;
+  state.size = null;
   showStage("welcome");
 });
 
@@ -654,6 +706,7 @@ $("#productCards").addEventListener("click", (event) => {
   state.option = card.dataset.option;
   state.color = null;
   state.process = null;
+  state.size = null;
   state.packaging = GROUPS[state.group].packs[0];
   if (state.group === "entera") {
     renderColors();
@@ -669,6 +722,7 @@ $("#colorCards").addEventListener("click", (event) => {
   if (!card) return;
   state.color = card.dataset.color;
   state.process = GROUPS.entera.processes[0];
+  state.size = GROUPS.entera.sizes[0];
   fillConfig();
   showStage("config");
 });
@@ -677,6 +731,13 @@ $("#processChips").addEventListener("click", (event) => {
   const chip = event.target.closest("[data-process]");
   if (!chip) return;
   state.process = chip.dataset.process;
+  fillConfig();
+});
+
+$("#sizeChips").addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-size]");
+  if (!chip) return;
+  state.size = chip.dataset.size;
   fillConfig();
 });
 
@@ -705,6 +766,7 @@ $("#orderForm").addEventListener("submit", (event) => {
   event.preventDefault();
   if (!state.group || !state.option || !state.packaging) return;
   if (state.group === "entera" && (!state.color || !state.process)) return;
+  if (GROUPS[state.group].sizes && !state.size) return;
   state.order = collectOrder();
   renderTicket();
   showStage("summary");
