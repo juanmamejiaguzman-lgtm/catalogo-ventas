@@ -484,7 +484,6 @@ const GROUPS = {
     options: ["fresco", "congelado"],
     colors: ["roja", "negra"],
     processes: ["sesa", "ceca", "seca"],
-    sizes: ["t80", "t350", "t550"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
@@ -492,7 +491,6 @@ const GROUPS = {
   },
   filete: {
     options: ["fresco", "congelado"],
-    sizes: ["oz35", "oz46", "oz79", "oz9up"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
@@ -546,9 +544,17 @@ function formatKg(kg) {
   return `${roundMass(kg)} kg`;
 }
 
+function sizesFor(groupId) {
+  if (groupId === "filete") return Object.keys(FILLET_SIZE_LABELS);
+  if (groupId === "entera") return Object.keys(SIZE_RANGES);
+  return null;
+}
+
 function sizeLabel(key) {
   if (FILLET_SIZE_LABELS[key]) return FILLET_SIZE_LABELS[key];
-  const [from, to] = SIZE_RANGES[key];
+  const range = SIZE_RANGES[key];
+  if (!range) return "";
+  const [from, to] = range;
   if (state.mass === "lb") {
     return `${roundMass(from / 453.59237)} - ${roundMass(to / 453.59237)} lb`;
   }
@@ -716,11 +722,13 @@ function fillConfig() {
   }
 
   const sizeField = $("#sizeField");
-  const sizes = group.sizes;
+  const sizes = sizesFor(id);
   sizeField.hidden = !sizes;
   if (sizes) {
     if (!state.size || !sizes.includes(state.size)) state.size = sizes[0];
     renderChips($("#sizeChips"), sizes, state.size, "size", sizeLabel);
+  } else {
+    $("#sizeChips").innerHTML = "";
   }
 
   const dualPack = Boolean(group.packPrimary);
@@ -763,7 +771,7 @@ function formattedOrder() {
     product: dict.groups[o.group].options[o.option],
     color: o.group === "entera" ? dict.colors[o.color] : "",
     process: o.group === "entera" ? dict.processes[o.process] : "",
-    size: group.sizes ? sizeLabel(o.size) : "",
+    size: sizesFor(o.group) ? sizeLabel(o.size) : "",
     scientific: o.group === "entera" ? dict.colorSci[o.color] : dict.groups[o.group].sci,
     packPrimary,
     packSecondary,
@@ -879,7 +887,7 @@ $("#colorCards").addEventListener("click", (event) => {
   if (!card) return;
   state.color = card.dataset.color;
   state.process = GROUPS.entera.processes[0];
-  state.size = GROUPS.entera.sizes[0];
+  state.size = sizesFor("entera")[0];
   resetPack();
   fillConfig();
   showStage("config");
@@ -938,7 +946,7 @@ $("#orderForm").addEventListener("submit", (event) => {
   const group = GROUPS[state.group];
   if (!state.group || !state.option) return;
   if (state.group === "entera" && (!state.color || !state.process)) return;
-  if (group.sizes && !state.size) return;
+  if (sizesFor(state.group) && !state.size) return;
   if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
   if (!group.packPrimary && !state.packPrimary) return;
   state.order = collectOrder();
