@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css?v=wa1" />
+    <link rel="stylesheet" href="css/styles.css?v=oct2" />
   </head>
   <body>
     <div class="waves" aria-hidden="true"></div>
@@ -103,6 +103,7 @@
           </a>
         </nav>
         <div class="cards" id="productCards"></div>
+        <p class="note" data-i18n="shipCatalog"></p>
       </section>
 
       <section class="stage" id="stage-color" data-stage="color">
@@ -121,6 +122,7 @@
             <h2 id="configTitle"></h2>
             <p class="sci" id="configSci"></p>
             <p class="lede" id="configLede"></p>
+            <p class="note" id="shipHint" hidden></p>
           </div>
         </div>
         <form class="config" id="orderForm">
@@ -139,6 +141,10 @@
           <fieldset id="packSecondaryField" hidden>
             <legend data-i18n="packSecondaryTitle"></legend>
             <div class="chips" id="packSecondaryChips"></div>
+          </fieldset>
+          <fieldset id="termoSizeField" hidden>
+            <legend data-i18n="termoSize"></legend>
+            <div class="chips" id="termoSizeChips"></div>
           </fieldset>
           <fieldset id="packFixedField" hidden>
             <legend data-i18n="packaging"></legend>
@@ -203,6 +209,6 @@
       <span data-i18n="footerNote"></span>
     </footer>
 
-    <script src="js/app.js?v=wa1"></script>
+    <script src="js/app.js?v=oct2"></script>
   </body>
 </html>

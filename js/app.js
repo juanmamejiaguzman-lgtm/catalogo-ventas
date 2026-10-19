@@ -16,6 +16,12 @@ const FILLET_SIZE_LABELS = {
   oz9up: "9 UP",
 };
 
+const TERMO_SIZES = {
+  t5: "2.27 kg / 5 lb",
+  t10: "4.54 kg / 10 lb",
+  t22: "9.98 kg / 22 lb",
+};
+
 const I18N = {
   es: {
     welcomeEyebrow: "Portafolio de productos para el mercado internacional",
@@ -27,7 +33,12 @@ const I18N = {
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
     productsTitle: "¿Qué producto desea?",
     productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
-    colorTitle: "¿Tilapia entera roja o negra?",
+    shipCatalog:
+      "Los productos congelados se despachan en contenedores de 40 pies. La cabeza de tilapia congelada es el único producto congelado que puede despacharse por vía aérea.",
+    shipFrozen: "Despacho: contenedor de 40 pies.",
+    shipHead:
+      "Despacho: la cabeza de tilapia congelada es el único producto congelado que puede ir por vía aérea. El resto de congelados sale en contenedor de 40 pies.",
+    colorTitle: "¿Tilapia entera roja o plateada?",
     colorLede: "Cuando elijas el color, armamos el pedido.",
     process: "Presentación",
     size: "Talla",
@@ -35,6 +46,7 @@ const I18N = {
     packaging: "Tipo de empaque",
     packPrimaryTitle: "Empaque primario",
     packSecondaryTitle: "Empaque secundario",
+    termoSize: "Talla del termo",
     quantity: "Cantidad",
     unit: "Unidad",
     city: "Ciudad",
@@ -56,14 +68,16 @@ const I18N = {
       scientific: "Nombre científico",
       packPrimary: "Empaque primario",
       packSecondary: "Empaque secundario",
+      termoSize: "Talla del termo",
       packaging: "Empaque",
       quantity: "Cantidad",
       destination: "Destino",
+      shipping: "Despacho",
       client: "Nombre",
       company: "Empresa",
       email: "Correo electrónico",
     },
-    units: { kg: "kg", lb: "lb", cajas: "cajas", unidades: "unidades" },
+    units: { kg: "kg", lb: "lb", termos: "termos" },
     groups: {
       entera: {
         name: "Tilapia entera",
@@ -107,7 +121,7 @@ const I18N = {
     },
     colors: {
       roja: "Tilapia entera roja",
-      negra: "Tilapia entera negra",
+      negra: "Tilapia entera plateada",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -129,9 +143,11 @@ const I18N = {
       (o.size ? `Talla: ${o.size}\n` : "") +
       `Nombre científico: ${o.scientific}\n` +
       (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : `Empaque: ${o.packPrimary}\n`) +
+      (o.termoSize ? `Talla del termo: ${o.termoSize}\n` : "") +
       `Cantidad: ${o.qty}\n` +
-      `Destino: ${o.city}, ${o.country}\n\n` +
-      `Este mensaje es una solicitud de pedido, no una compra confirmada.` +
+      `Destino: ${o.city}, ${o.country}\n` +
+      (o.shipping ? `${o.shipping}\n` : "") +
+      `\nEste mensaje es una solicitud de pedido, no una compra confirmada.` +
       WA_SIGN,
   },
   en: {
@@ -144,7 +160,12 @@ const I18N = {
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
     productsTitle: "Which product do you want?",
     productsLede: "First choose the type and how you want it. Then set packing and destination.",
-    colorTitle: "Red or black whole tilapia?",
+    shipCatalog:
+      "Frozen products ship in 40-foot containers. Frozen tilapia head is the only frozen product that can ship by air.",
+    shipFrozen: "Shipping: 40-foot container.",
+    shipHead:
+      "Shipping: frozen tilapia head is the only frozen product that can go by air. All other frozen products ship in a 40-foot container.",
+    colorTitle: "Red or silver whole tilapia?",
     colorLede: "After you choose the color, we build the order.",
     process: "Presentation",
     size: "Size",
@@ -152,6 +173,7 @@ const I18N = {
     packaging: "Packaging",
     packPrimaryTitle: "Primary packaging",
     packSecondaryTitle: "Secondary packaging",
+    termoSize: "Cooler size",
     quantity: "Quantity",
     unit: "Unit",
     city: "City",
@@ -173,14 +195,16 @@ const I18N = {
       scientific: "Scientific name",
       packPrimary: "Primary packaging",
       packSecondary: "Secondary packaging",
+      termoSize: "Cooler size",
       packaging: "Packaging",
       quantity: "Quantity",
       destination: "Destination",
+      shipping: "Shipping",
       client: "Name",
       company: "Company",
       email: "Email",
     },
-    units: { kg: "kg", lb: "lb", cajas: "boxes", unidades: "units" },
+    units: { kg: "kg", lb: "lb", termos: "coolers" },
     groups: {
       entera: {
         name: "Whole tilapia",
@@ -224,7 +248,7 @@ const I18N = {
     },
     colors: {
       roja: "Red whole tilapia",
-      negra: "Black whole tilapia",
+      negra: "Silver whole tilapia",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -246,9 +270,11 @@ const I18N = {
       (o.size ? `Size: ${o.size}\n` : "") +
       `Scientific name: ${o.scientific}\n` +
       (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : `Packaging: ${o.packPrimary}\n`) +
+      (o.termoSize ? `Cooler size: ${o.termoSize}\n` : "") +
       `Quantity: ${o.qty}\n` +
-      `Destination: ${o.city}, ${o.country}\n\n` +
-      `This message is a request, not a confirmed purchase.` +
+      `Destination: ${o.city}, ${o.country}\n` +
+      (o.shipping ? `${o.shipping}\n` : "") +
+      `\nThis message is a request, not a confirmed purchase.` +
       WA_SIGN,
   },
   pt: {
@@ -261,7 +287,12 @@ const I18N = {
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
     productsTitle: "Qual produto deseja?",
     productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
-    colorTitle: "Tilápia inteira vermelha ou preta?",
+    shipCatalog:
+      "Os produtos congelados são despachados em contêineres de 40 pés. A cabeça de tilápia congelada é o único produto congelado que pode ir por via aérea.",
+    shipFrozen: "Despacho: contêiner de 40 pés.",
+    shipHead:
+      "Despacho: a cabeça de tilápia congelada é o único produto congelado que pode ir por via aérea. Os demais congelados saem em contêiner de 40 pés.",
+    colorTitle: "Tilápia inteira vermelha ou prateada?",
     colorLede: "Depois de escolher a cor, montamos o pedido.",
     process: "Apresentação",
     size: "Tamanho",
@@ -269,6 +300,7 @@ const I18N = {
     packaging: "Tipo de embalagem",
     packPrimaryTitle: "Embalagem primária",
     packSecondaryTitle: "Embalagem secundária",
+    termoSize: "Tamanho da caixa térmica",
     quantity: "Quantidade",
     unit: "Unidade",
     city: "Cidade",
@@ -290,14 +322,16 @@ const I18N = {
       scientific: "Nome científico",
       packPrimary: "Embalagem primária",
       packSecondary: "Embalagem secundária",
+      termoSize: "Tamanho da caixa térmica",
       packaging: "Embalagem",
       quantity: "Quantidade",
       destination: "Destino",
+      shipping: "Despacho",
       client: "Nome",
       company: "Empresa",
       email: "E-mail",
     },
-    units: { kg: "kg", lb: "lb", cajas: "caixas", unidades: "unidades" },
+    units: { kg: "kg", lb: "lb", termos: "caixas térmicas" },
     groups: {
       entera: {
         name: "Tilápia inteira",
@@ -341,7 +375,7 @@ const I18N = {
     },
     colors: {
       roja: "Tilápia inteira vermelha",
-      negra: "Tilápia inteira preta",
+      negra: "Tilápia inteira prateada",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -363,9 +397,11 @@ const I18N = {
       (o.size ? `Tamanho: ${o.size}\n` : "") +
       `Nome científico: ${o.scientific}\n` +
       (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : `Embalagem: ${o.packPrimary}\n`) +
+      (o.termoSize ? `Tamanho da caixa térmica: ${o.termoSize}\n` : "") +
       `Quantidade: ${o.qty}\n` +
-      `Destino: ${o.city}, ${o.country}\n\n` +
-      `Esta mensagem é uma solicitação de pedido, não uma compra confirmada.` +
+      `Destino: ${o.city}, ${o.country}\n` +
+      (o.shipping ? `${o.shipping}\n` : "") +
+      `\nEsta mensagem é uma solicitação de pedido, não uma compra confirmada.` +
       WA_SIGN,
   },
   zh: {
@@ -377,7 +413,12 @@ const I18N = {
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
-    colorTitle: "整条红罗非鱼还是黑罗非鱼？",
+    shipCatalog:
+      "冷冻产品以 40 英尺集装箱发运。冷冻罗非鱼头是唯一可空运的冷冻产品。",
+    shipFrozen: "发运：40 英尺集装箱。",
+    shipHead:
+      "发运：冷冻罗非鱼头是唯一可空运的冷冻产品。其余冷冻产品以 40 英尺集装箱发运。",
+    colorTitle: "整条红罗非鱼还是银罗非鱼？",
     colorLede: "选定颜色后，再填写订单。",
     process: "加工方式",
     size: "规格",
@@ -385,6 +426,7 @@ const I18N = {
     packaging: "包装方式",
     packPrimaryTitle: "内包装",
     packSecondaryTitle: "外包装",
+    termoSize: "保温箱规格",
     quantity: "数量",
     unit: "单位",
     city: "城市",
@@ -406,14 +448,16 @@ const I18N = {
       scientific: "学名",
       packPrimary: "内包装",
       packSecondary: "外包装",
+      termoSize: "保温箱规格",
       packaging: "包装",
       quantity: "数量",
       destination: "目的地",
+      shipping: "发运",
       client: "姓名",
       company: "公司",
       email: "电子邮箱",
     },
-    units: { kg: "公斤", lb: "磅", cajas: "箱", unidades: "件" },
+    units: { kg: "公斤", lb: "磅", termos: "保温箱" },
     groups: {
       entera: {
         name: "整条罗非鱼",
@@ -457,7 +501,7 @@ const I18N = {
     },
     colors: {
       roja: "整条红罗非鱼",
-      negra: "整条黑罗非鱼",
+      negra: "整条银罗非鱼",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -479,9 +523,11 @@ const I18N = {
       (o.size ? `规格：${o.size}\n` : "") +
       `学名：${o.scientific}\n` +
       (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : `包装：${o.packPrimary}\n`) +
+      (o.termoSize ? `保温箱规格：${o.termoSize}\n` : "") +
       `数量：${o.qty}\n` +
-      `目的地：${o.city}, ${o.country}\n\n` +
-      `此消息仅为询盘，不是已确认的采购。` +
+      `目的地：${o.city}, ${o.country}\n` +
+      (o.shipping ? `${o.shipping}\n` : "") +
+      `\n此消息仅为询盘，不是已确认的采购。` +
       WA_SIGN,
   },
 };
@@ -491,15 +537,17 @@ const GROUPS = {
     options: ["fresco", "congelado"],
     colors: ["roja", "negra"],
     processes: ["sesa", "ceca", "seca"],
-    packPrimary: ["bolsa", "vacio", "granel"],
+    packPrimary: ["bolsa", "granel"],
     packSecondary: ["termoIcopor"],
+    termoSizes: ["t10", "t22"],
     art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
-    colorArt: (color) => fishArt(color === "roja" ? "#e3066a" : "#1b2430"),
+    colorArt: (color) => fishArt(color === "roja" ? "#e3066a" : "#7b8b99"),
   },
   filete: {
     options: ["fresco", "congelado"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
+    termoSizes: ["t5", "t10", "t22"],
     art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
   },
   subproductos: {
@@ -530,6 +578,7 @@ const state = {
   size: null,
   packPrimary: null,
   packSecondary: null,
+  termoSize: null,
   order: null,
 };
 
@@ -568,6 +617,13 @@ function sizeLabel(key) {
   return `${from} - ${to} gr`;
 }
 
+function shippingCopy(groupId, option) {
+  const dict = t();
+  if (groupId === "subproductos" && option === "cabezas") return dict.shipHead;
+  if (option === "congelado") return dict.shipFrozen;
+  return "";
+}
+
 function packFixedLabel(key) {
   const template = t().packFixed[key];
   return template.replace("{w}", formatKg(10));
@@ -587,10 +643,12 @@ function resetPack() {
   if (group.packPrimary) {
     state.packPrimary = group.packPrimary[0];
     state.packSecondary = group.packSecondary[0];
+    state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
     return;
   }
   state.packPrimary = group.packFixed[state.option];
   state.packSecondary = null;
+  state.termoSize = null;
 }
 
 function fishArt(color) {
@@ -719,6 +777,10 @@ function fillConfig() {
   $("#configSci").textContent = scientificName();
   $("#configLede").textContent = groupCopy.lede;
   $("#configArt").innerHTML = id === "entera" && state.color ? GROUPS.entera.colorArt(state.color) : group.art(state.option);
+  const ship = shippingCopy(id, state.option);
+  const shipHint = $("#shipHint");
+  shipHint.hidden = !ship;
+  shipHint.textContent = ship;
 
   const processField = $("#processField");
   const needsProcess = id === "entera";
@@ -743,19 +805,32 @@ function fillConfig() {
   $("#packSecondaryField").hidden = !dualPack;
   $("#packFixedField").hidden = dualPack;
   if (dualPack) {
-    if (!state.packPrimary) state.packPrimary = group.packPrimary[0];
+    if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
     if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
     renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
     renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
+    $("#packFixedChips").innerHTML = "";
   } else {
     state.packPrimary = group.packFixed[state.option];
     state.packSecondary = null;
+    state.termoSize = null;
     renderChips($("#packFixedChips"), [state.packPrimary], state.packPrimary, "pack-fixed", packFixedLabel);
+    $("#packPrimaryChips").innerHTML = "";
+    $("#packSecondaryChips").innerHTML = "";
+  }
+
+  const termoSizes = dualPack && state.packSecondary === "termoIcopor" ? group.termoSizes : null;
+  $("#termoSizeField").hidden = !termoSizes;
+  if (termoSizes) {
+    if (!state.termoSize || !termoSizes.includes(state.termoSize)) state.termoSize = termoSizes[0];
+    renderChips($("#termoSizeChips"), termoSizes, state.termoSize, "termo-size", (key) => TERMO_SIZES[key]);
+  } else {
+    $("#termoSizeChips").innerHTML = "";
   }
 
   const unitEl = $("#unit");
   const prevUnit = unitEl.value;
-  const unitKeys = [state.mass, "cajas", "unidades"];
+  const unitKeys = [state.mass, "termos"];
   unitEl.innerHTML = unitKeys.map((value) => `<option value="${value}">${dict.units[value]}</option>`).join("");
   if (prevUnit === "kg" || prevUnit === "lb") unitEl.value = state.mass;
   else if (unitKeys.includes(prevUnit)) unitEl.value = prevUnit;
@@ -782,9 +857,11 @@ function formattedOrder() {
     scientific: o.group === "entera" ? dict.colorSci[o.color] : dict.groups[o.group].sci,
     packPrimary,
     packSecondary,
+    termoSize: o.termoSize ? TERMO_SIZES[o.termoSize] : "",
     qty: qtyDisplay(o.qty, o.unitKey),
     city: o.city,
     country: o.country,
+    shipping: shippingCopy(o.group, o.option),
   };
 }
 
@@ -799,10 +876,11 @@ function renderTicket() {
     <dt>${dict.fields.scientific}</dt><dd class="sci">${o.scientific}</dd>
     ${
       o.packSecondary
-        ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>`
+        ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>${o.termoSize ? `<dt>${dict.fields.termoSize}</dt><dd>${o.termoSize}</dd>` : ""}`
         : `<dt>${dict.fields.packaging}</dt><dd>${o.packPrimary}</dd>`
     }
     <dt>${dict.fields.quantity}</dt><dd>${o.qty}</dd>
+    ${o.shipping ? `<dt>${dict.fields.shipping}</dt><dd>${o.shipping}</dd>` : ""}
     <dt>${dict.fields.destination}</dt><dd>${o.city}, ${o.country}</dd>
     <dt>${dict.fields.client}</dt><dd>${o.name}</dd>
     <dt>${dict.fields.company}</dt><dd>${o.company}</dd>
@@ -820,6 +898,7 @@ function collectOrder() {
     size: state.size,
     packPrimary: state.packPrimary,
     packSecondary: state.packSecondary,
+    termoSize: state.termoSize,
     qty: $("#qty").value,
     unitKey: $("#unit").value,
     city: $("#city").value.trim(),
@@ -861,6 +940,7 @@ $("#homeBtn").addEventListener("click", () => {
   state.size = null;
   state.packPrimary = null;
   state.packSecondary = null;
+  state.termoSize = null;
   showStage("welcome");
 });
 
@@ -925,6 +1005,18 @@ $("#packSecondaryChips").addEventListener("click", (event) => {
   const chip = event.target.closest("[data-pack-secondary]");
   if (!chip) return;
   state.packSecondary = chip.dataset.packSecondary;
+  if (state.packSecondary === "termoIcopor" && GROUPS[state.group].termoSizes) {
+    state.termoSize = GROUPS[state.group].termoSizes[0];
+  } else {
+    state.termoSize = null;
+  }
+  fillConfig();
+});
+
+$("#termoSizeChips").addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-termo-size]");
+  if (!chip) return;
+  state.termoSize = chip.dataset.termoSize;
   fillConfig();
 });
 
@@ -955,6 +1047,7 @@ $("#orderForm").addEventListener("submit", (event) => {
   if (state.group === "entera" && (!state.color || !state.process)) return;
   if (sizesFor(state.group) && !state.size) return;
   if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
+  if (group.termoSizes && state.packSecondary === "termoIcopor" && !state.termoSize) return;
   if (!group.packPrimary && !state.packPrimary) return;
   state.order = collectOrder();
   renderTicket();

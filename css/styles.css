@@ -176,6 +176,22 @@ html.is-zh h3 {
   line-height: 1.55;
 }
 
+.note {
+  margin: 22px 0 0;
+  padding: 12px 14px;
+  max-width: 62ch;
+  color: var(--ink);
+  background: rgba(0, 167, 225, 0.1);
+  border-left: 3px solid var(--cyan);
+  border-radius: 12px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.config-hero .note {
+  margin-top: 12px;
+}
+
 #stage-welcome .lede,
 #stage-welcome .eyebrow {
   margin-left: auto;
