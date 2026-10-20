@@ -49,7 +49,7 @@ const I18N = {
     packaging: "Tipo de empaque",
     packPrimaryTitle: "Empaque primario",
     packSecondaryTitle: "Empaque secundario",
-    termoSize: "Talla del termo",
+    termoSize: "Talla de la caja",
     quantity: "Cantidad",
     unit: "Unidad",
     city: "Ciudad",
@@ -73,7 +73,7 @@ const I18N = {
       scientific: "Nombre científico",
       packPrimary: "Empaque primario",
       packSecondary: "Empaque secundario",
-      termoSize: "Talla del termo",
+      termoSize: "Talla de la caja",
       packaging: "Empaque",
       quantity: "Cantidad",
       destination: "Destino",
@@ -118,7 +118,7 @@ const I18N = {
       granel: "A granel",
     },
     packSecondary: {
-      termoIcopor: "Termos de icopor",
+      termoIcopor: "Caja de poliestireno expandido",
     },
     packFixed: {
       palletStretch: "Pallet envuelto en stretch",
@@ -153,7 +153,7 @@ const I18N = {
       (o.freeze ? `Tipo de congelación: ${o.freeze}\n` : "") +
       `Nombre científico: ${o.scientific}\n` +
       (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : `Empaque: ${o.packPrimary}\n`) +
-      (o.termoSize ? `Talla del termo: ${o.termoSize}\n` : "") +
+      (o.termoSize ? `Talla de la caja: ${o.termoSize}\n` : "") +
       `Cantidad: ${o.qty}\n` +
       `Destino: ${o.city}, ${o.country}\n` +
       (o.incoterm ? `Incoterm: ${o.incoterm}\n` : "") +
@@ -184,7 +184,7 @@ const I18N = {
     packaging: "Packaging",
     packPrimaryTitle: "Primary packaging",
     packSecondaryTitle: "Secondary packaging",
-    termoSize: "Cooler size",
+    termoSize: "Box size",
     quantity: "Quantity",
     unit: "Unit",
     city: "City",
@@ -208,7 +208,7 @@ const I18N = {
       scientific: "Scientific name",
       packPrimary: "Primary packaging",
       packSecondary: "Secondary packaging",
-      termoSize: "Cooler size",
+      termoSize: "Box size",
       packaging: "Packaging",
       quantity: "Quantity",
       destination: "Destination",
@@ -253,7 +253,7 @@ const I18N = {
       granel: "Bulk",
     },
     packSecondary: {
-      termoIcopor: "Styrofoam coolers",
+      termoIcopor: "Expanded polystyrene box",
     },
     packFixed: {
       palletStretch: "Pallet wrapped in stretch film",
@@ -288,7 +288,7 @@ const I18N = {
       (o.freeze ? `Freezing type: ${o.freeze}\n` : "") +
       `Scientific name: ${o.scientific}\n` +
       (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : `Packaging: ${o.packPrimary}\n`) +
-      (o.termoSize ? `Cooler size: ${o.termoSize}\n` : "") +
+      (o.termoSize ? `Box size: ${o.termoSize}\n` : "") +
       `Quantity: ${o.qty}\n` +
       `Destination: ${o.city}, ${o.country}\n` +
       (o.incoterm ? `Incoterm: ${o.incoterm}\n` : "") +
@@ -390,7 +390,7 @@ const I18N = {
       granel: "A granel",
     },
     packSecondary: {
-      termoIcopor: "Caixas térmicas de isopor",
+      termoIcopor: "Caixa de poliestireno expandido",
     },
     packFixed: {
       palletStretch: "Pallet envolvido em stretch",
@@ -526,7 +526,7 @@ const I18N = {
       granel: "散装",
     },
     packSecondary: {
-      termoIcopor: "泡沫保温箱",
+      termoIcopor: "发泡聚苯乙烯箱",
     },
     packFixed: {
       palletStretch: "缠绕膜托盘",
