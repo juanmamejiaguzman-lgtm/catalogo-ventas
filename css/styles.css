@@ -502,6 +502,17 @@ label span {
   margin-bottom: 10px;
 }
 
+#filletUnitSwitch {
+  margin: -4px 0 12px;
+  display: inline-flex;
+  box-shadow: none;
+  border: 1px solid rgba(16, 35, 58, 0.1);
+}
+
+#filletUnitSwitch[hidden] {
+  display: none;
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;
