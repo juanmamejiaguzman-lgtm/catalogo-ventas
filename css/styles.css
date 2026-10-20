@@ -57,44 +57,108 @@ body {
   opacity: 0.55;
 }
 
-.swim {
+.swimmer {
   position: absolute;
   width: min(220px, 28vw);
   height: auto;
-  opacity: 0.55;
+  opacity: 0.62;
   filter: drop-shadow(0 10px 12px rgba(16, 35, 58, 0.18));
+  will-change: transform;
+}
+
+.swimmer svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.fish-wobble {
+  transform-box: fill-box;
+  transform-origin: 45% 55%;
+  animation: wobble 0.85s ease-in-out infinite;
+}
+
+.fish-wobble.delay {
+  animation-delay: -0.42s;
+}
+
+.fin-tail {
+  transform-box: fill-box;
+  transform-origin: 12% 50%;
+  animation: flap 0.28s ease-in-out infinite;
+}
+
+.fin-dorsal,
+.fin-pelvic {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+  animation: fin 0.5s ease-in-out infinite;
+}
+
+.fin-pelvic {
+  transform-origin: 50% 10%;
+  animation-duration: 0.42s;
 }
 
 .swim-1 {
-  top: 14%;
-  animation: swim-right 28s linear infinite;
+  top: 10%;
+  animation: swim-right 24s linear infinite;
 }
 
 .swim-2 {
-  top: 38%;
-  width: min(160px, 22vw);
-  animation: swim-left 34s linear infinite;
+  top: 32%;
+  width: min(170px, 24vw);
+  animation: swim-left 29s linear infinite;
 }
 
 .swim-3 {
-  top: 62%;
+  top: 54%;
   width: min(140px, 20vw);
-  animation: swim-right 22s linear infinite;
-  animation-delay: -8s;
+  animation: swim-right 19s linear infinite;
+  animation-delay: -6s;
 }
 
 .swim-4 {
-  top: 78%;
-  width: min(110px, 16vw);
-  animation: swim-left 40s linear infinite;
-  animation-delay: -12s;
+  top: 76%;
+  width: min(115px, 16vw);
+  animation: swim-left 36s linear infinite;
+  animation-delay: -10s;
 }
 
 .swim-5 {
-  top: 24%;
-  width: min(180px, 24vw);
-  animation: swim-right 46s linear infinite;
-  animation-delay: -20s;
+  top: 20%;
+  width: min(190px, 26vw);
+  animation: swim-right 41s linear infinite;
+  animation-delay: -18s;
+}
+
+.swim-6 {
+  top: 44%;
+  width: min(125px, 18vw);
+  animation: swim-left 21s linear infinite;
+  animation-delay: -4s;
+}
+
+.swim-7 {
+  top: 66%;
+  width: min(155px, 22vw);
+  animation: swim-right 31s linear infinite;
+  animation-delay: -14s;
+}
+
+.swim-8 {
+  top: 86%;
+  width: min(100px, 14vw);
+  animation: swim-left 26s linear infinite;
+  animation-delay: -9s;
+}
+
+.swim-9 {
+  top: 6%;
+  width: min(135px, 19vw);
+  animation: swim-left 38s linear infinite;
+  animation-delay: -22s;
 }
 
 .bubble {
@@ -102,39 +166,74 @@ body {
   bottom: -40px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.18);
-  animation: rise linear infinite;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12));
+  animation: bubble-rise linear infinite;
+  box-shadow: inset -2px -3px 6px rgba(255, 255, 255, 0.35);
 }
 
-.b1 { left: 8%; width: 10px; height: 10px; animation-duration: 11s; }
-.b2 { left: 18%; width: 16px; height: 16px; animation-duration: 15s; animation-delay: -3s; }
-.b3 { left: 28%; width: 8px; height: 8px; animation-duration: 9s; animation-delay: -6s; }
-.b4 { left: 42%; width: 14px; height: 14px; animation-duration: 13s; animation-delay: -2s; }
-.b5 { left: 55%; width: 11px; height: 11px; animation-duration: 17s; animation-delay: -8s; }
-.b6 { left: 64%; width: 18px; height: 18px; animation-duration: 12s; animation-delay: -4s; }
-.b7 { left: 73%; width: 9px; height: 9px; animation-duration: 10s; animation-delay: -1s; }
-.b8 { left: 82%; width: 13px; height: 13px; animation-duration: 16s; animation-delay: -7s; }
-.b9 { left: 90%; width: 7px; height: 7px; animation-duration: 8s; animation-delay: -5s; }
-.b10 { left: 48%; width: 20px; height: 20px; animation-duration: 19s; animation-delay: -9s; }
+.b1 { left: 6%; width: 10px; height: 10px; animation-duration: 11s; }
+.b2 { left: 14%; width: 16px; height: 16px; animation-duration: 15s; animation-delay: -3s; }
+.b3 { left: 22%; width: 8px; height: 8px; animation-duration: 9s; animation-delay: -6s; }
+.b4 { left: 31%; width: 14px; height: 14px; animation-duration: 13s; animation-delay: -2s; }
+.b5 { left: 39%; width: 11px; height: 11px; animation-duration: 17s; animation-delay: -8s; }
+.b6 { left: 47%; width: 18px; height: 18px; animation-duration: 12s; animation-delay: -4s; }
+.b7 { left: 55%; width: 9px; height: 9px; animation-duration: 10s; animation-delay: -1s; }
+.b8 { left: 63%; width: 13px; height: 13px; animation-duration: 16s; animation-delay: -7s; }
+.b9 { left: 71%; width: 7px; height: 7px; animation-duration: 8s; animation-delay: -5s; }
+.b10 { left: 79%; width: 20px; height: 20px; animation-duration: 19s; animation-delay: -9s; }
+.b11 { left: 87%; width: 12px; height: 12px; animation-duration: 14s; animation-delay: -11s; }
+.b12 { left: 94%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: -2.5s; }
+.b13 { left: 10%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: -4.5s; }
+.b14 { left: 26%; width: 15px; height: 15px; animation-duration: 18s; animation-delay: -13s; }
+.b15 { left: 43%; width: 9px; height: 9px; animation-duration: 11s; animation-delay: -6.5s; }
+.b16 { left: 58%; width: 17px; height: 17px; animation-duration: 20s; animation-delay: -1.8s; }
+.b17 { left: 68%; width: 6px; height: 6px; animation-duration: 8s; animation-delay: -9.2s; }
+.b18 { left: 76%; width: 11px; height: 11px; animation-duration: 13s; animation-delay: -15s; }
+.b19 { left: 84%; width: 22px; height: 22px; animation-duration: 21s; animation-delay: -3.4s; }
+.b20 { left: 51%; width: 7px; height: 7px; animation-duration: 9s; animation-delay: -12s; }
 
 @keyframes swim-right {
-  0% { transform: translateX(-30vw) translateY(0) scaleX(1); }
-  50% { transform: translateX(50vw) translateY(-18px) scaleX(1); }
-  50.01% { transform: translateX(50vw) translateY(-18px) scaleX(-1); }
-  100% { transform: translateX(-30vw) translateY(8px) scaleX(-1); }
+  0% { transform: translateX(-32vw) translateY(0) scaleX(1); }
+  18% { transform: translateX(6vw) translateY(-26px) scaleX(1); }
+  36% { transform: translateX(32vw) translateY(14px) scaleX(1); }
+  50% { transform: translateX(58vw) translateY(-10px) scaleX(1); }
+  50.01% { transform: translateX(58vw) translateY(-10px) scaleX(-1); }
+  68% { transform: translateX(30vw) translateY(22px) scaleX(-1); }
+  84% { transform: translateX(2vw) translateY(-16px) scaleX(-1); }
+  100% { transform: translateX(-32vw) translateY(8px) scaleX(-1); }
 }
 
 @keyframes swim-left {
-  0% { transform: translateX(110vw) translateY(0) scaleX(-1); }
-  50% { transform: translateX(20vw) translateY(16px) scaleX(-1); }
-  50.01% { transform: translateX(20vw) translateY(16px) scaleX(1); }
-  100% { transform: translateX(110vw) translateY(-10px) scaleX(1); }
+  0% { transform: translateX(112vw) translateY(0) scaleX(-1); }
+  18% { transform: translateX(78vw) translateY(20px) scaleX(-1); }
+  36% { transform: translateX(48vw) translateY(-24px) scaleX(-1); }
+  50% { transform: translateX(18vw) translateY(12px) scaleX(-1); }
+  50.01% { transform: translateX(18vw) translateY(12px) scaleX(1); }
+  68% { transform: translateX(46vw) translateY(-18px) scaleX(1); }
+  84% { transform: translateX(82vw) translateY(16px) scaleX(1); }
+  100% { transform: translateX(112vw) translateY(-8px) scaleX(1); }
 }
 
-@keyframes rise {
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  12% { opacity: 0.7; }
-  100% { transform: translateY(-110vh) scale(1.35); opacity: 0; }
+@keyframes wobble {
+  0%, 100% { transform: rotate(-7deg) translateY(0); }
+  50% { transform: rotate(7deg) translateY(5px); }
+}
+
+@keyframes flap {
+  0%, 100% { transform: rotate(-16deg); }
+  50% { transform: rotate(18deg); }
+}
+
+@keyframes fin {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes bubble-rise {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.75; }
+  50% { transform: translateY(-55vh) translateX(12px) scale(1.2); }
+  100% { transform: translateY(-110vh) translateX(-8px) scale(1.4); opacity: 0; }
 }
 
 @keyframes caustic {
@@ -143,13 +242,17 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .swim,
+  .swimmer,
   .bubble,
-  .sea-caustics {
+  .sea-caustics,
+  .fish-wobble,
+  .fin-tail,
+  .fin-dorsal,
+  .fin-pelvic {
     animation: none;
   }
 
-  .swim {
+  .swimmer {
     display: none;
   }
 }
@@ -495,7 +598,7 @@ html.is-zh h3 {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
   margin-top: 28px;
 }

@@ -37,8 +37,6 @@ const I18N = {
     productsTitle: "¿Qué producto desea?",
     productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
     shipFrozen: "Despacho en contenedor refrigerado de 40 pies.",
-    shipHead:
-      "Despacho: la cabeza de tilapia congelada es el único producto congelado que puede ir por vía aérea. El resto de congelados sale en contenedor de 40 pies.",
     colorTitle: "¿Tilapia entera roja o plateada?",
     colorLede: "Cuando elijas el color, armamos el pedido.",
     process: "Presentación",
@@ -102,15 +100,6 @@ const I18N = {
           congelado: "Filete congelado",
         },
       },
-      subproductos: {
-        name: "Subproductos",
-        sci: "Oreochromis niloticus",
-        lede: "Indica cantidad, destino y datos de contacto. El empaque ya está definido para cada subproducto.",
-        options: {
-          pieles: "Pieles de tilapia",
-          cabezas: "Cabezas de tilapia",
-        },
-      },
     },
     packPrimary: {
       bolsa: "Bolsa",
@@ -119,10 +108,6 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caja de poliestireno expandido",
-    },
-    packFixed: {
-      palletStretch: "Pallet envuelto en stretch",
-      termo10: "Termos de {w}",
     },
     colors: {
       roja: "Tilapia entera roja",
@@ -172,8 +157,6 @@ const I18N = {
     productsTitle: "Which product do you want?",
     productsLede: "First choose the type and how you want it. Then set packing and destination.",
     shipFrozen: "Shipped in a refrigerated 40-foot container.",
-    shipHead:
-      "Shipping: frozen tilapia head is the only frozen product that can go by air. All other frozen products ship in a 40-foot container.",
     colorTitle: "Red or silver whole tilapia?",
     colorLede: "After you choose the color, we build the order.",
     process: "Presentation",
@@ -237,15 +220,6 @@ const I18N = {
           congelado: "Frozen fillet",
         },
       },
-      subproductos: {
-        name: "By-products",
-        sci: "Oreochromis niloticus",
-        lede: "Set quantity, destination and contact details. Packaging is already defined for each by-product.",
-        options: {
-          pieles: "Tilapia skins",
-          cabezas: "Tilapia heads",
-        },
-      },
     },
     packPrimary: {
       bolsa: "Bag",
@@ -254,10 +228,6 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Expanded polystyrene box",
-    },
-    packFixed: {
-      palletStretch: "Pallet wrapped in stretch film",
-      termo10: "{w} coolers",
     },
     colors: {
       roja: "Red whole tilapia",
@@ -306,11 +276,7 @@ const I18N = {
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
     productsTitle: "Qual produto deseja?",
     productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
-    shipCatalog:
-      "Os produtos congelados são despachados em contêineres de 40 pés. A cabeça de tilápia congelada é o único produto congelado que pode ir por via aérea.",
     shipFrozen: "Despacho em contêiner refrigerado de 40 pés.",
-    shipHead:
-      "Despacho: a cabeça de tilápia congelada é o único produto congelado que pode ir por via aérea. Os demais congelados saem em contêiner de 40 pés.",
     colorTitle: "Tilápia inteira vermelha ou prateada?",
     colorLede: "Depois de escolher a cor, montamos o pedido.",
     process: "Apresentação",
@@ -374,15 +340,6 @@ const I18N = {
           congelado: "Filé congelado",
         },
       },
-      subproductos: {
-        name: "Subprodutos",
-        sci: "Oreochromis niloticus",
-        lede: "Indique quantidade, destino e dados de contato. A embalagem já está definida para cada subproduto.",
-        options: {
-          pieles: "Peles de tilápia",
-          cabezas: "Cabeças de tilápia",
-        },
-      },
     },
     packPrimary: {
       bolsa: "Bolsa",
@@ -391,10 +348,6 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caixa de poliestireno expandido",
-    },
-    packFixed: {
-      palletStretch: "Pallet envolvido em stretch",
-      termo10: "Caixas térmicas de {w}",
     },
     colors: {
       roja: "Tilápia inteira vermelha",
@@ -442,11 +395,7 @@ const I18N = {
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
-    shipCatalog:
-      "冷冻产品以 40 英尺集装箱发运。冷冻罗非鱼头是唯一可空运的冷冻产品。",
     shipFrozen: "以 40 英尺冷藏集装箱发运。",
-    shipHead:
-      "发运：冷冻罗非鱼头是唯一可空运的冷冻产品。其余冷冻产品以 40 英尺集装箱发运。",
     colorTitle: "整条红罗非鱼还是银罗非鱼？",
     colorLede: "选定颜色后，再填写订单。",
     process: "加工方式",
@@ -510,15 +459,6 @@ const I18N = {
           congelado: "冻鱼片",
         },
       },
-      subproductos: {
-        name: "副产品",
-        sci: "Oreochromis niloticus",
-        lede: "请填写数量、目的地和联系方式。每种副产品的包装已固定。",
-        options: {
-          pieles: "罗非鱼皮",
-          cabezas: "罗非鱼头",
-        },
-      },
     },
     packPrimary: {
       bolsa: "袋装",
@@ -527,10 +467,6 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "发泡聚苯乙烯箱",
-    },
-    packFixed: {
-      palletStretch: "缠绕膜托盘",
-      termo10: "{w}保温箱",
     },
     colors: {
       roja: "整条红罗非鱼",
@@ -588,11 +524,6 @@ const GROUPS = {
     packSecondary: ["termoIcopor"],
     termoSizes: ["t5", "t10", "t22"],
     art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
-  },
-  subproductos: {
-    options: ["pieles", "cabezas"],
-    packFixed: { pieles: "palletStretch", cabezas: "termo10" },
-    art: (option) => (option === "cabezas" ? headArt("#10233a") : skinArt("#10233a")),
   },
 };
 
@@ -669,16 +600,9 @@ function sizeLabel(key) {
   return `${from} - ${to} g`;
 }
 
-function shippingCopy(groupId, option) {
-  const dict = t();
-  if (groupId === "subproductos" && option === "cabezas") return dict.shipHead;
-  if (option === "congelado") return dict.shipFrozen;
+function shippingCopy(_groupId, option) {
+  if (option === "congelado") return t().shipFrozen;
   return "";
-}
-
-function packFixedLabel(key) {
-  const template = t().packFixed[key];
-  return template.replace("{w}", formatKg(10));
 }
 
 function qtyDisplay(qty, unitKey) {
@@ -692,23 +616,22 @@ function qtyDisplay(qty, unitKey) {
 
 function resetPack() {
   const group = GROUPS[state.group];
-  if (group.packPrimary) {
-    state.packPrimary = group.packPrimary[0];
-    state.packSecondary = group.packSecondary[0];
-    state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
-    return;
-  }
-  state.packPrimary = group.packFixed[state.option];
-  state.packSecondary = null;
-  state.termoSize = null;
+  state.packPrimary = group.packPrimary[0];
+  state.packSecondary = group.packSecondary[0];
+  state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
 }
 
 function fishArt(color) {
-  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
-    <path d="M28 72c18-34 78-48 118-28 18 9 28 22 40 20-8 14-4 28 2 40-16 2-30-6-48-4-42 6-90-6-112-28Z" fill="${color}" opacity=".9"/>
-    <circle cx="58" cy="64" r="6" fill="#fff"/>
-    <circle cx="56" cy="64" r="3" fill="#10233a"/>
-    <path d="M150 58c12-18 28-22 42-18-10 16-10 32 0 48-16 2-30-6-42-14Z" fill="${color}"/>
+  return `<svg viewBox="0 0 240 140" fill="none" aria-hidden="true">
+    <path d="M88 32c18-20 40-22 54-8-16 8-32 10-54 8Z" fill="${color}" opacity=".85"/>
+    <path d="M164 50c22-26 48-30 62-20-12 20-10 40 2 56-16 6-40-2-64-16Z" fill="${color}"/>
+    <path d="M90 96c8 16 22 20 34 12-10-2-24-4-34-12Z" fill="${color}" opacity=".8"/>
+    <path d="M24 74c16-36 78-52 124-28 16 8 28 22 40 20-8 14-4 26 2 38-18 4-32-4-50-2-44 6-92-6-116-28Z" fill="${color}"/>
+    <path d="M50 70c36-8 78-6 112 10" stroke="#fff" stroke-width="3" opacity=".4"/>
+    <path d="M66 56c8 10 8 22 0 32" stroke="#10233a" stroke-width="2.5" opacity=".25"/>
+    <circle cx="50" cy="64" r="7" fill="#fff"/>
+    <circle cx="48" cy="64" r="3.5" fill="#10233a"/>
+    <circle cx="47" cy="62" r="1.2" fill="#fff"/>
   </svg>`;
 }
 
@@ -719,23 +642,6 @@ function filletArt(color) {
   </svg>`;
 }
 
-function skinArt(color) {
-  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
-    <path d="M36 40c48-8 96 10 148 4-10 28-6 54 8 76-58 6-108-8-156-18 8-22 6-44 0-62Z" fill="${color}" opacity=".85"/>
-    <circle cx="70" cy="62" r="4" fill="#00a7e1"/>
-    <circle cx="102" cy="70" r="4" fill="#e3066a"/>
-    <circle cx="134" cy="60" r="4" fill="#00a7e1"/>
-  </svg>`;
-}
-
-function headArt(color) {
-  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
-    <path d="M40 78c10-34 48-50 88-38 18 6 28 22 34 38-8 24-28 38-62 40-32 2-54-12-60-40Z" fill="${color}"/>
-    <circle cx="78" cy="70" r="7" fill="#fff"/>
-    <circle cx="76" cy="70" r="3.5" fill="#00a7e1"/>
-    <path d="M58 92c10 8 28 10 42 6" stroke="#e3066a" stroke-width="4" stroke-linecap="round"/>
-  </svg>`;
-}
 
 function applyI18n() {
   document.documentElement.lang = LANG_HTML[state.lang];
@@ -874,26 +780,14 @@ function fillConfig() {
   if (!state.incoterm) state.incoterm = INCOTERMS[0];
   renderChips($("#incotermChips"), INCOTERMS, state.incoterm, "incoterm", (key) => key);
 
-  const dualPack = Boolean(group.packPrimary);
-  $("#packPrimaryField").hidden = !dualPack;
-  $("#packSecondaryField").hidden = !dualPack;
-  $("#packFixedField").hidden = dualPack;
-  if (dualPack) {
-    if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
-    if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
-    renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
-    renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
-    $("#packFixedChips").innerHTML = "";
-  } else {
-    state.packPrimary = group.packFixed[state.option];
-    state.packSecondary = null;
-    state.termoSize = null;
-    renderChips($("#packFixedChips"), [state.packPrimary], state.packPrimary, "pack-fixed", packFixedLabel);
-    $("#packPrimaryChips").innerHTML = "";
-    $("#packSecondaryChips").innerHTML = "";
-  }
+  $("#packPrimaryField").hidden = false;
+  $("#packSecondaryField").hidden = false;
+  if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
+  if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
+  renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
+  renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
 
-  const termoSizes = dualPack && state.packSecondary === "termoIcopor" ? group.termoSizes : null;
+  const termoSizes = state.packSecondary === "termoIcopor" ? group.termoSizes : null;
   $("#termoSizeField").hidden = !termoSizes;
   if (termoSizes) {
     if (!state.termoSize || !termoSizes.includes(state.termoSize)) state.termoSize = termoSizes[0];
@@ -917,9 +811,8 @@ function fillConfig() {
 function formattedOrder() {
   const dict = t();
   const o = state.order;
-  const group = GROUPS[o.group];
-  const packPrimary = group.packPrimary ? dict.packPrimary[o.packPrimary] : packFixedLabel(o.packPrimary);
-  const packSecondary = group.packPrimary ? dict.packSecondary[o.packSecondary] : "";
+  const packPrimary = dict.packPrimary[o.packPrimary];
+  const packSecondary = dict.packSecondary[o.packSecondary];
   return {
     name: o.name,
     company: o.company,
@@ -1151,11 +1044,10 @@ $("#orderForm").addEventListener("submit", (event) => {
   if (!state.group || !state.option) return;
   if (state.group === "entera" && (!state.color || !state.process)) return;
   if (sizesFor(state.group) && !state.size) return;
-  if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
+  if (!state.packPrimary || !state.packSecondary) return;
   if (group.termoSizes && state.packSecondary === "termoIcopor" && !state.termoSize) return;
   if (state.option === "congelado" && !state.freeze) return;
   if (!state.incoterm) return;
-  if (!group.packPrimary && !state.packPrimary) return;
   state.order = collectOrder();
   renderTicket();
   showStage("summary");
