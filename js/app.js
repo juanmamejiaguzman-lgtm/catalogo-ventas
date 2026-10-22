@@ -47,6 +47,8 @@ const I18N = {
     packaging: "Tipo de empaque",
     packPrimaryTitle: "Empaque primario",
     packSecondaryTitle: "Empaque secundario",
+    productPreview: "Producto",
+    packPreview: "Empaque",
     termoSize: "Talla de la caja",
     quantity: "Cantidad",
     unit: "Unidad",
@@ -167,6 +169,8 @@ const I18N = {
     packaging: "Packaging",
     packPrimaryTitle: "Primary packaging",
     packSecondaryTitle: "Secondary packaging",
+    productPreview: "Product",
+    packPreview: "Packaging",
     termoSize: "Box size",
     quantity: "Quantity",
     unit: "Unit",
@@ -287,6 +291,8 @@ const I18N = {
     packaging: "Tipo de embalagem",
     packPrimaryTitle: "Embalagem primária",
     packSecondaryTitle: "Embalagem secundária",
+    productPreview: "Produto",
+    packPreview: "Embalagem",
     termoSize: "Tamanho da caixa térmica",
     quantity: "Quantidade",
     unit: "Unidade",
@@ -406,6 +412,8 @@ const I18N = {
     packaging: "包装方式",
     packPrimaryTitle: "内包装",
     packSecondaryTitle: "外包装",
+    productPreview: "产品",
+    packPreview: "包装",
     termoSize: "保温箱规格",
     quantity: "数量",
     unit: "单位",
@@ -515,15 +523,12 @@ const GROUPS = {
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     termoSizes: ["t10", "t22"],
-    art: (option) => fishArt(option === "congelado" ? "#0077a8" : "#00a7e1"),
-    colorArt: (color) => fishArt(color === "roja" ? "#e3066a" : "#7b8b99"),
   },
   filete: {
     options: ["fresco", "congelado"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     termoSizes: ["t5", "t10", "t22"],
-    art: (option) => filletArt(option === "congelado" ? "#b10552" : "#e3066a"),
   },
 };
 
@@ -552,6 +557,7 @@ const state = {
   freeze: null,
   incoterm: "EXW",
   filletUnit: "oz",
+  hover: {},
   order: null,
 };
 
@@ -621,25 +627,175 @@ function resetPack() {
   state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
 }
 
-function fishArt(color) {
+function viewOf(overrides = {}) {
+  return {
+    group: state.group,
+    option: state.option,
+    color: state.color,
+    process: state.process,
+    size: state.size,
+    freeze: state.freeze,
+    packPrimary: state.packPrimary,
+    packSecondary: state.packSecondary,
+    termoSize: state.termoSize,
+    ...state.hover,
+    ...overrides,
+  };
+}
+
+function colorFile(color) {
+  if (color === "negra") return "plateada";
+  return color || "";
+}
+
+function sizeScale(key) {
+  return (
+    {
+      t80: 0.72,
+      t350: 0.88,
+      t550: 1,
+      oz35: 0.7,
+      oz46: 0.82,
+      oz79: 0.94,
+      oz9up: 1.08,
+    }[key] || 1
+  );
+}
+
+function productPhotoKeys(view) {
+  const keys = [];
+  if (view.group === "entera") {
+    const color = colorFile(view.color);
+    if (color && view.option && view.process) keys.push(`entera-${color}-${view.option}-${view.process}`);
+    if (color && view.option) keys.push(`entera-${color}-${view.option}`);
+    if (color) keys.push(`entera-${color}`);
+    if (view.option) keys.push(`entera-${view.option}`);
+    keys.push("entera");
+  } else if (view.group === "filete") {
+    if (view.option && view.freeze) keys.push(`filete-${view.option}-${view.freeze}`);
+    if (view.option && view.size) keys.push(`filete-${view.option}-${view.size}`);
+    if (view.option) keys.push(`filete-${view.option}`);
+    keys.push("filete");
+  }
+  return keys;
+}
+
+function packPhotoKeys(view) {
+  const keys = [];
+  if (view.packPrimary && view.packSecondary && view.termoSize) {
+    keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
+  }
+  if (view.packPrimary && view.packSecondary) keys.push(`${view.packPrimary}-${view.packSecondary}`);
+  if (view.packPrimary) keys.push(view.packPrimary);
+  if (view.packSecondary) keys.push(view.packSecondary);
+  if (view.termoSize) keys.push(view.termoSize);
+  return keys;
+}
+
+const PHOTO_FILES = new Set();
+
+function mediaBox(folder, keys, fallback) {
+  const srcs = keys.map((key) => `assets/${folder}/${key}.png`).filter((src) => PHOTO_FILES.has(src));
+  const img = srcs.length
+    ? `<img class="photo" hidden src="${srcs[0]}" data-fallbacks="${srcs.slice(1).join("|")}" alt="" />`
+    : "";
+  return `<div class="media">${img}<div class="fallback">${fallback}</div></div>`;
+}
+
+function frostOverlay() {
+  return `<g opacity=".55" fill="#fff">
+    <circle cx="70" cy="42" r="4"/>
+    <circle cx="118" cy="36" r="3"/>
+    <circle cx="156" cy="58" r="5"/>
+    <circle cx="96" cy="88" r="3.5"/>
+    <circle cx="178" cy="86" r="4"/>
+  </g>`;
+}
+
+function fishArt(view) {
+  const color =
+    view.color === "roja" ? "#e3066a" : view.color === "negra" ? "#7b8b99" : view.option === "congelado" ? "#0077a8" : "#00a7e1";
+  const scale = sizeScale(view.size);
+  const scales = view.process === "sesa" || !view.process
+    ? `<g fill="#fff" opacity=".28">
+        <circle cx="86" cy="62" r="3"/><circle cx="104" cy="58" r="3"/><circle cx="122" cy="64" r="3"/>
+        <circle cx="98" cy="76" r="2.5"/><circle cx="116" cy="74" r="2.5"/><circle cx="134" cy="70" r="2.5"/>
+      </g>`
+    : "";
+  const belly = view.process === "seca" ? `<path d="M70 86c28 10 62 8 92-4" stroke="#10233a" stroke-width="3" opacity=".35"/>` : "";
+  const frozen = view.option === "congelado" ? frostOverlay() : "";
   return `<svg viewBox="0 0 240 140" fill="none" aria-hidden="true">
-    <path d="M88 32c18-20 40-22 54-8-16 8-32 10-54 8Z" fill="${color}" opacity=".85"/>
-    <path d="M164 50c22-26 48-30 62-20-12 20-10 40 2 56-16 6-40-2-64-16Z" fill="${color}"/>
-    <path d="M90 96c8 16 22 20 34 12-10-2-24-4-34-12Z" fill="${color}" opacity=".8"/>
-    <path d="M24 74c16-36 78-52 124-28 16 8 28 22 40 20-8 14-4 26 2 38-18 4-32-4-50-2-44 6-92-6-116-28Z" fill="${color}"/>
-    <path d="M50 70c36-8 78-6 112 10" stroke="#fff" stroke-width="3" opacity=".4"/>
-    <path d="M66 56c8 10 8 22 0 32" stroke="#10233a" stroke-width="2.5" opacity=".25"/>
-    <circle cx="50" cy="64" r="7" fill="#fff"/>
-    <circle cx="48" cy="64" r="3.5" fill="#10233a"/>
-    <circle cx="47" cy="62" r="1.2" fill="#fff"/>
+    <g transform="translate(120 70) scale(${scale}) translate(-120 -70)">
+      <path d="M88 32c18-20 40-22 54-8-16 8-32 10-54 8Z" fill="${color}" opacity=".85"/>
+      <path d="M164 50c22-26 48-30 62-20-12 20-10 40 2 56-16 6-40-2-64-16Z" fill="${color}"/>
+      <path d="M90 96c8 16 22 20 34 12-10-2-24-4-34-12Z" fill="${color}" opacity=".8"/>
+      <path d="M24 74c16-36 78-52 124-28 16 8 28 22 40 20-8 14-4 26 2 38-18 4-32-4-50-2-44 6-92-6-116-28Z" fill="${color}"/>
+      <path d="M50 70c36-8 78-6 112 10" stroke="#fff" stroke-width="3" opacity=".4"/>
+      <path d="M66 56c8 10 8 22 0 32" stroke="#10233a" stroke-width="2.5" opacity=".25"/>
+      ${scales}${belly}
+      <circle cx="50" cy="64" r="7" fill="#fff"/>
+      <circle cx="48" cy="64" r="3.5" fill="#10233a"/>
+      <circle cx="47" cy="62" r="1.2" fill="#fff"/>
+      ${frozen}
+    </g>
   </svg>`;
 }
 
-function filletArt(color) {
+function filletArt(view) {
+  const color = view.option === "congelado" ? "#b10552" : "#e3066a";
+  const scale = sizeScale(view.size);
+  const frozen = view.option === "congelado" ? frostOverlay() : "";
+  const iqf =
+    view.freeze === "iqf"
+      ? `<g opacity=".95">
+          <path d="M28 78c14-22 48-32 84-18-6 10-4 20 2 30-30 4-60 2-86-12Z" fill="${color}"/>
+          <path d="M92 70c14-20 46-28 78-14-6 10-4 18 2 28-28 4-54 2-80-14Z" fill="${color}" opacity=".85"/>
+          <path d="M48 96c16-18 50-24 86-10-6 8-4 16 2 24-30 4-58 2-88-14Z" fill="${color}" opacity=".75"/>
+        </g>`
+      : `<path d="M30 88c22-40 86-58 150-34-8 18-6 36 4 52-54 8-108 4-154-18Z" fill="${color}"/>
+         <path d="M48 82c28-8 70-12 112 2" stroke="#fff" stroke-width="3" opacity=".5"/>`;
   return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
-    <path d="M30 88c22-40 86-58 150-34-8 18-6 36 4 52-54 8-108 4-154-18Z" fill="${color}"/>
-    <path d="M48 82c28-8 70-12 112 2" stroke="#fff" stroke-width="3" opacity=".5"/>
+    <g transform="translate(110 70) scale(${scale}) translate(-110 -70)">${iqf}${frozen}</g>
   </svg>`;
+}
+
+function packArt(view) {
+  const primary = view.packPrimary || "bolsa";
+  const cooler = view.packSecondary === "termoIcopor";
+  const bag =
+    primary === "vacio"
+      ? `<rect x="58" y="28" width="88" height="78" rx="10" fill="#d7eef8" stroke="#0077a8" stroke-width="3"/>
+         <path d="M70 46h64M70 62h64M70 78h44" stroke="#0077a8" stroke-width="3" opacity=".45"/>
+         <path d="M86 28v-8h32v8" stroke="#0077a8" stroke-width="3"/>`
+      : primary === "granel"
+        ? `<path d="M52 46h100l-10 64H62Z" fill="#f3d27a" stroke="#c49a2a" stroke-width="3"/>
+           <path d="M62 70h80" stroke="#c49a2a" stroke-width="3" opacity=".4"/>`
+        : `<path d="M70 38c22-16 62-16 84 0v62c-24 14-62 14-84 0Z" fill="#cfeef8" stroke="#00a7e1" stroke-width="3"/>
+           <path d="M78 58h68" stroke="#00a7e1" stroke-width="3" opacity=".4"/>`;
+  const box = cooler
+    ? `<g transform="translate(0 8)">
+         <rect x="28" y="86" width="168" height="36" rx="8" fill="#f4fbff" stroke="#7b8b99" stroke-width="3"/>
+         <rect x="40" y="96" width="40" height="16" rx="3" fill="#00a7e1" opacity=".25"/>
+         <rect x="92" y="96" width="40" height="16" rx="3" fill="#00a7e1" opacity=".25"/>
+         <rect x="144" y="96" width="36" height="16" rx="3" fill="#00a7e1" opacity=".25"/>
+       </g>`
+    : "";
+  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">${bag}${box}</svg>`;
+}
+
+function productMedia(view) {
+  const svg = view.group === "filete" ? filletArt(view) : fishArt(view);
+  return mediaBox("products", productPhotoKeys(view), svg);
+}
+
+function packMedia(view) {
+  return mediaBox("packs", packPhotoKeys(view), packArt(view));
+}
+
+function updateMediaFrames() {
+  const view = viewOf();
+  if ($("#configArt")) $("#configArt").innerHTML = productMedia(view);
+  if ($("#packArt")) $("#packArt").innerHTML = packMedia(view);
 }
 
 
@@ -683,7 +839,7 @@ function renderProducts() {
       const options = group.options
         .map(
           (option) => `<button class="choice" type="button" data-group="${id}" data-option="${option}">
-            ${group.art(option)}
+            ${productMedia({ group: id, option })}
             <span>${copy.options[option]}</span>
           </button>`
         )
@@ -709,7 +865,7 @@ function renderColors() {
   $("#colorCards").innerHTML = GROUPS.entera.colors
     .map(
       (color) => `<button class="choice" type="button" data-color="${color}">
-        ${GROUPS.entera.colorArt(color)}
+        ${productMedia({ group: "entera", option: state.option, color })}
         <span>${dict.colors[color]}</span>
         <small class="sci">${dict.colorSci[color]}</small>
       </button>`
@@ -731,13 +887,14 @@ function fillConfig() {
   const dict = t();
   const group = GROUPS[id];
   const groupCopy = dict.groups[id];
+  state.hover = {};
   const title = [groupCopy.options[state.option], id === "entera" && state.color ? dict.colors[state.color] : ""]
     .filter(Boolean)
     .join(" · ");
   $("#configTitle").textContent = title;
   $("#configSci").textContent = scientificName();
   $("#configLede").textContent = groupCopy.lede;
-  $("#configArt").innerHTML = id === "entera" && state.color ? GROUPS.entera.colorArt(state.color) : group.art(state.option);
+  updateMediaFrames();
   const ship = shippingCopy(id, state.option);
   const shipHint = $("#shipHint");
   shipHint.hidden = !ship;
@@ -1010,6 +1167,68 @@ $("#packSecondaryChips").addEventListener("click", (event) => {
   }
   fillConfig();
 });
+
+function chipPreviewPair(chip) {
+  if (chip.dataset.process) return ["process", chip.dataset.process];
+  if (chip.dataset.size) return ["size", chip.dataset.size];
+  if (chip.dataset.freeze) return ["freeze", chip.dataset.freeze];
+  if (chip.dataset.packPrimary) return ["packPrimary", chip.dataset.packPrimary];
+  if (chip.dataset.packSecondary) return ["packSecondary", chip.dataset.packSecondary];
+  if (chip.dataset.termoSize) return ["termoSize", chip.dataset.termoSize];
+  return null;
+}
+
+$("#stage-config").addEventListener("pointerover", (event) => {
+  const chip = event.target.closest(".chip");
+  if (!chip || !$("#stage-config").contains(chip)) return;
+  const pair = chipPreviewPair(chip);
+  if (!pair) return;
+  const [field, value] = pair;
+  if (state.hover[field] === value) return;
+  state.hover = { [field]: value };
+  document.querySelectorAll("#stage-config .chip.is-preview").forEach((el) => el.classList.remove("is-preview"));
+  chip.classList.add("is-preview");
+  updateMediaFrames();
+});
+
+$("#stage-config").addEventListener("pointerout", (event) => {
+  const chip = event.target.closest(".chip");
+  if (!chip) return;
+  const next = event.relatedTarget;
+  if (next && chip.contains(next)) return;
+  chip.classList.remove("is-preview");
+  if (!Object.keys(state.hover).length) return;
+  state.hover = {};
+  updateMediaFrames();
+});
+
+document.addEventListener(
+  "error",
+  (event) => {
+    const img = event.target;
+    if (!(img instanceof HTMLImageElement) || !img.classList.contains("photo")) return;
+    const rest = (img.dataset.fallbacks || "").split("|").filter(Boolean);
+    if (rest.length) {
+      img.dataset.fallbacks = rest.slice(1).join("|");
+      img.src = rest[0];
+      return;
+    }
+    img.remove();
+  },
+  true
+);
+
+document.addEventListener(
+  "load",
+  (event) => {
+    const img = event.target;
+    if (!(img instanceof HTMLImageElement) || !img.classList.contains("photo")) return;
+    img.hidden = false;
+    const fallback = img.nextElementSibling;
+    if (fallback) fallback.hidden = true;
+  },
+  true
+);
 
 $("#termoSizeChips").addEventListener("click", (event) => {
   const chip = event.target.closest("[data-termo-size]");
