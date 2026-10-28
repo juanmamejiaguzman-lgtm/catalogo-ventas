@@ -108,7 +108,7 @@ const I18N = {
       subproductos: {
         name: "Subproductos",
         sci: "Oreochromis niloticus",
-        lede: "Indica cantidad, destino y datos de contacto. El empaque ya está definido para este subproducto.",
+        lede: "Indica cantidad, destino y datos de contacto.",
         options: {
           pieles: "Piel de tilapia",
         },
@@ -169,7 +169,7 @@ const I18N = {
       (o.size ? `Talla: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelación: ${o.freeze}\n` : "") +
       `Nombre científico: ${o.scientific}\n` +
-      (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : `Empaque: ${o.packPrimary}\n`) +
+      (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : o.packPrimary ? `Empaque: ${o.packPrimary}\n` : "") +
       (o.termoSize ? `Talla de la caja: ${o.termoSize}\n` : "") +
       `Cantidad: ${o.qty}\n` +
       `Destino: ${o.city}, ${o.country}\n` +
@@ -260,7 +260,7 @@ const I18N = {
       subproductos: {
         name: "By-products",
         sci: "Oreochromis niloticus",
-        lede: "Set quantity, destination and contact details. Packaging is already defined for this by-product.",
+        lede: "Set quantity, destination and contact details.",
         options: {
           pieles: "Tilapia skin",
         },
@@ -321,7 +321,7 @@ const I18N = {
       (o.size ? `Size: ${o.size}\n` : "") +
       (o.freeze ? `Freezing type: ${o.freeze}\n` : "") +
       `Scientific name: ${o.scientific}\n` +
-      (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : `Packaging: ${o.packPrimary}\n`) +
+      (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : o.packPrimary ? `Packaging: ${o.packPrimary}\n` : "") +
       (o.termoSize ? `Box size: ${o.termoSize}\n` : "") +
       `Quantity: ${o.qty}\n` +
       `Destination: ${o.city}, ${o.country}\n` +
@@ -412,7 +412,7 @@ const I18N = {
       subproductos: {
         name: "Subprodutos",
         sci: "Oreochromis niloticus",
-        lede: "Indique quantidade, destino e dados de contato. A embalagem já está definida para este subproduto.",
+        lede: "Indique quantidade, destino e dados de contato.",
         options: {
           pieles: "Pele de tilápia",
         },
@@ -473,7 +473,7 @@ const I18N = {
       (o.size ? `Tamanho: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelamento: ${o.freeze}\n` : "") +
       `Nome científico: ${o.scientific}\n` +
-      (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : `Embalagem: ${o.packPrimary}\n`) +
+      (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : o.packPrimary ? `Embalagem: ${o.packPrimary}\n` : "") +
       (o.termoSize ? `Tamanho da caixa térmica: ${o.termoSize}\n` : "") +
       `Quantidade: ${o.qty}\n` +
       `Destino: ${o.city}, ${o.country}\n` +
@@ -563,7 +563,7 @@ const I18N = {
       subproductos: {
         name: "副产品",
         sci: "Oreochromis niloticus",
-        lede: "请填写数量、目的地和联系方式。该副产品的包装已固定。",
+        lede: "请填写数量、目的地和联系方式。",
         options: {
           pieles: "罗非鱼皮",
         },
@@ -624,7 +624,7 @@ const I18N = {
       (o.size ? `规格：${o.size}\n` : "") +
       (o.freeze ? `冻结方式：${o.freeze}\n` : "") +
       `学名：${o.scientific}\n` +
-      (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : `包装：${o.packPrimary}\n`) +
+      (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : o.packPrimary ? `包装：${o.packPrimary}\n` : "") +
       (o.termoSize ? `保温箱规格：${o.termoSize}\n` : "") +
       `数量：${o.qty}\n` +
       `目的地：${o.city}, ${o.country}\n` +
@@ -654,7 +654,6 @@ const GROUPS = {
   },
   subproductos: {
     options: ["pieles"],
-    packFixed: { pieles: "palletStretch" },
   },
 };
 
@@ -738,12 +737,14 @@ function shippingCopy(_groupId, option) {
   return "";
 }
 
+function kgOnlyUnits() {
+  return state.group === "subproductos";
+}
+
 function qtyDisplay(qty, unitKey) {
   const dict = t();
-  if (unitKey === "kg" || unitKey === "lb") {
-    const kg = unitKey === "kg" ? Number(qty) : Number(qty) / KG_TO_LB;
-    return formatKg(kg);
-  }
+  if (unitKey === "kg") return `${roundMass(Number(qty))} ${dict.units.kg}`;
+  if (unitKey === "lb") return `${roundMass(Number(qty))} ${dict.units.lb}`;
   return `${qty} ${dict.units[unitKey]}`;
 }
 
@@ -764,7 +765,7 @@ function resetPack() {
     state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
     return;
   }
-  state.packPrimary = group.packFixed[state.option];
+  state.packPrimary = null;
   state.packSecondary = null;
   state.termoSize = null;
 }
@@ -983,7 +984,10 @@ function packMedia(view) {
 function updateMediaFrames() {
   const view = viewOf();
   if ($("#configArt")) $("#configArt").innerHTML = productMedia(view);
-  if ($("#packArt")) $("#packArt").innerHTML = packMedia(view);
+  const packFrame = $("#packFrame");
+  const showPack = Boolean(GROUPS[view.group]?.packPrimary);
+  if (packFrame) packFrame.hidden = !showPack;
+  if ($("#packArt") && showPack) $("#packArt").innerHTML = packMedia(view);
 }
 
 
@@ -1150,7 +1154,7 @@ function fillConfig() {
   const dualPack = Boolean(group.packPrimary);
   $("#packPrimaryField").hidden = !dualPack;
   $("#packSecondaryField").hidden = !dualPack;
-  $("#packFixedField").hidden = dualPack;
+  $("#packFixedField").hidden = true;
   if (dualPack) {
     const secondary = packSecondaryOptions(group);
     if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
@@ -1159,10 +1163,10 @@ function fillConfig() {
     renderChips($("#packSecondaryChips"), secondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
     $("#packFixedChips").innerHTML = "";
   } else {
-    state.packPrimary = group.packFixed[state.option];
+    state.packPrimary = null;
     state.packSecondary = null;
     state.termoSize = null;
-    renderChips($("#packFixedChips"), [state.packPrimary], state.packPrimary, "pack-fixed", (key) => dict.packFixed[key]);
+    $("#packFixedChips").innerHTML = "";
     $("#packPrimaryChips").innerHTML = "";
     $("#packSecondaryChips").innerHTML = "";
   }
@@ -1178,9 +1182,10 @@ function fillConfig() {
 
   const unitEl = $("#unit");
   const prevUnit = unitEl.value;
-  const unitKeys = [state.mass, "termos"];
+  const unitKeys = kgOnlyUnits() ? ["kg"] : [state.mass, "termos"];
   unitEl.innerHTML = unitKeys.map((value) => `<option value="${value}">${dict.units[value]}</option>`).join("");
-  if (prevUnit === "kg" || prevUnit === "lb") unitEl.value = state.mass;
+  if (kgOnlyUnits()) unitEl.value = "kg";
+  else if (prevUnit === "kg" || prevUnit === "lb") unitEl.value = state.mass;
   else if (unitKeys.includes(prevUnit)) unitEl.value = prevUnit;
 
   $("#destSuggest").innerHTML = DESTINATIONS.map(
@@ -1192,7 +1197,7 @@ function formattedOrder() {
   const dict = t();
   const o = state.order;
   const group = GROUPS[o.group];
-  const packPrimary = group.packPrimary ? dict.packPrimary[o.packPrimary] : dict.packFixed[o.packPrimary];
+  const packPrimary = group.packPrimary ? dict.packPrimary[o.packPrimary] : "";
   const packSecondary = group.packPrimary ? dict.packSecondary[o.packSecondary] : "";
   return {
     name: o.name,
@@ -1230,7 +1235,9 @@ function renderTicket() {
     ${
       o.packSecondary
         ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>${o.termoSize ? `<dt>${dict.fields.termoSize}</dt><dd>${o.termoSize}</dd>` : ""}`
-        : `<dt>${dict.fields.packaging}</dt><dd>${o.packPrimary}</dd>`
+        : o.packPrimary
+          ? `<dt>${dict.fields.packaging}</dt><dd>${o.packPrimary}</dd>`
+          : ""
     }
     <dt>${dict.fields.quantity}</dt><dd>${o.qty}</dd>
     ${o.shipping ? `<dt>${dict.fields.shipping}</dt><dd>${o.shipping}</dd>` : ""}
@@ -1270,7 +1277,7 @@ function setMass(next) {
   if (state.mass === next) return;
   const unitEl = $("#unit");
   const qtyEl = $("#qty");
-  if (unitEl && qtyEl && (unitEl.value === "kg" || unitEl.value === "lb")) {
+  if (unitEl && qtyEl && !kgOnlyUnits() && (unitEl.value === "kg" || unitEl.value === "lb")) {
     const n = Number(qtyEl.value);
     if (!Number.isNaN(n)) {
       qtyEl.value = next === "lb" ? roundMass(n * KG_TO_LB) : roundMass(n / KG_TO_LB);
@@ -1512,7 +1519,6 @@ $("#orderForm").addEventListener("submit", (event) => {
   if (needsFilletChoice() && (!state.color || !state.skin)) return;
   if (sizesFor(state.group) && !state.size) return;
   if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
-  if (!group.packPrimary && !state.packPrimary) return;
   if (group.termoSizes && state.packSecondary === "termoIcopor" && !state.termoSize) return;
   if (state.option === "congelado" && !state.freeze) return;
   if (!state.incoterm) return;
