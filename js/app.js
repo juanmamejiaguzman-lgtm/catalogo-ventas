@@ -753,6 +753,7 @@ const PHOTO_FILES = new Set([
   "assets/products/entera-fresco.jpg",
   "assets/products/entera-roja.jpg",
   "assets/products/entera-plateada.jpg",
+  "assets/products/entera-congelado.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
