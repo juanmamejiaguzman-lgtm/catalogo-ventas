@@ -121,6 +121,7 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caja de poliestireno expandido",
+      cajaCarton: "Caja de cartón",
     },
     packFixed: {
       palletStretch: "Pallet envuelto en stretch",
@@ -272,6 +273,7 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Expanded polystyrene box",
+      cajaCarton: "Cardboard box",
     },
     packFixed: {
       palletStretch: "Pallet wrapped in stretch film",
@@ -423,6 +425,7 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caixa de poliestireno expandido",
+      cajaCarton: "Caixa de papelão",
     },
     packFixed: {
       palletStretch: "Pallet envolvido em stretch",
@@ -573,6 +576,7 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "发泡聚苯乙烯箱",
+      cajaCarton: "纸箱",
     },
     packFixed: {
       palletStretch: "缠绕膜托盘",
@@ -743,12 +747,21 @@ function qtyDisplay(qty, unitKey) {
   return `${qty} ${dict.units[unitKey]}`;
 }
 
+function packSecondaryOptions(group) {
+  if (!group.packSecondary) return [];
+  if (state.group === "entera" && state.option === "congelado") {
+    return ["termoIcopor", "cajaCarton"];
+  }
+  return group.packSecondary;
+}
+
 function resetPack() {
   const group = GROUPS[state.group];
   if (group.packPrimary) {
+    const secondary = packSecondaryOptions(group);
     state.packPrimary = group.packPrimary[0];
-    state.packSecondary = group.packSecondary[0];
-    state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
+    state.packSecondary = secondary[0] || null;
+    state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
     return;
   }
   state.packPrimary = group.packFixed[state.option];
@@ -845,6 +858,7 @@ const PHOTO_FILES = new Set([
   "assets/products/pieles.jpg",
   "assets/products/pieles-pallet.jpg",
   "assets/packs/termoIcopor.jpg",
+  "assets/packs/cajaCarton.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
@@ -1138,10 +1152,11 @@ function fillConfig() {
   $("#packSecondaryField").hidden = !dualPack;
   $("#packFixedField").hidden = dualPack;
   if (dualPack) {
+    const secondary = packSecondaryOptions(group);
     if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
-    if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
+    if (!state.packSecondary || !secondary.includes(state.packSecondary)) state.packSecondary = secondary[0];
     renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
-    renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
+    renderChips($("#packSecondaryChips"), secondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
     $("#packFixedChips").innerHTML = "";
   } else {
     state.packPrimary = group.packFixed[state.option];
