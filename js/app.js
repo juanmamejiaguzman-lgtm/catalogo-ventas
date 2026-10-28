@@ -102,6 +102,14 @@ const I18N = {
           congelado: "Filete congelado",
         },
       },
+      subproductos: {
+        name: "Subproductos",
+        sci: "Oreochromis niloticus",
+        lede: "Indica cantidad, destino y datos de contacto. El empaque ya está definido para este subproducto.",
+        options: {
+          pieles: "Piel de tilapia",
+        },
+      },
     },
     packPrimary: {
       bolsa: "Bolsa",
@@ -110,6 +118,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caja de poliestireno expandido",
+    },
+    packFixed: {
+      palletStretch: "Pallet envuelto en stretch",
     },
     colors: {
       roja: "Tilapia entera roja",
@@ -224,6 +235,14 @@ const I18N = {
           congelado: "Frozen fillet",
         },
       },
+      subproductos: {
+        name: "By-products",
+        sci: "Oreochromis niloticus",
+        lede: "Set quantity, destination and contact details. Packaging is already defined for this by-product.",
+        options: {
+          pieles: "Tilapia skin",
+        },
+      },
     },
     packPrimary: {
       bolsa: "Bag",
@@ -232,6 +251,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Expanded polystyrene box",
+    },
+    packFixed: {
+      palletStretch: "Pallet wrapped in stretch film",
     },
     colors: {
       roja: "Red whole tilapia",
@@ -346,6 +368,14 @@ const I18N = {
           congelado: "Filé congelado",
         },
       },
+      subproductos: {
+        name: "Subprodutos",
+        sci: "Oreochromis niloticus",
+        lede: "Indique quantidade, destino e dados de contato. A embalagem já está definida para este subproduto.",
+        options: {
+          pieles: "Pele de tilápia",
+        },
+      },
     },
     packPrimary: {
       bolsa: "Bolsa",
@@ -354,6 +384,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caixa de poliestireno expandido",
+    },
+    packFixed: {
+      palletStretch: "Pallet envolvido em stretch",
     },
     colors: {
       roja: "Tilápia inteira vermelha",
@@ -467,6 +500,14 @@ const I18N = {
           congelado: "冻鱼片",
         },
       },
+      subproductos: {
+        name: "副产品",
+        sci: "Oreochromis niloticus",
+        lede: "请填写数量、目的地和联系方式。该副产品的包装已固定。",
+        options: {
+          pieles: "罗非鱼皮",
+        },
+      },
     },
     packPrimary: {
       bolsa: "袋装",
@@ -475,6 +516,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "发泡聚苯乙烯箱",
+    },
+    packFixed: {
+      palletStretch: "缠绕膜托盘",
     },
     colors: {
       roja: "整条红罗非鱼",
@@ -529,6 +573,10 @@ const GROUPS = {
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     termoSizes: ["t5", "t10", "t22"],
+  },
+  subproductos: {
+    options: ["pieles"],
+    packFixed: { pieles: "palletStretch" },
   },
 };
 
@@ -622,9 +670,15 @@ function qtyDisplay(qty, unitKey) {
 
 function resetPack() {
   const group = GROUPS[state.group];
-  state.packPrimary = group.packPrimary[0];
-  state.packSecondary = group.packSecondary[0];
-  state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
+  if (group.packPrimary) {
+    state.packPrimary = group.packPrimary[0];
+    state.packSecondary = group.packSecondary[0];
+    state.termoSize = group.termoSizes ? group.termoSizes[0] : null;
+    return;
+  }
+  state.packPrimary = group.packFixed[state.option];
+  state.packSecondary = null;
+  state.termoSize = null;
 }
 
 function viewOf(overrides = {}) {
@@ -676,6 +730,9 @@ function productPhotoKeys(view) {
     if (view.option && view.size) keys.push(`filete-${view.option}-${view.size}`);
     if (view.option) keys.push(`filete-${view.option}`);
     keys.push("filete");
+  } else if (view.group === "subproductos") {
+    if (view.option) keys.push(view.option);
+    keys.push("subproductos");
   }
   return keys;
 }
@@ -692,10 +749,20 @@ function packPhotoKeys(view) {
   return keys;
 }
 
-const PHOTO_FILES = new Set();
+const PHOTO_FILES = new Set([
+  "assets/products/entera-fresco.jpg",
+  "assets/products/entera-roja.jpg",
+  "assets/products/entera-plateada.jpg",
+]);
 
 function mediaBox(folder, keys, fallback) {
-  const srcs = keys.map((key) => `assets/${folder}/${key}.png`).filter((src) => PHOTO_FILES.has(src));
+  const srcs = [];
+  for (const key of keys) {
+    [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
+      const src = `assets/${folder}/${key}${ext}`;
+      if (PHOTO_FILES.has(src)) srcs.push(src);
+    });
+  }
   const img = srcs.length
     ? `<img class="photo" hidden src="${srcs[0]}" data-fallbacks="${srcs.slice(1).join("|")}" alt="" />`
     : "";
@@ -770,6 +837,10 @@ function packArt(view) {
       : primary === "granel"
         ? `<path d="M52 46h100l-10 64H62Z" fill="#f3d27a" stroke="#c49a2a" stroke-width="3"/>
            <path d="M62 70h80" stroke="#c49a2a" stroke-width="3" opacity=".4"/>`
+        : primary === "palletStretch"
+          ? `<rect x="48" y="36" width="124" height="78" rx="6" fill="#d9dee4" stroke="#7b8b99" stroke-width="3"/>
+             <path d="M48 58h124M48 78h124M70 36v78M98 36v78M126 36v78M150 36v78" stroke="#fff" stroke-width="2" opacity=".7"/>
+             <path d="M40 42c20 8 36-6 70 4 28 8 48-4 70 8" stroke="#00a7e1" stroke-width="4" fill="none" opacity=".55"/>`
         : `<path d="M70 38c22-16 62-16 84 0v62c-24 14-62 14-84 0Z" fill="#cfeef8" stroke="#00a7e1" stroke-width="3"/>
            <path d="M78 58h68" stroke="#00a7e1" stroke-width="3" opacity=".4"/>`;
   const box = cooler
@@ -783,8 +854,19 @@ function packArt(view) {
   return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">${bag}${box}</svg>`;
 }
 
+function skinArt() {
+  return `<svg viewBox="0 0 220 140" fill="none" aria-hidden="true">
+    <path d="M36 40c48-8 96 10 148 4-10 28-6 54 8 76-58 6-108-8-156-18 8-22 6-44 0-62Z" fill="#c45c48" opacity=".9"/>
+    <path d="M52 58c40-6 86 2 128 0" stroke="#fff" stroke-width="3" opacity=".35"/>
+    <circle cx="70" cy="62" r="4" fill="#00a7e1"/>
+    <circle cx="102" cy="70" r="4" fill="#e3066a"/>
+    <circle cx="134" cy="60" r="4" fill="#00a7e1"/>
+  </svg>`;
+}
+
 function productMedia(view) {
-  const svg = view.group === "filete" ? filletArt(view) : fishArt(view);
+  const svg =
+    view.group === "filete" ? filletArt(view) : view.group === "subproductos" ? skinArt() : fishArt(view);
   return mediaBox("products", productPhotoKeys(view), svg);
 }
 
@@ -937,14 +1019,26 @@ function fillConfig() {
   if (!state.incoterm) state.incoterm = INCOTERMS[0];
   renderChips($("#incotermChips"), INCOTERMS, state.incoterm, "incoterm", (key) => key);
 
-  $("#packPrimaryField").hidden = false;
-  $("#packSecondaryField").hidden = false;
-  if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
-  if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
-  renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
-  renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
+  const dualPack = Boolean(group.packPrimary);
+  $("#packPrimaryField").hidden = !dualPack;
+  $("#packSecondaryField").hidden = !dualPack;
+  $("#packFixedField").hidden = dualPack;
+  if (dualPack) {
+    if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
+    if (!state.packSecondary) state.packSecondary = group.packSecondary[0];
+    renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
+    renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
+    $("#packFixedChips").innerHTML = "";
+  } else {
+    state.packPrimary = group.packFixed[state.option];
+    state.packSecondary = null;
+    state.termoSize = null;
+    renderChips($("#packFixedChips"), [state.packPrimary], state.packPrimary, "pack-fixed", (key) => dict.packFixed[key]);
+    $("#packPrimaryChips").innerHTML = "";
+    $("#packSecondaryChips").innerHTML = "";
+  }
 
-  const termoSizes = state.packSecondary === "termoIcopor" ? group.termoSizes : null;
+  const termoSizes = dualPack && state.packSecondary === "termoIcopor" ? group.termoSizes : null;
   $("#termoSizeField").hidden = !termoSizes;
   if (termoSizes) {
     if (!state.termoSize || !termoSizes.includes(state.termoSize)) state.termoSize = termoSizes[0];
@@ -968,8 +1062,9 @@ function fillConfig() {
 function formattedOrder() {
   const dict = t();
   const o = state.order;
-  const packPrimary = dict.packPrimary[o.packPrimary];
-  const packSecondary = dict.packSecondary[o.packSecondary];
+  const group = GROUPS[o.group];
+  const packPrimary = group.packPrimary ? dict.packPrimary[o.packPrimary] : dict.packFixed[o.packPrimary];
+  const packSecondary = group.packPrimary ? dict.packSecondary[o.packSecondary] : "";
   return {
     name: o.name,
     company: o.company,
@@ -1263,7 +1358,8 @@ $("#orderForm").addEventListener("submit", (event) => {
   if (!state.group || !state.option) return;
   if (state.group === "entera" && (!state.color || !state.process)) return;
   if (sizesFor(state.group) && !state.size) return;
-  if (!state.packPrimary || !state.packSecondary) return;
+  if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
+  if (!group.packPrimary && !state.packPrimary) return;
   if (group.termoSizes && state.packSecondary === "termoIcopor" && !state.termoSize) return;
   if (state.option === "congelado" && !state.freeze) return;
   if (!state.incoterm) return;
