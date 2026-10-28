@@ -813,6 +813,7 @@ function productPhotoKeys(view) {
     if (view.option) keys.push(`filete-${view.option}`);
     keys.push("filete");
   } else if (view.group === "subproductos") {
+    if (view.slot !== "card") keys.push("pieles-pallet");
     if (view.option) keys.push(view.option);
     keys.push("subproductos");
   }
@@ -841,6 +842,8 @@ const PHOTO_FILES = new Set([
   "assets/products/filete-roja-piel.jpg",
   "assets/products/filete-plateada-piel.jpg",
   "assets/products/filete-sin-piel.jpg",
+  "assets/products/pieles.jpg",
+  "assets/products/pieles-pallet.jpg",
   "assets/packs/termoIcopor.jpg",
 ]);
 
@@ -1011,7 +1014,7 @@ function renderProducts() {
       const options = group.options
         .map(
           (option) => `<button class="choice" type="button" data-group="${id}" data-option="${option}">
-            ${productMedia({ group: id, option })}
+            ${productMedia({ group: id, option, slot: "card" })}
             <span>${copy.options[option]}</span>
           </button>`
         )
