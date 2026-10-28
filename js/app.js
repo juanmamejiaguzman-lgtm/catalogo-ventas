@@ -39,6 +39,8 @@ const I18N = {
     shipFrozen: "Despacho en contenedor refrigerado de 40 pies.",
     colorTitle: "¿Tilapia entera roja o plateada?",
     colorLede: "Cuando elijas el color, armamos el pedido.",
+    filletTitle: "¿Filete rojo o plateado, con piel o sin piel?",
+    filletLede: "Cuando elijas el tipo, armamos el pedido.",
     process: "Presentación",
     size: "Talla",
     freeze: "Tipo de congelación",
@@ -66,6 +68,7 @@ const I18N = {
     fields: {
       product: "Producto",
       color: "Color",
+      skin: "Piel",
       process: "Presentación",
       size: "Talla",
       freeze: "Tipo de congelación",
@@ -126,6 +129,20 @@ const I18N = {
       roja: "Tilapia entera roja",
       negra: "Tilapia entera plateada",
     },
+    filletColors: {
+      roja: "Tilapia roja",
+      negra: "Tilapia plateada",
+    },
+    skins: {
+      con: "Con piel",
+      sin: "Sin piel",
+    },
+    filletVariants: {
+      "roja-con": "Filete de tilapia roja con piel",
+      "roja-sin": "Filete de tilapia roja sin piel",
+      "negra-con": "Filete de tilapia plateada con piel",
+      "negra-sin": "Filete de tilapia plateada sin piel",
+    },
     colorSci: {
       roja: "Oreochromis spp.",
       negra: "Oreochromis niloticus",
@@ -146,6 +163,7 @@ const I18N = {
       `Quiero cotizar con CI Piscícola Botero SA:\n\n` +
       `Producto: ${o.product}\n` +
       (o.color ? `Color: ${o.color}\n` : "") +
+      (o.skin ? `Piel: ${o.skin}\n` : "") +
       (o.process ? `Presentación: ${o.process}\n` : "") +
       (o.size ? `Talla: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelación: ${o.freeze}\n` : "") +
@@ -172,6 +190,8 @@ const I18N = {
     shipFrozen: "Shipped in a refrigerated 40-foot container.",
     colorTitle: "Red or silver whole tilapia?",
     colorLede: "After you choose the color, we build the order.",
+    filletTitle: "Red or silver fillet, skin-on or skinless?",
+    filletLede: "After you choose the type, we build the order.",
     process: "Presentation",
     size: "Size",
     freeze: "Freezing type",
@@ -199,6 +219,7 @@ const I18N = {
     fields: {
       product: "Product",
       color: "Color",
+      skin: "Skin",
       process: "Presentation",
       size: "Size",
       freeze: "Freezing type",
@@ -259,6 +280,20 @@ const I18N = {
       roja: "Red whole tilapia",
       negra: "Silver whole tilapia",
     },
+    filletColors: {
+      roja: "Red tilapia",
+      negra: "Silver tilapia",
+    },
+    skins: {
+      con: "Skin-on",
+      sin: "Skinless",
+    },
+    filletVariants: {
+      "roja-con": "Red tilapia fillet, skin-on",
+      "roja-sin": "Red tilapia fillet, skinless",
+      "negra-con": "Silver tilapia fillet, skin-on",
+      "negra-sin": "Silver tilapia fillet, skinless",
+    },
     colorSci: {
       roja: "Oreochromis spp.",
       negra: "Oreochromis niloticus",
@@ -279,6 +314,7 @@ const I18N = {
       `I would like a quote from CI Piscícola Botero SA:\n\n` +
       `Product: ${o.product}\n` +
       (o.color ? `Color: ${o.color}\n` : "") +
+      (o.skin ? `Skin: ${o.skin}\n` : "") +
       (o.process ? `Presentation: ${o.process}\n` : "") +
       (o.size ? `Size: ${o.size}\n` : "") +
       (o.freeze ? `Freezing type: ${o.freeze}\n` : "") +
@@ -305,6 +341,8 @@ const I18N = {
     shipFrozen: "Despacho em contêiner refrigerado de 40 pés.",
     colorTitle: "Tilápia inteira vermelha ou prateada?",
     colorLede: "Depois de escolher a cor, montamos o pedido.",
+    filletTitle: "Filé vermelho ou prateado, com pele ou sem pele?",
+    filletLede: "Depois de escolher o tipo, montamos o pedido.",
     process: "Apresentação",
     size: "Tamanho",
     freeze: "Tipo de congelamento",
@@ -332,6 +370,7 @@ const I18N = {
     fields: {
       product: "Produto",
       color: "Cor",
+      skin: "Pele",
       process: "Apresentação",
       size: "Tamanho",
       freeze: "Tipo de congelamento",
@@ -392,6 +431,20 @@ const I18N = {
       roja: "Tilápia inteira vermelha",
       negra: "Tilápia inteira prateada",
     },
+    filletColors: {
+      roja: "Tilápia vermelha",
+      negra: "Tilápia prateada",
+    },
+    skins: {
+      con: "Com pele",
+      sin: "Sem pele",
+    },
+    filletVariants: {
+      "roja-con": "Filé de tilápia vermelha com pele",
+      "roja-sin": "Filé de tilápia vermelha sem pele",
+      "negra-con": "Filé de tilápia prateada com pele",
+      "negra-sin": "Filé de tilápia prateada sem pele",
+    },
     colorSci: {
       roja: "Oreochromis spp.",
       negra: "Oreochromis niloticus",
@@ -412,6 +465,7 @@ const I18N = {
       `Quero cotar com a CI Piscícola Botero SA:\n\n` +
       `Produto: ${o.product}\n` +
       (o.color ? `Cor: ${o.color}\n` : "") +
+      (o.skin ? `Pele: ${o.skin}\n` : "") +
       (o.process ? `Apresentação: ${o.process}\n` : "") +
       (o.size ? `Tamanho: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelamento: ${o.freeze}\n` : "") +
@@ -437,6 +491,8 @@ const I18N = {
     shipFrozen: "以 40 英尺冷藏集装箱发运。",
     colorTitle: "整条红罗非鱼还是银罗非鱼？",
     colorLede: "选定颜色后，再填写订单。",
+    filletTitle: "红罗非鱼片还是银罗非鱼片，带皮还是去皮？",
+    filletLede: "选定类型后，再填写订单。",
     process: "加工方式",
     size: "规格",
     freeze: "冻结方式",
@@ -464,6 +520,7 @@ const I18N = {
     fields: {
       product: "产品",
       color: "颜色",
+      skin: "鱼皮",
       process: "加工方式",
       size: "规格",
       freeze: "冻结方式",
@@ -524,6 +581,20 @@ const I18N = {
       roja: "整条红罗非鱼",
       negra: "整条银罗非鱼",
     },
+    filletColors: {
+      roja: "红罗非鱼",
+      negra: "银罗非鱼",
+    },
+    skins: {
+      con: "带皮",
+      sin: "去皮",
+    },
+    filletVariants: {
+      "roja-con": "带皮红罗非鱼片",
+      "roja-sin": "去皮红罗非鱼片",
+      "negra-con": "带皮银罗非鱼片",
+      "negra-sin": "去皮银罗非鱼片",
+    },
     colorSci: {
       roja: "Oreochromis spp.",
       negra: "Oreochromis niloticus",
@@ -544,6 +615,7 @@ const I18N = {
       `希望向 CI Piscícola Botero SA 询价：\n\n` +
       `产品：${o.product}\n` +
       (o.color ? `颜色：${o.color}\n` : "") +
+      (o.skin ? `鱼皮：${o.skin}\n` : "") +
       (o.process ? `加工方式：${o.process}\n` : "") +
       (o.size ? `规格：${o.size}\n` : "") +
       (o.freeze ? `冻结方式：${o.freeze}\n` : "") +
@@ -570,6 +642,8 @@ const GROUPS = {
   },
   filete: {
     options: ["fresco", "congelado"],
+    colors: ["roja", "negra"],
+    skins: ["con", "sin"],
     packPrimary: ["bolsa", "vacio", "granel"],
     packSecondary: ["termoIcopor"],
     termoSizes: ["t5", "t10", "t22"],
@@ -603,6 +677,7 @@ const state = {
   packSecondary: null,
   termoSize: null,
   freeze: null,
+  skin: null,
   incoterm: "EXW",
   filletUnit: "oz",
   hover: {},
@@ -689,6 +764,7 @@ function viewOf(overrides = {}) {
     process: state.process,
     size: state.size,
     freeze: state.freeze,
+    skin: state.skin,
     packPrimary: state.packPrimary,
     packSecondary: state.packSecondary,
     termoSize: state.termoSize,
@@ -716,18 +792,24 @@ function sizeScale(key) {
   );
 }
 
+function needsFilletChoice() {
+  return state.group === "filete" && state.option === "fresco";
+}
+
 function productPhotoKeys(view) {
   const keys = [];
   if (view.group === "entera") {
     const color = colorFile(view.color);
+    if (view.slot !== "color" && view.option === "congelado") keys.push("entera-congelado");
     if (color && view.option && view.process) keys.push(`entera-${color}-${view.option}-${view.process}`);
     if (color && view.option) keys.push(`entera-${color}-${view.option}`);
     if (color) keys.push(`entera-${color}`);
     if (view.option) keys.push(`entera-${view.option}`);
     keys.push("entera");
   } else if (view.group === "filete") {
-    if (view.option && view.freeze) keys.push(`filete-${view.option}-${view.freeze}`);
-    if (view.option && view.size) keys.push(`filete-${view.option}-${view.size}`);
+    const color = colorFile(view.color);
+    if (view.skin === "con" && color) keys.push(`filete-${color}-piel`);
+    if (view.skin === "sin") keys.push("filete-sin-piel");
     if (view.option) keys.push(`filete-${view.option}`);
     keys.push("filete");
   } else if (view.group === "subproductos") {
@@ -754,6 +836,12 @@ const PHOTO_FILES = new Set([
   "assets/products/entera-roja.jpg",
   "assets/products/entera-plateada.jpg",
   "assets/products/entera-congelado.jpg",
+  "assets/products/filete-fresco.jpg",
+  "assets/products/filete-congelado.jpg",
+  "assets/products/filete-roja-piel.jpg",
+  "assets/products/filete-plateada-piel.jpg",
+  "assets/products/filete-sin-piel.jpg",
+  "assets/packs/termoIcopor.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
@@ -902,7 +990,8 @@ function applyI18n() {
   });
   renderProducts();
   if (state.group === "entera") renderColors();
-  if (state.group && state.option && (state.group !== "entera" || state.color)) fillConfig();
+  if (needsFilletChoice()) renderFilletVariants();
+  if (state.group && state.option && (state.group !== "entera" || state.color) && (!needsFilletChoice() || (state.color && state.skin))) fillConfig();
   if (state.order) renderTicket();
 }
 
@@ -938,8 +1027,24 @@ function renderProducts() {
 
 function scientificName() {
   const dict = t();
-  if (state.group === "entera" && state.color) return dict.colorSci[state.color];
+  if ((state.group === "entera" || state.group === "filete") && state.color) return dict.colorSci[state.color];
   return dict.groups[state.group].sci;
+}
+
+function renderFilletVariants() {
+  const dict = t();
+  $("#filletContext").textContent = dict.groups.filete.options[state.option] || "";
+  const cards = [];
+  GROUPS.filete.colors.forEach((color) => {
+    GROUPS.filete.skins.forEach((skin) => {
+      cards.push(`<button class="choice" type="button" data-color="${color}" data-skin="${skin}">
+        ${productMedia({ group: "filete", option: state.option, color, skin })}
+        <span>${dict.filletVariants[`${color}-${skin}`]}</span>
+        <small class="sci">${dict.colorSci[color]}</small>
+      </button>`);
+    });
+  });
+  $("#filletCards").innerHTML = cards.join("");
 }
 
 function renderColors() {
@@ -948,7 +1053,7 @@ function renderColors() {
   $("#colorCards").innerHTML = GROUPS.entera.colors
     .map(
       (color) => `<button class="choice" type="button" data-color="${color}">
-        ${productMedia({ group: "entera", option: state.option, color })}
+        ${productMedia({ group: "entera", option: state.option, color, slot: "color" })}
         <span>${dict.colors[color]}</span>
         <small class="sci">${dict.colorSci[color]}</small>
       </button>`
@@ -971,7 +1076,12 @@ function fillConfig() {
   const group = GROUPS[id];
   const groupCopy = dict.groups[id];
   state.hover = {};
-  const title = [groupCopy.options[state.option], id === "entera" && state.color ? dict.colors[state.color] : ""]
+  const title = [
+    groupCopy.options[state.option],
+    id === "entera" && state.color ? dict.colors[state.color] : "",
+    id === "filete" && state.color ? dict.filletColors[state.color] : "",
+    id === "filete" && state.skin ? dict.skins[state.skin] : "",
+  ]
     .filter(Boolean)
     .join(" · ");
   $("#configTitle").textContent = title;
@@ -1071,11 +1181,12 @@ function formattedOrder() {
     company: o.company,
     email: o.email,
     product: dict.groups[o.group].options[o.option],
-    color: o.group === "entera" ? dict.colors[o.color] : "",
+    color: o.group === "entera" ? dict.colors[o.color] : o.group === "filete" && o.color ? dict.filletColors[o.color] : "",
+    skin: o.skin ? dict.skins[o.skin] : "",
     process: o.group === "entera" ? dict.processes[o.process] : "",
     size: sizesFor(o.group) ? sizeLabel(o.size) : "",
     freeze: o.freeze ? dict.freezes[o.freeze] : "",
-    scientific: o.group === "entera" ? dict.colorSci[o.color] : dict.groups[o.group].sci,
+    scientific: o.color && (o.group === "entera" || o.group === "filete") ? dict.colorSci[o.color] : dict.groups[o.group].sci,
     packPrimary,
     packSecondary,
     termoSize: o.termoSize ? TERMO_SIZES[o.termoSize] : "",
@@ -1093,6 +1204,7 @@ function renderTicket() {
   $("#ticket").innerHTML = `<dl>
     <dt>${dict.fields.product}</dt><dd>${o.product}</dd>
     ${o.color ? `<dt>${dict.fields.color}</dt><dd>${o.color}</dd>` : ""}
+    ${o.skin ? `<dt>${dict.fields.skin}</dt><dd>${o.skin}</dd>` : ""}
     ${o.process ? `<dt>${dict.fields.process}</dt><dd>${o.process}</dd>` : ""}
     ${o.size ? `<dt>${dict.fields.size}</dt><dd>${o.size}</dd>` : ""}
     ${o.freeze ? `<dt>${dict.fields.freeze}</dt><dd>${o.freeze}</dd>` : ""}
@@ -1118,6 +1230,7 @@ function collectOrder() {
     group: state.group,
     option: state.option,
     color: state.color,
+    skin: state.skin,
     process: state.process,
     size: state.size,
     packPrimary: state.packPrimary,
@@ -1168,15 +1281,18 @@ $("#homeBtn").addEventListener("click", () => {
   state.packSecondary = null;
   state.termoSize = null;
   state.freeze = null;
+  state.skin = null;
   state.incoterm = "EXW";
   showStage("welcome");
 });
 
 $("#backToProducts").addEventListener("click", () => {
   if (state.group === "entera") showStage("color");
+  else if (needsFilletChoice()) showStage("fillet");
   else showStage("products");
 });
 $("#backToProductsFromColor").addEventListener("click", () => showStage("products"));
+$("#backToProductsFromFillet").addEventListener("click", () => showStage("products"));
 $("#backToConfig").addEventListener("click", () => showStage("config"));
 
 $("#productCards").addEventListener("click", (event) => {
@@ -1185,6 +1301,7 @@ $("#productCards").addEventListener("click", (event) => {
   state.group = card.dataset.group;
   state.option = card.dataset.option;
   state.color = null;
+  state.skin = null;
   state.process = null;
   state.size = null;
   state.freeze = card.dataset.option === "congelado" ? FREEZE_TYPES[0] : null;
@@ -1195,6 +1312,22 @@ $("#productCards").addEventListener("click", (event) => {
     showStage("color");
     return;
   }
+  if (needsFilletChoice()) {
+    renderFilletVariants();
+    showStage("fillet");
+    return;
+  }
+  fillConfig();
+  showStage("config");
+});
+
+$("#filletCards").addEventListener("click", (event) => {
+  const card = event.target.closest("[data-color][data-skin]");
+  if (!card) return;
+  state.color = card.dataset.color;
+  state.skin = card.dataset.skin;
+  state.size = sizesFor("filete")[0];
+  resetPack();
   fillConfig();
   showStage("config");
 });
@@ -1358,6 +1491,7 @@ $("#orderForm").addEventListener("submit", (event) => {
   const group = GROUPS[state.group];
   if (!state.group || !state.option) return;
   if (state.group === "entera" && (!state.color || !state.process)) return;
+  if (needsFilletChoice() && (!state.color || !state.skin)) return;
   if (sizesFor(state.group) && !state.size) return;
   if (group.packPrimary && (!state.packPrimary || !state.packSecondary)) return;
   if (!group.packPrimary && !state.packPrimary) return;
