@@ -868,15 +868,23 @@ function productPhotoKeys(view) {
 
 function packPhotoKeys(view) {
   const keys = [];
-  const redBulk = view.group === "entera" && view.color === "roja" && view.packPrimary === "granel";
+  const red = view.group === "entera" && view.color === "roja";
+  const freshRed = red && view.option === "fresco";
+  const frozenRed = red && view.option === "congelado";
   const focus = view.packFocus || "secondary";
-  if (redBulk && focus === "primary") keys.push("granel-roja");
+  if (focus === "primary") {
+    if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
+    if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
+    if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
+  }
   if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
   if (focus === "extra" && view.packExtra === "cajaCarton") keys.push("cajaCarton");
   if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
   if (view.packSecondary) keys.push(view.packSecondary);
   if (view.packExtra === "cajaCarton") keys.push("cajaCarton");
-  if (redBulk) keys.push("granel-roja");
+  if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
+  if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
+  if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
   }
@@ -903,10 +911,12 @@ const PHOTO_FILES = new Set([
   "assets/packs/termoIcopor.jpg",
   "assets/packs/cajaCarton.jpg",
   "assets/packs/granel-roja.jpg",
+  "assets/packs/granel-roja-fresco.jpg",
+  "assets/packs/vacio-roja-fresco.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct20";
+  const bust = "oct21";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
