@@ -1012,8 +1012,10 @@ function updateMediaFrames() {
   const view = viewOf();
   if ($("#configArt")) $("#configArt").innerHTML = productMedia(view);
   const packFrame = $("#packFrame");
+  const productFrame = $("#productFrame");
   const showPack = Boolean(GROUPS[view.group]?.packPrimary);
   if (packFrame) packFrame.hidden = !showPack;
+  if (productFrame) productFrame.classList.toggle("photo-frame--tall", view.group === "subproductos");
   if ($("#packArt") && showPack) $("#packArt").innerHTML = packMedia(view);
 }
 
