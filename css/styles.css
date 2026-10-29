@@ -742,15 +742,39 @@ html.is-zh h3 {
   object-position: center;
 }
 
+.config-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.config-body--pack {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+}
+
+.pack-frame--sticky {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
 #packFrame .frame-body {
-  min-height: 220px;
-  padding: 6px 10px 12px;
+  min-height: 0;
+  padding: 8px 10px 12px;
+}
+
+#packFrame .frame-body .media {
+  width: 100%;
 }
 
 #packFrame .frame-body .photo {
-  height: auto;
-  max-height: 320px;
   width: 100%;
+  height: auto;
+  max-height: min(68vh, 560px);
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  object-position: center;
 }
 
 .photo-frame--tall .frame-body {
@@ -1006,8 +1030,20 @@ footer {
   .cards-2,
   .grid-2,
   .config-hero,
+  .config-body,
+  .config-body--pack,
   .ticket dl {
     grid-template-columns: 1fr;
+  }
+
+  #packFrame {
+    order: -1;
+    z-index: 4;
+    top: 8px;
+  }
+
+  #packFrame .frame-body .photo {
+    max-height: 42vh;
   }
 
   .topbar .company {

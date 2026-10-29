@@ -822,7 +822,8 @@ function productPhotoKeys(view) {
   const keys = [];
   if (view.group === "entera") {
     const color = colorFile(view.color);
-    if (view.slot !== "color" && view.option === "congelado") keys.push("entera-congelado");
+    if (view.color === "roja" && view.slot !== "color") keys.push("entera-roja");
+    if (view.slot !== "color" && view.option === "congelado" && view.color !== "roja") keys.push("entera-congelado");
     if (color && view.option && view.process) keys.push(`entera-${color}-${view.option}-${view.process}`);
     if (color && view.option) keys.push(`entera-${color}-${view.option}`);
     if (color) keys.push(`entera-${color}`);
@@ -880,7 +881,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct18";
+  const bust = "oct19";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
@@ -1006,6 +1007,8 @@ function updateMediaFrames() {
   const productFrame = $("#productFrame");
   const showPack = Boolean(GROUPS[view.group]?.packPrimary);
   if (packFrame) packFrame.hidden = !showPack;
+  const configBody = $("#configBody");
+  if (configBody) configBody.classList.toggle("config-body--pack", showPack);
   if (productFrame) productFrame.classList.toggle("photo-frame--tall", view.group === "subproductos");
   if ($("#packArt") && showPack) $("#packArt").innerHTML = packMedia(view);
 }
