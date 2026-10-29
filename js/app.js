@@ -156,7 +156,7 @@ const I18N = {
       ceca: "CECA — Con escamas y con agallas",
       seca: "SECA — Sin escamas y con agallas",
       pocket: "Pocket",
-      posta: "Posta",
+      posta: "H y G (Decapitado y eviscerado)",
     },
     freezes: {
       conventional: "Congelación convencional",
@@ -315,7 +315,7 @@ const I18N = {
       ceca: "CECA — With scales and gills",
       seca: "SECA — Scaled, with gills",
       pocket: "Pocket",
-      posta: "Posta",
+      posta: "H&G (Headed and gutted)",
     },
     freezes: {
       conventional: "Conventional freezing",
@@ -474,7 +474,7 @@ const I18N = {
       ceca: "CECA — Com escamas e com guelras",
       seca: "SECA — Sem escamas e com guelras",
       pocket: "Pocket",
-      posta: "Posta",
+      posta: "H e G (Decapitado e eviscerado)",
     },
     freezes: {
       conventional: "Congelamento convencional",
@@ -632,7 +632,7 @@ const I18N = {
       ceca: "CECA — 带鳞带鳃",
       seca: "SECA — 去鳞留鳃",
       pocket: "Pocket",
-      posta: "Posta",
+      posta: "H&G（去头去内脏）",
     },
     freezes: {
       conventional: "常规冷冻",
@@ -918,7 +918,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct23";
+  const bust = "oct24";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
