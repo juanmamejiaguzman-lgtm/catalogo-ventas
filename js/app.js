@@ -845,9 +845,9 @@ function productPhotoKeys(view) {
   const keys = [];
   if (view.group === "entera") {
     const color = colorFile(view.color);
+    if (color && view.option && view.process) keys.push(`entera-${color}-${view.option}-${view.process}`);
     if (view.color === "roja" && view.slot !== "color") keys.push("entera-roja");
     if (view.slot !== "color" && view.option === "congelado" && view.color !== "roja") keys.push("entera-congelado");
-    if (color && view.option && view.process) keys.push(`entera-${color}-${view.option}-${view.process}`);
     if (color && view.option) keys.push(`entera-${color}-${view.option}`);
     if (color) keys.push(`entera-${color}`);
     if (view.option) keys.push(`entera-${view.option}`);
@@ -918,7 +918,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct24";
+  const bust = "oct25";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
