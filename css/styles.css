@@ -338,6 +338,12 @@ body {
   cursor: pointer;
 }
 
+.lang button[data-lang="zh"] {
+  font-family: "Noto Sans SC", "Manrope", sans-serif;
+  padding: 6px 8px;
+  letter-spacing: 0.02em;
+}
+
 .lang button.is-active {
   background: linear-gradient(135deg, var(--cyan), var(--magenta));
   color: #fff;
