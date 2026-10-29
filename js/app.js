@@ -152,6 +152,8 @@ const I18N = {
       sesa: "SESA — Sin escamas y sin agallas",
       ceca: "CECA — Con escamas y con agallas",
       seca: "SECA — Sin escamas y con agallas",
+      pocket: "Pocket",
+      posta: "Posta",
     },
     freezes: {
       conventional: "Congelación convencional",
@@ -304,6 +306,8 @@ const I18N = {
       sesa: "GGS — Scaled and gills removed",
       ceca: "CECA — With scales and gills",
       seca: "SECA — Scaled, with gills",
+      pocket: "Pocket",
+      posta: "Posta",
     },
     freezes: {
       conventional: "Conventional freezing",
@@ -456,6 +460,8 @@ const I18N = {
       sesa: "SESA — Sem escamas e sem guelras",
       ceca: "CECA — Com escamas e com guelras",
       seca: "SECA — Sem escamas e com guelras",
+      pocket: "Pocket",
+      posta: "Posta",
     },
     freezes: {
       conventional: "Congelamento convencional",
@@ -607,6 +613,8 @@ const I18N = {
       sesa: "SESA — 去鳞去鳃",
       ceca: "CECA — 带鳞带鳃",
       seca: "SECA — 去鳞留鳃",
+      pocket: "Pocket",
+      posta: "Posta",
     },
     freezes: {
       conventional: "常规冷冻",
@@ -683,7 +691,7 @@ const state = {
   skin: null,
   incoterm: "EXW",
   filletUnit: "oz",
-  hover: {},
+  packFocus: "primary",
   order: null,
 };
 
@@ -709,6 +717,14 @@ function sizesFor(groupId) {
   if (groupId === "filete") return Object.keys(FILLET_SIZE_OZ);
   if (groupId === "entera") return Object.keys(SIZE_RANGES);
   return null;
+}
+
+function processesFor() {
+  const list = GROUPS.entera.processes.slice();
+  if (state.group === "entera" && state.option === "fresco" && state.color === "negra") {
+    list.push("pocket", "posta");
+  }
+  return list;
 }
 
 function sizeLabel(key) {
@@ -763,11 +779,13 @@ function resetPack() {
     state.packPrimary = group.packPrimary[0];
     state.packSecondary = secondary[0] || null;
     state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
+    state.packFocus = "primary";
     return;
   }
   state.packPrimary = null;
   state.packSecondary = null;
   state.termoSize = null;
+  state.packFocus = "primary";
 }
 
 function viewOf(overrides = {}) {
@@ -782,7 +800,7 @@ function viewOf(overrides = {}) {
     packPrimary: state.packPrimary,
     packSecondary: state.packSecondary,
     termoSize: state.termoSize,
-    ...state.hover,
+    packFocus: state.packFocus,
     ...overrides,
   };
 }
@@ -836,6 +854,12 @@ function productPhotoKeys(view) {
 
 function packPhotoKeys(view) {
   const keys = [];
+  const redBag = view.group === "entera" && view.color === "roja" && view.packPrimary === "bolsa";
+  const focus = view.packFocus || "primary";
+  if (focus === "primary" && redBag) keys.push("bolsa-roja");
+  if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
+  if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
+  if (redBag) keys.push("bolsa-roja");
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
   }
@@ -858,8 +882,11 @@ const PHOTO_FILES = new Set([
   "assets/products/filete-sin-piel.jpg",
   "assets/products/pieles.jpg",
   "assets/products/pieles-pallet.jpg",
+  "assets/products/entera-plateada-fresco-pocket.jpg",
+  "assets/products/entera-plateada-fresco-posta.jpg",
   "assets/packs/termoIcopor.jpg",
   "assets/packs/cajaCarton.jpg",
+  "assets/packs/bolsa-roja.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
@@ -1037,7 +1064,7 @@ function renderProducts() {
           </button>`
         )
         .join("");
-      return `<article class="family">
+      return `<article class="family${group.options.length === 1 ? " family--solo" : ""}">
         <h3>${copy.name}</h3>
         <p class="sci">${copy.sci}</p>
         <div class="choices">${options}</div>
@@ -1096,7 +1123,6 @@ function fillConfig() {
   const dict = t();
   const group = GROUPS[id];
   const groupCopy = dict.groups[id];
-  state.hover = {};
   const title = [
     groupCopy.options[state.option],
     id === "entera" && state.color ? dict.colors[state.color] : "",
@@ -1118,8 +1144,9 @@ function fillConfig() {
   const needsProcess = id === "entera";
   processField.hidden = !needsProcess;
   if (needsProcess) {
-    if (!state.process) state.process = GROUPS.entera.processes[0];
-    renderChips($("#processChips"), GROUPS.entera.processes, state.process, "process", (key) => dict.processes[key]);
+    const processes = processesFor();
+    if (!state.process || !processes.includes(state.process)) state.process = processes[0];
+    renderChips($("#processChips"), processes, state.process, "process", (key) => dict.processes[key]);
   }
 
   const sizeField = $("#sizeField");
@@ -1361,7 +1388,7 @@ $("#colorCards").addEventListener("click", (event) => {
   const card = event.target.closest("[data-color]");
   if (!card) return;
   state.color = card.dataset.color;
-  state.process = GROUPS.entera.processes[0];
+  state.process = processesFor()[0];
   state.size = sizesFor("entera")[0];
   resetPack();
   fillConfig();
@@ -1407,6 +1434,7 @@ $("#packPrimaryChips").addEventListener("click", (event) => {
   const chip = event.target.closest("[data-pack-primary]");
   if (!chip) return;
   state.packPrimary = chip.dataset.packPrimary;
+  state.packFocus = "primary";
   fillConfig();
 });
 
@@ -1419,41 +1447,8 @@ $("#packSecondaryChips").addEventListener("click", (event) => {
   } else {
     state.termoSize = null;
   }
+  state.packFocus = "secondary";
   fillConfig();
-});
-
-function chipPreviewPair(chip) {
-  if (chip.dataset.process) return ["process", chip.dataset.process];
-  if (chip.dataset.size) return ["size", chip.dataset.size];
-  if (chip.dataset.freeze) return ["freeze", chip.dataset.freeze];
-  if (chip.dataset.packPrimary) return ["packPrimary", chip.dataset.packPrimary];
-  if (chip.dataset.packSecondary) return ["packSecondary", chip.dataset.packSecondary];
-  if (chip.dataset.termoSize) return ["termoSize", chip.dataset.termoSize];
-  return null;
-}
-
-$("#stage-config").addEventListener("pointerover", (event) => {
-  const chip = event.target.closest(".chip");
-  if (!chip || !$("#stage-config").contains(chip)) return;
-  const pair = chipPreviewPair(chip);
-  if (!pair) return;
-  const [field, value] = pair;
-  if (state.hover[field] === value) return;
-  state.hover = { [field]: value };
-  document.querySelectorAll("#stage-config .chip.is-preview").forEach((el) => el.classList.remove("is-preview"));
-  chip.classList.add("is-preview");
-  updateMediaFrames();
-});
-
-$("#stage-config").addEventListener("pointerout", (event) => {
-  const chip = event.target.closest(".chip");
-  if (!chip) return;
-  const next = event.relatedTarget;
-  if (next && chip.contains(next)) return;
-  chip.classList.remove("is-preview");
-  if (!Object.keys(state.hover).length) return;
-  state.hover = {};
-  updateMediaFrames();
 });
 
 document.addEventListener(
@@ -1488,6 +1483,7 @@ $("#termoSizeChips").addEventListener("click", (event) => {
   const chip = event.target.closest("[data-termo-size]");
   if (!chip) return;
   state.termoSize = chip.dataset.termoSize;
+  state.packFocus = "termo";
   fillConfig();
 });
 
