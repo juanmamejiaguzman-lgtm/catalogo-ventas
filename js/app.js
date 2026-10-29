@@ -47,6 +47,7 @@ const I18N = {
     packaging: "Tipo de empaque",
     packPrimaryTitle: "Empaque primario",
     packSecondaryTitle: "Empaque secundario",
+    packExtraTitle: "Empaque adicional",
     productPreview: "Producto",
     packPreview: "Empaque",
     termoSize: "Talla de la caja",
@@ -74,6 +75,7 @@ const I18N = {
       scientific: "Nombre científico",
       packPrimary: "Empaque primario",
       packSecondary: "Empaque secundario",
+      packExtra: "Empaque adicional",
       termoSize: "Talla de la caja",
       packaging: "Empaque",
       quantity: "Cantidad",
@@ -119,6 +121,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caja de poliestireno expandido",
+    },
+    packExtra: {
+      ninguno: "Ninguno",
       cajaCarton: "Caja de cartón",
     },
     packFixed: {
@@ -170,6 +175,7 @@ const I18N = {
       (o.freeze ? `Tipo de congelación: ${o.freeze}\n` : "") +
       `Nombre científico: ${o.scientific}\n` +
       (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : o.packPrimary ? `Empaque: ${o.packPrimary}\n` : "") +
+      (o.packExtra ? `Empaque adicional: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Talla de la caja: ${o.termoSize}\n` : "") +
       `Cantidad: ${o.qty}\n` +
       `Destino: ${o.city}, ${o.country}\n` +
@@ -200,6 +206,7 @@ const I18N = {
     packaging: "Packaging",
     packPrimaryTitle: "Primary packaging",
     packSecondaryTitle: "Secondary packaging",
+    packExtraTitle: "Additional packaging",
     productPreview: "Product",
     packPreview: "Packaging",
     termoSize: "Box size",
@@ -227,6 +234,7 @@ const I18N = {
       scientific: "Scientific name",
       packPrimary: "Primary packaging",
       packSecondary: "Secondary packaging",
+      packExtra: "Additional packaging",
       termoSize: "Box size",
       packaging: "Packaging",
       quantity: "Quantity",
@@ -272,6 +280,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Expanded polystyrene box",
+    },
+    packExtra: {
+      ninguno: "None",
       cajaCarton: "Cardboard box",
     },
     packFixed: {
@@ -323,6 +334,7 @@ const I18N = {
       (o.freeze ? `Freezing type: ${o.freeze}\n` : "") +
       `Scientific name: ${o.scientific}\n` +
       (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : o.packPrimary ? `Packaging: ${o.packPrimary}\n` : "") +
+      (o.packExtra ? `Additional packaging: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Box size: ${o.termoSize}\n` : "") +
       `Quantity: ${o.qty}\n` +
       `Destination: ${o.city}, ${o.country}\n` +
@@ -353,6 +365,7 @@ const I18N = {
     packaging: "Tipo de embalagem",
     packPrimaryTitle: "Embalagem primária",
     packSecondaryTitle: "Embalagem secundária",
+    packExtraTitle: "Embalagem adicional",
     productPreview: "Produto",
     packPreview: "Embalagem",
     termoSize: "Tamanho da caixa térmica",
@@ -380,6 +393,7 @@ const I18N = {
       scientific: "Nome científico",
       packPrimary: "Embalagem primária",
       packSecondary: "Embalagem secundária",
+      packExtra: "Embalagem adicional",
       termoSize: "Tamanho da caixa térmica",
       packaging: "Embalagem",
       quantity: "Quantidade",
@@ -425,6 +439,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "Caixa de poliestireno expandido",
+    },
+    packExtra: {
+      ninguno: "Nenhum",
       cajaCarton: "Caixa de papelão",
     },
     packFixed: {
@@ -476,6 +493,7 @@ const I18N = {
       (o.freeze ? `Tipo de congelamento: ${o.freeze}\n` : "") +
       `Nome científico: ${o.scientific}\n` +
       (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : o.packPrimary ? `Embalagem: ${o.packPrimary}\n` : "") +
+      (o.packExtra ? `Embalagem adicional: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Tamanho da caixa térmica: ${o.termoSize}\n` : "") +
       `Quantidade: ${o.qty}\n` +
       `Destino: ${o.city}, ${o.country}\n` +
@@ -505,6 +523,7 @@ const I18N = {
     packaging: "包装方式",
     packPrimaryTitle: "内包装",
     packSecondaryTitle: "外包装",
+    packExtraTitle: "附加包装",
     productPreview: "产品",
     packPreview: "包装",
     termoSize: "保温箱规格",
@@ -532,6 +551,7 @@ const I18N = {
       scientific: "学名",
       packPrimary: "内包装",
       packSecondary: "外包装",
+      packExtra: "附加包装",
       termoSize: "保温箱规格",
       packaging: "包装",
       quantity: "数量",
@@ -577,6 +597,9 @@ const I18N = {
     },
     packSecondary: {
       termoIcopor: "发泡聚苯乙烯箱",
+    },
+    packExtra: {
+      ninguno: "无",
       cajaCarton: "纸箱",
     },
     packFixed: {
@@ -628,6 +651,7 @@ const I18N = {
       (o.freeze ? `冻结方式：${o.freeze}\n` : "") +
       `学名：${o.scientific}\n` +
       (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : o.packPrimary ? `包装：${o.packPrimary}\n` : "") +
+      (o.packExtra ? `附加包装：${o.packExtra}\n` : "") +
       (o.termoSize ? `保温箱规格：${o.termoSize}\n` : "") +
       `数量：${o.qty}\n` +
       `目的地：${o.city}, ${o.country}\n` +
@@ -680,6 +704,7 @@ const state = {
   size: null,
   packPrimary: null,
   packSecondary: null,
+  packExtra: null,
   termoSize: null,
   freeze: null,
   skin: null,
@@ -754,26 +779,23 @@ function qtyDisplay(qty, unitKey) {
   return `${qty} ${dict.units[unitKey]}`;
 }
 
-function packSecondaryOptions(group) {
-  if (!group.packSecondary) return [];
-  if (state.group === "entera" && state.option === "congelado") {
-    return ["termoIcopor", "cajaCarton"];
-  }
-  return group.packSecondary;
+function hasPackExtra() {
+  return state.group === "entera" && state.option === "congelado";
 }
 
 function resetPack() {
   const group = GROUPS[state.group];
   if (group.packPrimary) {
-    const secondary = packSecondaryOptions(group);
     state.packPrimary = group.packPrimary[0];
-    state.packSecondary = secondary[0] || null;
+    state.packSecondary = group.packSecondary[0] || null;
+    state.packExtra = hasPackExtra() ? "ninguno" : null;
     state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
     state.packFocus = "secondary";
     return;
   }
   state.packPrimary = null;
   state.packSecondary = null;
+  state.packExtra = null;
   state.termoSize = null;
   state.packFocus = "secondary";
 }
@@ -789,6 +811,7 @@ function viewOf(overrides = {}) {
     skin: state.skin,
     packPrimary: state.packPrimary,
     packSecondary: state.packSecondary,
+    packExtra: state.packExtra,
     termoSize: state.termoSize,
     packFocus: state.packFocus,
     ...overrides,
@@ -849,8 +872,10 @@ function packPhotoKeys(view) {
   const focus = view.packFocus || "secondary";
   if (redBulk && focus === "primary") keys.push("granel-roja");
   if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
+  if (focus === "extra" && view.packExtra === "cajaCarton") keys.push("cajaCarton");
   if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
   if (view.packSecondary) keys.push(view.packSecondary);
+  if (view.packExtra === "cajaCarton") keys.push("cajaCarton");
   if (redBulk) keys.push("granel-roja");
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
@@ -881,7 +906,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct19";
+  const bust = "oct20";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
@@ -1176,19 +1201,30 @@ function fillConfig() {
   $("#packSecondaryField").hidden = !dualPack;
   $("#packFixedField").hidden = true;
   if (dualPack) {
-    const secondary = packSecondaryOptions(group);
     if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
-    if (!state.packSecondary || !secondary.includes(state.packSecondary)) state.packSecondary = secondary[0];
+    if (!state.packSecondary || !group.packSecondary.includes(state.packSecondary)) state.packSecondary = group.packSecondary[0];
     renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
-    renderChips($("#packSecondaryChips"), secondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
+    renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
     $("#packFixedChips").innerHTML = "";
   } else {
     state.packPrimary = null;
     state.packSecondary = null;
+    state.packExtra = null;
     state.termoSize = null;
     $("#packFixedChips").innerHTML = "";
     $("#packPrimaryChips").innerHTML = "";
     $("#packSecondaryChips").innerHTML = "";
+  }
+
+  const extraField = $("#packExtraField");
+  const showExtra = dualPack && hasPackExtra();
+  extraField.hidden = !showExtra;
+  if (showExtra) {
+    if (!state.packExtra || !["ninguno", "cajaCarton"].includes(state.packExtra)) state.packExtra = "ninguno";
+    renderChips($("#packExtraChips"), ["ninguno", "cajaCarton"], state.packExtra, "pack-extra", (key) => dict.packExtra[key]);
+  } else {
+    state.packExtra = null;
+    $("#packExtraChips").innerHTML = "";
   }
 
   const termoSizes = dualPack && state.packSecondary === "termoIcopor" ? group.termoSizes : null;
@@ -1231,6 +1267,7 @@ function formattedOrder() {
     scientific: o.color && (o.group === "entera" || o.group === "filete") ? dict.colorSci[o.color] : dict.groups[o.group].sci,
     packPrimary,
     packSecondary,
+    packExtra: o.packExtra && o.packExtra !== "ninguno" ? dict.packExtra[o.packExtra] : "",
     termoSize: o.termoSize ? TERMO_SIZES[o.termoSize] : "",
     qty: qtyDisplay(o.qty, o.unitKey),
     city: o.city,
@@ -1253,7 +1290,7 @@ function renderTicket() {
     <dt>${dict.fields.scientific}</dt><dd class="sci">${o.scientific}</dd>
     ${
       o.packSecondary
-        ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>${o.termoSize ? `<dt>${dict.fields.termoSize}</dt><dd>${o.termoSize}</dd>` : ""}`
+        ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>${o.termoSize ? `<dt>${dict.fields.termoSize}</dt><dd>${o.termoSize}</dd>` : ""}${o.packExtra ? `<dt>${dict.fields.packExtra}</dt><dd>${o.packExtra}</dd>` : ""}`
         : o.packPrimary
           ? `<dt>${dict.fields.packaging}</dt><dd>${o.packPrimary}</dd>`
           : ""
@@ -1279,6 +1316,7 @@ function collectOrder() {
     size: state.size,
     packPrimary: state.packPrimary,
     packSecondary: state.packSecondary,
+    packExtra: state.packExtra,
     termoSize: state.termoSize,
     freeze: state.freeze,
     incoterm: state.incoterm,
@@ -1308,6 +1346,7 @@ $("#homeBtn").addEventListener("click", () => {
   state.size = null;
   state.packPrimary = null;
   state.packSecondary = null;
+  state.packExtra = null;
   state.termoSize = null;
   state.freeze = null;
   state.skin = null;
@@ -1425,6 +1464,14 @@ $("#packSecondaryChips").addEventListener("click", (event) => {
     state.termoSize = null;
   }
   state.packFocus = "secondary";
+  fillConfig();
+});
+
+$("#packExtraChips").addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-pack-extra]");
+  if (!chip) return;
+  state.packExtra = chip.dataset.packExtra;
+  state.packFocus = "extra";
   fillConfig();
 });
 
