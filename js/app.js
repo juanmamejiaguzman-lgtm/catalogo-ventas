@@ -685,7 +685,7 @@ const state = {
   skin: null,
   incoterm: "EXW",
   filletUnit: "oz",
-  packFocus: "primary",
+  packFocus: "secondary",
   order: null,
 };
 
@@ -769,13 +769,13 @@ function resetPack() {
     state.packPrimary = group.packPrimary[0];
     state.packSecondary = secondary[0] || null;
     state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
-    state.packFocus = "primary";
+    state.packFocus = "secondary";
     return;
   }
   state.packPrimary = null;
   state.packSecondary = null;
   state.termoSize = null;
-  state.packFocus = "primary";
+  state.packFocus = "secondary";
 }
 
 function viewOf(overrides = {}) {
@@ -845,17 +845,17 @@ function productPhotoKeys(view) {
 function packPhotoKeys(view) {
   const keys = [];
   const redBulk = view.group === "entera" && view.color === "roja" && view.packPrimary === "granel";
-  const focus = view.packFocus || "primary";
-  if (focus === "primary" && redBulk) keys.push("granel-roja");
+  const focus = view.packFocus || "secondary";
+  if (redBulk && focus === "primary") keys.push("granel-roja");
   if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
   if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
+  if (view.packSecondary) keys.push(view.packSecondary);
   if (redBulk) keys.push("granel-roja");
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
   }
   if (view.packPrimary && view.packSecondary) keys.push(`${view.packPrimary}-${view.packSecondary}`);
   if (view.packPrimary) keys.push(view.packPrimary);
-  if (view.packSecondary) keys.push(view.packSecondary);
   if (view.termoSize) keys.push(view.termoSize);
   return keys;
 }
@@ -880,11 +880,12 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
+  const bust = "oct18";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
       const src = `assets/${folder}/${key}${ext}`;
-      if (PHOTO_FILES.has(src)) srcs.push(src);
+      if (PHOTO_FILES.has(src)) srcs.push(`${src}?v=${bust}`);
     });
   }
   const img = srcs.length
