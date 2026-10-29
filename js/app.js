@@ -918,7 +918,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct22";
+  const bust = "oct23";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
