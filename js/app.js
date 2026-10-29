@@ -2,7 +2,6 @@ const WHATSAPP = "573164570484";
 const WA_SIGN =
   "\n\n" +
   "\u{1F41F}  CI Pisc\u00edcola Botero SA  \u{1F30A}\u{1F420}";
-const KG_TO_LB = 2.2046226218;
 const SIZE_RANGES = {
   t80: [80, 350],
   t350: [350, 550],
@@ -31,7 +30,6 @@ const I18N = {
     enterHint: "Toca el logo para entrar",
     videoTitle: "Conoce la piscícola",
     socialLabel: "Redes sociales",
-    massLabel: "Unidad de peso",
     welcomeLede:
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
     productsTitle: "¿Qué producto desea?",
@@ -185,7 +183,6 @@ const I18N = {
     enterHint: "Tap the logo to enter",
     videoTitle: "Meet the fish farm",
     socialLabel: "Social media",
-    massLabel: "Weight unit",
     welcomeLede:
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
     productsTitle: "Which product do you want?",
@@ -339,7 +336,6 @@ const I18N = {
     enterHint: "Toque no logo para entrar",
     videoTitle: "Conheça a piscicultura",
     socialLabel: "Redes sociais",
-    massLabel: "Unidade de peso",
     welcomeLede:
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
     productsTitle: "Qual produto deseja?",
@@ -493,7 +489,6 @@ const I18N = {
     enterHint: "点击标志进入",
     videoTitle: "了解我们的渔场",
     socialLabel: "社交媒体",
-    massLabel: "重量单位",
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
@@ -678,7 +673,6 @@ const LANG_HTML = { es: "es", en: "en", pt: "pt", zh: "zh-CN" };
 
 const state = {
   lang: "es",
-  mass: "kg",
   group: null,
   option: null,
   color: null,
@@ -709,7 +703,6 @@ function roundMass(n) {
 }
 
 function formatKg(kg) {
-  if (state.mass === "lb") return `${roundMass(kg * KG_TO_LB)} lb`;
   return `${roundMass(kg)} kg`;
 }
 
@@ -742,9 +735,6 @@ function sizeLabel(key) {
   const range = SIZE_RANGES[key];
   if (!range) return "";
   const [from, to] = range;
-  if (state.mass === "lb") {
-    return `${roundMass(from / 453.59237)} - ${roundMass(to / 453.59237)} lb`;
-  }
   return `${from} - ${to} g`;
 }
 
@@ -1029,9 +1019,6 @@ function applyI18n() {
   document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.lang === state.lang);
   });
-  document.querySelectorAll("[data-mass]").forEach((btn) => {
-    btn.classList.toggle("is-active", btn.dataset.mass === state.mass);
-  });
   document.querySelectorAll("[data-fillet-unit]").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.filletUnit === state.filletUnit);
   });
@@ -1211,10 +1198,9 @@ function fillConfig() {
 
   const unitEl = $("#unit");
   const prevUnit = unitEl.value;
-  const unitKeys = kgOnlyUnits() ? ["kg"] : [state.mass, "termos"];
+  const unitKeys = kgOnlyUnits() ? ["kg"] : ["kg", "termos"];
   unitEl.innerHTML = unitKeys.map((value) => `<option value="${value}">${dict.units[value]}</option>`).join("");
-  if (kgOnlyUnits()) unitEl.value = "kg";
-  else if (prevUnit === "kg" || prevUnit === "lb") unitEl.value = state.mass;
+  if (kgOnlyUnits() || prevUnit === "lb") unitEl.value = "kg";
   else if (unitKeys.includes(prevUnit)) unitEl.value = prevUnit;
 
   $("#destSuggest").innerHTML = DESTINATIONS.map(
@@ -1300,21 +1286,6 @@ function collectOrder() {
     company: $("#clientCompany").value.trim(),
     email: $("#clientEmail").value.trim(),
   };
-}
-
-function setMass(next) {
-  if (state.mass === next) return;
-  const unitEl = $("#unit");
-  const qtyEl = $("#qty");
-  if (unitEl && qtyEl && !kgOnlyUnits() && (unitEl.value === "kg" || unitEl.value === "lb")) {
-    const n = Number(qtyEl.value);
-    if (!Number.isNaN(n)) {
-      qtyEl.value = next === "lb" ? roundMass(n * KG_TO_LB) : roundMass(n / KG_TO_LB);
-      unitEl.value = next;
-    }
-  }
-  state.mass = next;
-  applyI18n();
 }
 
 $("#enterBtn").addEventListener("click", () => {
@@ -1496,17 +1467,11 @@ $("#destSuggest").addEventListener("click", (event) => {
   $("#country").value = btn.dataset.country;
 });
 
-document.querySelector(".controls .lang:not(#massSwitch)").addEventListener("click", (event) => {
+document.querySelector(".controls .lang").addEventListener("click", (event) => {
   const btn = event.target.closest("[data-lang]");
   if (!btn) return;
   state.lang = btn.dataset.lang;
   applyI18n();
-});
-
-$("#massSwitch").addEventListener("click", (event) => {
-  const btn = event.target.closest("[data-mass]");
-  if (!btn) return;
-  setMass(btn.dataset.mass);
 });
 
 $("#orderForm").addEventListener("submit", (event) => {
