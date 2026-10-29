@@ -739,7 +739,7 @@ function sizesFor(groupId) {
 
 function processesFor() {
   const list = GROUPS.entera.processes.slice();
-  if (state.group === "entera" && state.option === "fresco" && state.color === "negra") {
+  if (state.group === "entera" && state.option === "fresco") {
     list.push("pocket", "posta");
   }
   return list;
@@ -908,6 +908,8 @@ const PHOTO_FILES = new Set([
   "assets/products/pieles-pallet.jpg",
   "assets/products/entera-plateada-fresco-pocket.jpg",
   "assets/products/entera-plateada-fresco-posta.jpg",
+  "assets/products/entera-roja-fresco-pocket.jpg",
+  "assets/products/entera-roja-fresco-posta.jpg",
   "assets/packs/termoIcopor.jpg",
   "assets/packs/cajaCarton.jpg",
   "assets/packs/granel-roja.jpg",
@@ -916,7 +918,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct21";
+  const bust = "oct22";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
