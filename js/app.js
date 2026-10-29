@@ -146,6 +146,7 @@ const I18N = {
       "roja-sin": "Filete de tilapia roja sin piel",
       "negra-con": "Filete de tilapia plateada con piel",
       "negra-sin": "Filete de tilapia plateada sin piel",
+      "roja-sin-monoxido": "Filete de tilapia roja sin piel empacado al vacío con monóxido",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -305,6 +306,7 @@ const I18N = {
       "roja-sin": "Red tilapia fillet, skinless",
       "negra-con": "Silver tilapia fillet, skin-on",
       "negra-sin": "Silver tilapia fillet, skinless",
+      "roja-sin-monoxido": "Red tilapia skinless fillet, vacuum packed with carbon monoxide",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -464,6 +466,7 @@ const I18N = {
       "roja-sin": "Filé de tilápia vermelha sem pele",
       "negra-con": "Filé de tilápia prateada com pele",
       "negra-sin": "Filé de tilápia prateada sem pele",
+      "roja-sin-monoxido": "Filé de tilápia vermelha sem pele, vácuo com monóxido",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -622,6 +625,7 @@ const I18N = {
       "roja-sin": "去皮红罗非鱼片",
       "negra-con": "带皮银罗非鱼片",
       "negra-sin": "去皮银罗非鱼片",
+      "roja-sin-monoxido": "去皮红罗非鱼片（一氧化碳真空包装）",
     },
     colorSci: {
       roja: "Oreochromis spp.",
@@ -711,6 +715,7 @@ const state = {
   incoterm: "EXW",
   filletUnit: "oz",
   packFocus: "secondary",
+  monoxido: false,
   order: null,
 };
 
@@ -783,14 +788,22 @@ function hasPackExtra() {
   return state.group === "entera" && state.option === "congelado";
 }
 
+function packPrimaryFor() {
+  const group = GROUPS[state.group];
+  if (!group?.packPrimary) return null;
+  if (state.group === "filete" && state.monoxido) return ["vacio"];
+  return group.packPrimary;
+}
+
 function resetPack() {
   const group = GROUPS[state.group];
-  if (group.packPrimary) {
-    state.packPrimary = group.packPrimary[0];
+  const primary = packPrimaryFor();
+  if (primary) {
+    state.packPrimary = primary[0];
     state.packSecondary = group.packSecondary[0] || null;
     state.packExtra = hasPackExtra() ? "ninguno" : null;
     state.termoSize = group.termoSizes && state.packSecondary === "termoIcopor" ? group.termoSizes[0] : null;
-    state.packFocus = "secondary";
+    state.packFocus = state.monoxido ? "primary" : "secondary";
     return;
   }
   state.packPrimary = null;
@@ -814,6 +827,7 @@ function viewOf(overrides = {}) {
     packExtra: state.packExtra,
     termoSize: state.termoSize,
     packFocus: state.packFocus,
+    monoxido: state.monoxido,
     ...overrides,
   };
 }
@@ -854,6 +868,10 @@ function productPhotoKeys(view) {
     keys.push("entera");
   } else if (view.group === "filete") {
     const color = colorFile(view.color);
+    if (view.monoxido) {
+      if (view.slot === "card") keys.push("filete-roja-monoxido");
+      else keys.push("vacio-filete-roja-monoxido", "filete-roja-monoxido");
+    }
     if (view.skin === "con" && color) keys.push(`filete-${color}-piel`);
     if (view.skin === "sin") keys.push("filete-sin-piel");
     if (view.option) keys.push(`filete-${view.option}`);
@@ -877,6 +895,11 @@ function packPhotoKeys(view) {
     if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
     if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
     if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
+    if (view.group === "filete" && view.packPrimary === "vacio") {
+      if (view.monoxido) keys.push("vacio-filete-roja-monoxido");
+      else if (view.skin === "con" && view.color === "negra") keys.push("vacio-filete-plateada-piel");
+      else if (view.skin === "sin") keys.push("vacio-filete-sin-piel");
+    }
   }
   if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
   if (focus === "extra" && view.packExtra === "cajaCarton") keys.push("cajaCarton");
@@ -887,6 +910,11 @@ function packPhotoKeys(view) {
   if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
   if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
   if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
+  if (view.group === "filete" && view.packPrimary === "vacio") {
+    if (view.monoxido) keys.push("vacio-filete-roja-monoxido");
+    else if (view.skin === "con" && view.color === "negra") keys.push("vacio-filete-plateada-piel");
+    else if (view.skin === "sin") keys.push("vacio-filete-sin-piel");
+  }
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
   }
@@ -906,6 +934,8 @@ const PHOTO_FILES = new Set([
   "assets/products/filete-roja-piel.jpg",
   "assets/products/filete-plateada-piel.jpg",
   "assets/products/filete-sin-piel.jpg",
+  "assets/products/filete-roja-monoxido.jpg",
+  "assets/products/vacio-filete-roja-monoxido.jpg",
   "assets/products/pieles.jpg",
   "assets/products/pieles-pallet.jpg",
   "assets/products/entera-plateada-fresco-pocket.jpg",
@@ -918,10 +948,13 @@ const PHOTO_FILES = new Set([
   "assets/packs/granel-roja-fresco.jpg",
   "assets/packs/vacio-roja-fresco.jpg",
   "assets/packs/bolsa-roja-fresco.jpg",
+  "assets/packs/vacio-filete-plateada-piel.jpg",
+  "assets/packs/vacio-filete-sin-piel.jpg",
+  "assets/packs/vacio-filete-roja-monoxido.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct28";
+  const bust = "oct29";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
@@ -1125,6 +1158,11 @@ function renderFilletVariants() {
       </button>`);
     });
   });
+  cards.push(`<button class="choice choice--wide" type="button" data-color="roja" data-skin="sin" data-monoxido="1">
+    ${productMedia({ group: "filete", option: state.option, color: "roja", skin: "sin", monoxido: true, slot: "card" })}
+    <span>${dict.filletVariants["roja-sin-monoxido"]}</span>
+    <small class="sci">${dict.colorSci.roja}</small>
+  </button>`);
   $("#filletCards").innerHTML = cards.join("");
 }
 
@@ -1156,14 +1194,16 @@ function fillConfig() {
   const dict = t();
   const group = GROUPS[id];
   const groupCopy = dict.groups[id];
-  const title = [
-    groupCopy.options[state.option],
-    id === "entera" && state.color ? dict.colors[state.color] : "",
-    id === "filete" && state.color ? dict.filletColors[state.color] : "",
-    id === "filete" && state.skin ? dict.skins[state.skin] : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  const title = state.monoxido
+    ? [groupCopy.options[state.option], dict.filletVariants["roja-sin-monoxido"]].filter(Boolean).join(" · ")
+    : [
+        groupCopy.options[state.option],
+        id === "entera" && state.color ? dict.colors[state.color] : "",
+        id === "filete" && state.color ? dict.filletColors[state.color] : "",
+        id === "filete" && state.skin ? dict.skins[state.skin] : "",
+      ]
+        .filter(Boolean)
+        .join(" · ");
   $("#configTitle").textContent = title;
   $("#configSci").textContent = scientificName();
   $("#configLede").textContent = groupCopy.lede;
@@ -1211,14 +1251,15 @@ function fillConfig() {
   if (!state.incoterm) state.incoterm = INCOTERMS[0];
   renderChips($("#incotermChips"), INCOTERMS, state.incoterm, "incoterm", (key) => key);
 
-  const dualPack = Boolean(group.packPrimary);
+  const packPrimaryKeys = packPrimaryFor();
+  const dualPack = Boolean(packPrimaryKeys);
   $("#packPrimaryField").hidden = !dualPack;
   $("#packSecondaryField").hidden = !dualPack;
   $("#packFixedField").hidden = true;
   if (dualPack) {
-    if (!state.packPrimary || !group.packPrimary.includes(state.packPrimary)) state.packPrimary = group.packPrimary[0];
+    if (!state.packPrimary || !packPrimaryKeys.includes(state.packPrimary)) state.packPrimary = packPrimaryKeys[0];
     if (!state.packSecondary || !group.packSecondary.includes(state.packSecondary)) state.packSecondary = group.packSecondary[0];
-    renderChips($("#packPrimaryChips"), group.packPrimary, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
+    renderChips($("#packPrimaryChips"), packPrimaryKeys, state.packPrimary, "pack-primary", (key) => dict.packPrimary[key]);
     renderChips($("#packSecondaryChips"), group.packSecondary, state.packSecondary, "pack-secondary", (key) => dict.packSecondary[key]);
     $("#packFixedChips").innerHTML = "";
   } else {
@@ -1273,7 +1314,10 @@ function formattedOrder() {
     name: o.name,
     company: o.company,
     email: o.email,
-    product: dict.groups[o.group].options[o.option],
+    product:
+      o.group === "filete" && o.monoxido
+        ? dict.filletVariants["roja-sin-monoxido"]
+        : dict.groups[o.group].options[o.option],
     color: o.group === "entera" ? dict.colors[o.color] : o.group === "filete" && o.color ? dict.filletColors[o.color] : "",
     skin: o.skin ? dict.skins[o.skin] : "",
     process: o.group === "entera" ? dict.processes[o.process] : "",
@@ -1327,6 +1371,7 @@ function collectOrder() {
     option: state.option,
     color: state.color,
     skin: state.skin,
+    monoxido: state.monoxido,
     process: state.process,
     size: state.size,
     packPrimary: state.packPrimary,
@@ -1365,6 +1410,7 @@ $("#homeBtn").addEventListener("click", () => {
   state.termoSize = null;
   state.freeze = null;
   state.skin = null;
+  state.monoxido = false;
   state.incoterm = "EXW";
   showStage("welcome");
 });
@@ -1385,6 +1431,7 @@ $("#productCards").addEventListener("click", (event) => {
   state.option = card.dataset.option;
   state.color = null;
   state.skin = null;
+  state.monoxido = false;
   state.process = null;
   state.size = null;
   state.freeze = card.dataset.option === "congelado" ? FREEZE_TYPES[0] : null;
@@ -1409,6 +1456,7 @@ $("#filletCards").addEventListener("click", (event) => {
   if (!card) return;
   state.color = card.dataset.color;
   state.skin = card.dataset.skin;
+  state.monoxido = card.dataset.monoxido === "1";
   state.size = sizesFor("filete")[0];
   resetPack();
   fillConfig();
