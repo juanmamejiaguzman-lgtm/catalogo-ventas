@@ -873,6 +873,7 @@ function packPhotoKeys(view) {
   const frozenRed = red && view.option === "congelado";
   const focus = view.packFocus || "secondary";
   if (focus === "primary") {
+    if (freshRed && view.packPrimary === "bolsa") keys.push("bolsa-roja-fresco");
     if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
     if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
     if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
@@ -882,6 +883,7 @@ function packPhotoKeys(view) {
   if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
   if (view.packSecondary) keys.push(view.packSecondary);
   if (view.packExtra === "cajaCarton") keys.push("cajaCarton");
+  if (freshRed && view.packPrimary === "bolsa") keys.push("bolsa-roja-fresco");
   if (freshRed && view.packPrimary === "granel") keys.push("granel-roja-fresco");
   if (freshRed && view.packPrimary === "vacio") keys.push("vacio-roja-fresco");
   if (frozenRed && view.packPrimary === "granel") keys.push("granel-roja");
@@ -915,10 +917,11 @@ const PHOTO_FILES = new Set([
   "assets/packs/granel-roja.jpg",
   "assets/packs/granel-roja-fresco.jpg",
   "assets/packs/vacio-roja-fresco.jpg",
+  "assets/packs/bolsa-roja-fresco.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct25";
+  const bust = "oct26";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
