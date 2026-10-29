@@ -844,12 +844,12 @@ function productPhotoKeys(view) {
 
 function packPhotoKeys(view) {
   const keys = [];
-  const redBag = view.group === "entera" && view.color === "roja" && view.packPrimary === "bolsa";
+  const redBulk = view.group === "entera" && view.color === "roja" && view.packPrimary === "granel";
   const focus = view.packFocus || "primary";
-  if (focus === "primary" && redBag) keys.push("bolsa-roja");
+  if (focus === "primary" && redBulk) keys.push("granel-roja");
   if (focus === "secondary" && view.packSecondary) keys.push(view.packSecondary);
   if (focus === "termo" && view.termoSize) keys.push(view.termoSize);
-  if (redBag) keys.push("bolsa-roja");
+  if (redBulk) keys.push("granel-roja");
   if (view.packPrimary && view.packSecondary && view.termoSize) {
     keys.push(`${view.packPrimary}-${view.packSecondary}-${view.termoSize}`);
   }
@@ -876,7 +876,7 @@ const PHOTO_FILES = new Set([
   "assets/products/entera-plateada-fresco-posta.jpg",
   "assets/packs/termoIcopor.jpg",
   "assets/packs/cajaCarton.jpg",
-  "assets/packs/bolsa-roja.jpg",
+  "assets/packs/granel-roja.jpg",
 ]);
 
 function mediaBox(folder, keys, fallback) {

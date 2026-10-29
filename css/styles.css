@@ -736,6 +736,17 @@ html.is-zh h3 {
   object-position: center;
 }
 
+#packFrame .frame-body {
+  min-height: 220px;
+  padding: 6px 10px 12px;
+}
+
+#packFrame .frame-body .photo {
+  height: auto;
+  max-height: 320px;
+  width: 100%;
+}
+
 .photo-frame--tall .frame-body {
   min-height: 0;
   padding: 4px 8px 12px;
