@@ -420,6 +420,24 @@ html.is-zh h3 {
   text-align: center;
 }
 
+.pdf-link {
+  display: inline-flex;
+  margin: 14px auto 0;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--cyan-deep);
+  font-weight: 800;
+  font-size: 0.88rem;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 119, 168, 0.16);
+}
+
+#stage-welcome .pdf-link {
+  display: flex;
+  width: fit-content;
+}
+
 .logo-wrap {
   position: relative;
   display: grid;

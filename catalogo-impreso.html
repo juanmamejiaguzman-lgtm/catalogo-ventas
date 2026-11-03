@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CI Piscícola Botero SA — Catálogo impreso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --magenta: #e3066a;
+        --magenta-deep: #b10552;
+        --cyan: #00a7e1;
+        --cyan-deep: #0077a8;
+        --ink: #10233a;
+        --muted: #4d647a;
+        --paper: #f4fafd;
+        --line: rgba(16, 35, 58, 0.12);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: #d7eaf3; }
+      body {
+        font-family: Manrope, system-ui, sans-serif;
+        color: var(--ink);
+      }
+      h1, h2, h3, .brand {
+        font-family: Fraunces, Georgia, serif;
+        font-weight: 700;
+        margin: 0;
+      }
+      p { margin: 0; }
+      img { max-width: 100%; display: block; }
+      .book { padding: 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+      .page {
+        width: 210mm;
+        height: 297mm;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        break-after: page;
+      }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+      .pad { padding: 14mm 14mm 16mm; height: 100%; display: flex; flex-direction: column; }
+      .kicker {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--cyan-deep);
+      }
+      .muted { color: var(--muted); }
+      .sci { font-style: italic; color: var(--muted); font-size: 11px; }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        background: #f7fbfe;
+      }
+      .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 8px;
+      }
+      .card h3 { font-size: 14px; margin: 6px 0 2px; }
+      .photo {
+        background: #fff;
+        border-radius: 10px;
+        height: 118px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      .photo img { width: 100%; height: 100%; object-fit: contain; }
+      .photo.tall { height: 168px; }
+      .photo.hero { height: 210px; }
+      .foot {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+        font-size: 10px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .spec dt { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 800; }
+      .spec dd { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
+      .cover {
+        background:
+          radial-gradient(900px 420px at 12% 0%, rgba(255,255,255,.55), transparent 55%),
+          radial-gradient(700px 380px at 100% 8%, rgba(227,6,106,.22), transparent 50%),
+          linear-gradient(180deg, #e7f6fc 0%, #8fd0ea 48%, #2f90b8 100%);
+        color: var(--ink);
+      }
+      .cover .pad { justify-content: space-between; }
+      .cover img.logo { width: 210px; margin: 0 auto; }
+      .cover h1 { font-size: 34px; line-height: 1.1; text-align: center; }
+      .cover .sub { text-align: center; font-size: 15px; font-weight: 600; color: var(--ink); }
+      .badge {
+        align-self: center;
+        background: #fff;
+        color: var(--magenta-deep);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 11px;
+        padding: 8px 14px;
+        border-radius: 999px;
+      }
+      .toc li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-weight: 700; }
+      .toc { list-style: none; padding: 0; margin: 12px 0 0; }
+      .note {
+        background: #eef8fd;
+        border-left: 4px solid var(--cyan);
+        padding: 10px 12px;
+        border-radius: 0 10px 10px 0;
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+      .end {
+        background: linear-gradient(180deg, #10233a 0%, #0b4f6c 100%);
+        color: #fff;
+      }
+      .end .kicker, .end .muted, .end .sci, .end .foot { color: rgba(255,255,255,.72); }
+      .end h2 { color: #fff; }
+      .end a { color: #fff; }
+      @page { size: A4; margin: 0; }
+      @media print {
+        html, body { background: #fff; }
+        .book { padding: 0; gap: 0; }
+        .page { box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="book">
+      <section class="page cover">
+        <div class="pad">
+          <p class="kicker" style="text-align:center">Portafolio de productos · mercado internacional</p>
+          <img class="logo" src="assets/logo.png" alt="Botero" />
+          <div>
+            <h1>Catálogo de productos</h1>
+            <p class="sub" style="margin-top:10px">CI Piscícola Botero SA</p>
+            <p class="sub muted">Tilapia entera, filete y piel · fresco y congelado</p>
+          </div>
+          <span class="badge">Edición impresa · 2026</span>
+          <p class="foot" style="border:0;color:var(--ink)"><span>Colombia</span><span>Cotizaciones por WhatsApp +57 316 457 0484</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Contenido</p>
+          <h2 style="font-size:28px;margin:6px 0 10px">Cómo leer este catálogo</h2>
+          <p class="muted" style="font-size:14px;line-height:1.5;max-width:160mm">
+            Este documento reúne las líneas, presentaciones, tallas y empaques del catálogo interactivo.
+            No confirma una venta. Para cotizar, escriba por WhatsApp con producto, talla, empaque, cantidad y destino.
+          </p>
+          <ol class="toc">
+            <li><span>Tilapia entera fresca</span><span>03</span></li>
+            <li><span>Presentaciones frescas · Pocket y H y G</span><span>04</span></li>
+            <li><span>Tilapia entera congelada</span><span>05</span></li>
+            <li><span>Filete fresco</span><span>06</span></li>
+            <li><span>Filete con monóxido y tallas</span><span>07</span></li>
+            <li><span>Empaques</span><span>08</span></li>
+            <li><span>Piel de tilapia</span><span>09</span></li>
+            <li><span>Contacto e Incoterms</span><span>10</span></li>
+          </ol>
+          <div class="note" style="margin-top:16px">
+            <strong>Pedido de cotización.</strong> WhatsApp +57 316 457 0484 ·
+            Catálogo en línea: https://juanmamejiaguzman-lgtm.github.io/catalogo-ventas/
+          </div>
+          <div class="grid-2" style="margin-top:14px">
+            <div class="card">
+              <p class="kicker">Datos que pedimos</p>
+              <p style="margin-top:8px;font-size:13px;line-height:1.5">Nombre, empresa, ciudad, país y correo. Cantidad en kg o en termos. Incoterm: EXW, FOB, CIF, CFR, FCA o DDP.</p>
+            </div>
+            <div class="card">
+              <p class="kicker">Redes</p>
+              <p style="margin-top:8px;font-size:13px;line-height:1.6">YouTube, Instagram y Facebook: piscicolabotero</p>
+            </div>
+          </div>
+          <p class="foot"><span>CI Piscícola Botero SA</span><span>02</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Tilapia entera</p>
+          <h2 style="font-size:26px;margin:4px 0 4px">Entera fresca</h2>
+          <p class="sci">Oreochromis spp. (roja) · Oreochromis niloticus (plateada)</p>
+          <div class="photo hero" style="margin:10px 0">
+            <img src="assets/products/entera-fresco.jpg" alt="Tilapia entera fresca roja y plateada" />
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <div class="photo"><img src="assets/products/entera-roja.jpg" alt="Tilapia entera roja" /></div>
+              <h3>Tilapia entera roja</h3>
+              <p class="sci">Oreochromis spp.</p>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/products/entera-plateada.jpg" alt="Tilapia entera plateada" /></div>
+              <h3>Tilapia entera plateada</h3>
+              <p class="sci">Oreochromis niloticus</p>
+            </article>
+          </div>
+          <div style="margin-top:10px">
+            <p class="kicker">Tallas</p>
+            <div class="chips" style="margin-top:6px">
+              <span class="chip">80 – 350 g</span>
+              <span class="chip">350 – 550 g</span>
+              <span class="chip">550 – 750 g</span>
+            </div>
+          </div>
+          <p class="foot"><span>Tilapia entera fresca</span><span>03</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Tilapia entera fresca</p>
+          <h2 style="font-size:24px;margin:4px 0 8px">Presentaciones</h2>
+          <div class="chips" style="margin-bottom:10px">
+            <span class="chip">SESA — Sin escamas y sin agallas</span>
+            <span class="chip">CECA — Con escamas y con agallas</span>
+            <span class="chip">SECA — Sin escamas y con agallas</span>
+            <span class="chip">Pocket</span>
+            <span class="chip">H y G (Decapitado y eviscerado)</span>
+          </div>
+          <p class="muted" style="font-size:12px;margin-bottom:8px">Pocket y H y G aplican a entera fresca, roja y plateada.</p>
+          <div class="grid-2">
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/entera-roja-fresco-pocket.jpg" alt="Pocket tilapia roja" /></div>
+              <h3>Pocket · roja</h3>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/entera-roja-fresco-posta.jpg" alt="H y G tilapia roja" /></div>
+              <h3>H y G · roja</h3>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/entera-plateada-fresco-pocket.jpg" alt="Pocket tilapia plateada" /></div>
+              <h3>Pocket · plateada</h3>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/entera-plateada-fresco-posta.jpg" alt="H y G tilapia plateada" /></div>
+              <h3>H y G · plateada</h3>
+            </article>
+          </div>
+          <p class="foot"><span>Presentaciones frescas</span><span>04</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Tilapia entera</p>
+          <h2 style="font-size:26px;margin:4px 0 4px">Entera congelada</h2>
+          <p class="sci">Despacho en contenedor refrigerado de 40 pies.</p>
+          <div class="photo hero" style="margin:10px 0">
+            <img src="assets/products/entera-congelado.jpg" alt="Tilapia entera congelada" />
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <div class="photo"><img src="assets/packs/granel-roja.jpg" alt="Granel congelado" /></div>
+              <h3>A granel · congelada</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/cajaCarton.jpg" alt="Caja de cartón" /></div>
+              <h3>Empaque adicional: caja de cartón</h3>
+              <p class="sci">Opcional. Por defecto: ninguno.</p>
+            </article>
+          </div>
+          <dl class="spec" style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px">
+            <div><dt>Tipo de congelación</dt><dd>Convencional o IQF</dd></div>
+            <div><dt>Tallas</dt><dd>80–350 g · 350–550 g · 550–750 g</dd></div>
+            <div><dt>Empaque primario</dt><dd>Bolsa · Vacío · A granel</dd></div>
+            <div><dt>Empaque secundario</dt><dd>Caja de poliestireno expandido<br />4.54 kg / 10 lb · 9.98 kg / 22 lb</dd></div>
+          </dl>
+          <p class="foot"><span>Tilapia entera congelada</span><span>05</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Filete de tilapia</p>
+          <h2 style="font-size:26px;margin:4px 0 4px">Filete fresco</h2>
+          <p class="sci">Oreochromis spp. (roja) · Oreochromis niloticus (plateada)</p>
+          <div class="grid-2" style="margin-top:10px">
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/filete-roja-piel.jpg" alt="Filete roja con piel" /></div>
+              <h3>Roja con piel</h3>
+              <p class="sci">Oreochromis spp.</p>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/filete-sin-piel.jpg" alt="Filete sin piel" /></div>
+              <h3>Roja sin piel</h3>
+              <p class="sci">Oreochromis spp.</p>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/filete-plateada-piel.jpg" alt="Filete plateada con piel" /></div>
+              <h3>Plateada con piel</h3>
+              <p class="sci">Oreochromis niloticus</p>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/filete-sin-piel.jpg" alt="Filete plateada sin piel" /></div>
+              <h3>Plateada sin piel</h3>
+              <p class="sci">Oreochromis niloticus</p>
+            </article>
+          </div>
+          <p class="foot"><span>Filete fresco</span><span>06</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Filete de tilapia</p>
+          <h2 style="font-size:22px;margin:4px 0 8px">Al vacío con monóxido y tallas</h2>
+          <div class="grid-2">
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/filete-roja-monoxido.jpg" alt="Bolsa Botero filete con monóxido" /></div>
+              <h3>Roja sin piel · vacío con monóxido</h3>
+              <p class="sci">Única presentación primaria: empacado al vacío.</p>
+            </article>
+            <article class="card">
+              <div class="photo tall"><img src="assets/products/vacio-filete-roja-monoxido.jpg" alt="Filete con monóxido al vacío" /></div>
+              <h3>Presentación al vacío</h3>
+              <p class="sci">Oreochromis spp.</p>
+            </article>
+          </div>
+          <div class="card" style="margin-top:10px">
+            <p class="kicker">Tallas de filete</p>
+            <div class="chips" style="margin-top:8px">
+              <span class="chip">3 – 5 oz · 85 – 142 g</span>
+              <span class="chip">4 – 6 oz · 113 – 170 g</span>
+              <span class="chip">7 – 9 oz · 198 – 255 g</span>
+              <span class="chip">9 UP · 255 g UP</span>
+            </div>
+            <p class="muted" style="margin-top:8px;font-size:12px">También hay filete congelado, con congelación convencional o IQF y despacho en contenedor de 40 pies.</p>
+          </div>
+          <div class="grid-3" style="margin-top:10px">
+            <article class="card">
+              <div class="photo"><img src="assets/packs/vacio-filete-plateada-piel.jpg" alt="Vacío plateada con piel" /></div>
+              <h3 style="font-size:12px">Vacío · plateada con piel</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/vacio-filete-sin-piel.jpg" alt="Vacío sin piel" /></div>
+              <h3 style="font-size:12px">Vacío · sin piel</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/products/filete-congelado.jpg" alt="Filete congelado" /></div>
+              <h3 style="font-size:12px">Filete congelado</h3>
+            </article>
+          </div>
+          <p class="foot"><span>Filete · monóxido y tallas</span><span>07</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Logística</p>
+          <h2 style="font-size:26px;margin:4px 0 8px">Empaques</h2>
+          <p class="muted" style="font-size:13px;margin-bottom:10px">Entera y filete: empaque primario, caja de icopor como secundario. Entera congelada admite caja de cartón adicional.</p>
+          <div class="grid-3">
+            <article class="card">
+              <div class="photo"><img src="assets/packs/bolsa-roja-fresco.jpg" alt="Bolsa" /></div>
+              <h3>Bolsa</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/vacio-roja-fresco.jpg" alt="Vacío entera" /></div>
+              <h3>Empacado al vacío</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/granel-roja-fresco.jpg" alt="Granel fresco" /></div>
+              <h3>A granel</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/termoIcopor.jpg" alt="Caja de icopor" /></div>
+              <h3>Caja de poliestireno expandido</h3>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/cajaCarton.jpg" alt="Caja de cartón" /></div>
+              <h3>Caja de cartón</h3>
+              <p class="sci">Empaque adicional · congelado</p>
+            </article>
+            <article class="card">
+              <div class="photo"><img src="assets/packs/vacio-filete-roja-monoxido.jpg" alt="Vacío filete" /></div>
+              <h3>Vacío de filete</h3>
+            </article>
+          </div>
+          <div class="card" style="margin-top:10px">
+            <p class="kicker">Talla de la caja térmica</p>
+            <p style="margin-top:8px;font-size:13px;font-weight:700">Entera: 4.54 kg / 10 lb · 9.98 kg / 22 lb</p>
+            <p style="margin-top:4px;font-size:13px;font-weight:700">Filete: 2.27 kg / 5 lb · 4.54 kg / 10 lb · 9.98 kg / 22 lb</p>
+            <p class="muted" style="margin-top:6px;font-size:12px">Cantidad en kg o en número de termos. Pieles: solo kg, sin empaque.</p>
+          </div>
+          <p class="foot"><span>Empaques</span><span>08</span></p>
+        </div>
+      </section>
+
+      <section class="page">
+        <div class="pad">
+          <p class="kicker">Subproductos</p>
+          <h2 style="font-size:26px;margin:4px 0 4px">Piel de tilapia</h2>
+          <p class="sci">Oreochromis niloticus · unidad solo en kg · sin empaque en catálogo</p>
+          <div class="grid-2" style="margin-top:12px">
+            <article class="card">
+              <div class="photo" style="height:240px"><img src="assets/products/pieles.jpg" alt="Piel de tilapia" /></div>
+              <h3>Producto</h3>
+            </article>
+            <article class="card">
+              <div class="photo" style="height:240px"><img src="assets/products/pieles-pallet.jpg" alt="Pallet de pieles" /></div>
+              <h3>Pallet envuelto en stretch</h3>
+            </article>
+          </div>
+          <div class="note" style="margin-top:14px">Indique cantidad en kilogramos, destino y datos de contacto para cotizar este subproducto.</div>
+          <p class="foot"><span>Piel de tilapia</span><span>09</span></p>
+        </div>
+      </section>
+
+      <section class="page end">
+        <div class="pad">
+          <p class="kicker">Contacto</p>
+          <h2 style="font-size:30px;margin:8px 0 12px">Cotice con nosotros</h2>
+          <p style="font-size:16px;line-height:1.5;max-width:160mm">CI Piscícola Botero SA. Este catálogo es una guía de producto. El pedido se confirma con el vendedor; no implica compra ni pago.</p>
+          <dl class="spec" style="margin-top:22px">
+            <dt>WhatsApp</dt><dd>+57 316 457 0484</dd>
+            <dt>Catálogo interactivo</dt><dd>juanmamejiaguzman-lgtm.github.io/catalogo-ventas</dd>
+            <dt>Incoterms</dt><dd>EXW · FOB · CIF · CFR · FCA · DDP</dd>
+            <dt>Redes</dt><dd>youtube.com · instagram.com/piscicolabotero · facebook.com/piscicolabotero</dd>
+          </dl>
+          <div class="note" style="margin-top:18px;background:rgba(255,255,255,.1);border-left-color:#00a7e1;color:#fff">
+            Envíe nombre, empresa, ciudad, país, correo, producto, talla, empaque y cantidad.
+          </div>
+          <img src="assets/logo.png" alt="" style="width:140px;margin-top:auto;filter:brightness(10)" />
+          <p class="foot"><span>Pedido de cotización · no es una compra</span><span>10</span></p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

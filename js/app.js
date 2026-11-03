@@ -32,6 +32,7 @@ const I18N = {
     socialLabel: "Redes sociales",
     welcomeLede:
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
+    pdfLink: "Descargar catálogo impreso (PDF)",
     productsTitle: "¿Qué producto desea?",
     productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
     shipFrozen: "Despacho en contenedor refrigerado de 40 pies.",
@@ -192,6 +193,7 @@ const I18N = {
     socialLabel: "Social media",
     welcomeLede:
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
+    pdfLink: "Download printed catalog (PDF)",
     productsTitle: "Which product do you want?",
     productsLede: "First choose the type and how you want it. Then set packing and destination.",
     shipFrozen: "Shipped in a refrigerated 40-foot container.",
@@ -352,6 +354,7 @@ const I18N = {
     socialLabel: "Redes sociais",
     welcomeLede:
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
+    pdfLink: "Baixar catálogo impresso (PDF)",
     productsTitle: "Qual produto deseja?",
     productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
     shipFrozen: "Despacho em contêiner refrigerado de 40 pés.",
@@ -511,6 +514,7 @@ const I18N = {
     videoTitle: "了解我们的渔场",
     socialLabel: "社交媒体",
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
+    pdfLink: "下载印刷版产品目录（PDF）",
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
     shipFrozen: "以 40 英尺冷藏集装箱发运。",
@@ -954,7 +958,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "oct29";
+  const bust = "nov3";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
