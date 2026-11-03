@@ -67,24 +67,36 @@
       .chips { display: flex; flex-wrap: wrap; gap: 6px; }
       .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
       .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .grow { flex: 1; min-height: 0; align-items: stretch; }
       .card {
         background: var(--paper);
         border: 1px solid var(--line);
         border-radius: 14px;
         padding: 8px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
       }
       .card h3 { font-size: 14px; margin: 6px 0 2px; }
       .photo {
         background: #fff;
         border-radius: 10px;
-        height: 118px;
-        display: grid;
-        place-items: center;
+        flex: 1;
+        min-height: 70mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
       }
-      .photo img { width: 100%; height: 100%; object-fit: contain; }
-      .photo.tall { height: 168px; }
-      .photo.hero { height: 210px; }
+      .photo img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+      }
+      .photo.hero { min-height: 78mm; flex: 0.9; }
       .foot {
         margin-top: auto;
         display: flex;
@@ -202,10 +214,7 @@
           <p class="kicker">Tilapia entera</p>
           <h2 style="font-size:26px;margin:4px 0 4px">Entera fresca</h2>
           <p class="sci">Oreochromis spp. (roja) · Oreochromis niloticus (plateada)</p>
-          <div class="photo hero" style="margin:10px 0">
-            <img src="assets/products/entera-fresco.jpg" alt="Tilapia entera fresca roja y plateada" />
-          </div>
-          <div class="grid-2">
+          <div class="grid-2 grow" style="margin-top:10px">
             <article class="card">
               <div class="photo"><img src="assets/products/entera-roja.jpg" alt="Tilapia entera roja" /></div>
               <h3>Tilapia entera roja</h3>
@@ -241,21 +250,21 @@
             <span class="chip">H y G (Decapitado y eviscerado)</span>
           </div>
           <p class="muted" style="font-size:12px;margin-bottom:8px">Pocket y H y G aplican a entera fresca, roja y plateada.</p>
-          <div class="grid-2">
+          <div class="grid-2 grow">
             <article class="card">
-              <div class="photo tall"><img src="assets/products/entera-roja-fresco-pocket.jpg" alt="Pocket tilapia roja" /></div>
+              <div class="photo"><img src="assets/products/entera-roja-fresco-pocket.jpg" alt="Pocket tilapia roja" /></div>
               <h3>Pocket · roja</h3>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/entera-roja-fresco-posta.jpg" alt="H y G tilapia roja" /></div>
+              <div class="photo"><img src="assets/products/entera-roja-fresco-posta.jpg" alt="H y G tilapia roja" /></div>
               <h3>H y G · roja</h3>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/entera-plateada-fresco-pocket.jpg" alt="Pocket tilapia plateada" /></div>
+              <div class="photo"><img src="assets/products/entera-plateada-fresco-pocket.jpg" alt="Pocket tilapia plateada" /></div>
               <h3>Pocket · plateada</h3>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/entera-plateada-fresco-posta.jpg" alt="H y G tilapia plateada" /></div>
+              <div class="photo"><img src="assets/products/entera-plateada-fresco-posta.jpg" alt="H y G tilapia plateada" /></div>
               <h3>H y G · plateada</h3>
             </article>
           </div>
@@ -268,10 +277,10 @@
           <p class="kicker">Tilapia entera</p>
           <h2 style="font-size:26px;margin:4px 0 4px">Entera congelada</h2>
           <p class="sci">Despacho en contenedor refrigerado de 40 pies.</p>
-          <div class="photo hero" style="margin:10px 0">
-            <img src="assets/products/entera-congelado.jpg" alt="Tilapia entera congelada" />
-          </div>
-          <div class="grid-2">
+          <article class="card" style="flex:0.72;min-height:0;margin-top:8px">
+            <div class="photo hero"><img src="assets/products/entera-congelado.jpg" alt="Tilapia entera congelada" /></div>
+          </article>
+          <div class="grid-2 grow" style="margin-top:8px">
             <article class="card">
               <div class="photo"><img src="assets/packs/granel-roja.jpg" alt="Granel congelado" /></div>
               <h3>A granel · congelada</h3>
@@ -282,11 +291,11 @@
               <p class="sci">Opcional. Por defecto: ninguno.</p>
             </article>
           </div>
-          <dl class="spec" style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px">
+          <dl class="spec" style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px">
             <div><dt>Tipo de congelación</dt><dd>Convencional o IQF</dd></div>
             <div><dt>Tallas</dt><dd>80–350 g · 350–550 g · 550–750 g</dd></div>
             <div><dt>Empaque primario</dt><dd>Bolsa · Vacío · A granel</dd></div>
-            <div><dt>Empaque secundario</dt><dd>Caja de poliestireno expandido<br />4.54 kg / 10 lb · 9.98 kg / 22 lb</dd></div>
+            <div><dt>Empaque secundario</dt><dd>Icopor 4.54 kg / 10 lb · 9.98 kg / 22 lb</dd></div>
           </dl>
           <p class="foot"><span>Tilapia entera congelada</span><span>05</span></p>
         </div>
@@ -297,24 +306,24 @@
           <p class="kicker">Filete de tilapia</p>
           <h2 style="font-size:26px;margin:4px 0 4px">Filete fresco</h2>
           <p class="sci">Oreochromis spp. (roja) · Oreochromis niloticus (plateada)</p>
-          <div class="grid-2" style="margin-top:10px">
+          <div class="grid-2 grow" style="margin-top:10px">
             <article class="card">
-              <div class="photo tall"><img src="assets/products/filete-roja-piel.jpg" alt="Filete roja con piel" /></div>
+              <div class="photo"><img src="assets/products/filete-roja-piel.jpg" alt="Filete roja con piel" /></div>
               <h3>Roja con piel</h3>
               <p class="sci">Oreochromis spp.</p>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/filete-sin-piel.jpg" alt="Filete sin piel" /></div>
+              <div class="photo"><img src="assets/products/filete-sin-piel.jpg" alt="Filete sin piel" /></div>
               <h3>Roja sin piel</h3>
               <p class="sci">Oreochromis spp.</p>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/filete-plateada-piel.jpg" alt="Filete plateada con piel" /></div>
+              <div class="photo"><img src="assets/products/filete-plateada-piel.jpg" alt="Filete plateada con piel" /></div>
               <h3>Plateada con piel</h3>
               <p class="sci">Oreochromis niloticus</p>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/filete-sin-piel.jpg" alt="Filete plateada sin piel" /></div>
+              <div class="photo"><img src="assets/products/filete-sin-piel.jpg" alt="Filete plateada sin piel" /></div>
               <h3>Plateada sin piel</h3>
               <p class="sci">Oreochromis niloticus</p>
             </article>
@@ -327,19 +336,19 @@
         <div class="pad">
           <p class="kicker">Filete de tilapia</p>
           <h2 style="font-size:22px;margin:4px 0 8px">Al vacío con monóxido y tallas</h2>
-          <div class="grid-2">
+          <div class="grid-2 grow">
             <article class="card">
-              <div class="photo tall"><img src="assets/products/filete-roja-monoxido.jpg" alt="Bolsa Botero filete con monóxido" /></div>
+              <div class="photo"><img src="assets/products/filete-roja-monoxido.jpg" alt="Bolsa Botero filete con monóxido" /></div>
               <h3>Roja sin piel · vacío con monóxido</h3>
               <p class="sci">Única presentación primaria: empacado al vacío.</p>
             </article>
             <article class="card">
-              <div class="photo tall"><img src="assets/products/vacio-filete-roja-monoxido.jpg" alt="Filete con monóxido al vacío" /></div>
+              <div class="photo"><img src="assets/products/vacio-filete-roja-monoxido.jpg" alt="Filete con monóxido al vacío" /></div>
               <h3>Presentación al vacío</h3>
               <p class="sci">Oreochromis spp.</p>
             </article>
           </div>
-          <div class="card" style="margin-top:10px">
+          <div class="card" style="margin-top:8px;flex:0 0 auto">
             <p class="kicker">Tallas de filete</p>
             <div class="chips" style="margin-top:8px">
               <span class="chip">3 – 5 oz · 85 – 142 g</span>
@@ -349,20 +358,6 @@
             </div>
             <p class="muted" style="margin-top:8px;font-size:12px">También hay filete congelado, con congelación convencional o IQF y despacho en contenedor de 40 pies.</p>
           </div>
-          <div class="grid-3" style="margin-top:10px">
-            <article class="card">
-              <div class="photo"><img src="assets/packs/vacio-filete-plateada-piel.jpg" alt="Vacío plateada con piel" /></div>
-              <h3 style="font-size:12px">Vacío · plateada con piel</h3>
-            </article>
-            <article class="card">
-              <div class="photo"><img src="assets/packs/vacio-filete-sin-piel.jpg" alt="Vacío sin piel" /></div>
-              <h3 style="font-size:12px">Vacío · sin piel</h3>
-            </article>
-            <article class="card">
-              <div class="photo"><img src="assets/products/filete-congelado.jpg" alt="Filete congelado" /></div>
-              <h3 style="font-size:12px">Filete congelado</h3>
-            </article>
-          </div>
           <p class="foot"><span>Filete · monóxido y tallas</span><span>07</span></p>
         </div>
       </section>
@@ -371,8 +366,8 @@
         <div class="pad">
           <p class="kicker">Logística</p>
           <h2 style="font-size:26px;margin:4px 0 8px">Empaques</h2>
-          <p class="muted" style="font-size:13px;margin-bottom:10px">Entera y filete: empaque primario, caja de icopor como secundario. Entera congelada admite caja de cartón adicional.</p>
-          <div class="grid-3">
+          <p class="muted" style="font-size:13px;margin-bottom:8px">Entera y filete: empaque primario, caja de icopor como secundario. Entera congelada admite caja de cartón adicional.</p>
+          <div class="grid-3 grow">
             <article class="card">
               <div class="photo"><img src="assets/packs/bolsa-roja-fresco.jpg" alt="Bolsa" /></div>
               <h3>Bolsa</h3>
@@ -399,7 +394,7 @@
               <h3>Vacío de filete</h3>
             </article>
           </div>
-          <div class="card" style="margin-top:10px">
+          <div class="card" style="margin-top:8px;flex:0 0 auto">
             <p class="kicker">Talla de la caja térmica</p>
             <p style="margin-top:8px;font-size:13px;font-weight:700">Entera: 4.54 kg / 10 lb · 9.98 kg / 22 lb</p>
             <p style="margin-top:4px;font-size:13px;font-weight:700">Filete: 2.27 kg / 5 lb · 4.54 kg / 10 lb · 9.98 kg / 22 lb</p>
