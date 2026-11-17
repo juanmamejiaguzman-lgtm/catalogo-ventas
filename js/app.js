@@ -33,6 +33,36 @@ const I18N = {
     welcomeLede:
       "Catálogo interactivo de CI Piscícola Botero SA. Elige producto, empaque y destino. El pedido llega al vendedor por WhatsApp.",
     pdfLink: "Descargar catálogo impreso (PDF)",
+    certsTitle: "Certificaciones de calidad",
+    certsLede:
+      "Trazabilidad, inocuidad y sostenibilidad verificadas de la granja a la planta de exportación. Producto libre de antibióticos.",
+    certs: {
+      bap: {
+        mark: "BAP 4★",
+        name: "Best Aquaculture Practices",
+        blurb: "Cadena completa: alevinos, engorde, alimento y planta de proceso.",
+      },
+      haccp: {
+        mark: "HACCP",
+        name: "Inocuidad alimentaria",
+        blurb: "Sistema preventivo en la planta de proceso para exportación (INVIMA).",
+      },
+      asc: {
+        mark: "ASC",
+        name: "Aquaculture Stewardship Council",
+        blurb: "Cría responsable y cadena de custodia hasta la planta.",
+      },
+      globalgap: {
+        mark: "GLOBALG.A.P.",
+        name: "Buenas prácticas agrícolas",
+        blurb: "CoC hasta planta de proceso. Recertificación GRASP.",
+      },
+      smeta: {
+        mark: "SMETA",
+        name: "Auditoría social",
+        blurb: "Revisión anual de normas laborales, salud, ambiente y ética.",
+      },
+    },
     productsTitle: "¿Qué producto desea?",
     productsLede: "Elige primero el tipo y cómo lo quieres. Después indicas empaque y destino.",
     shipFrozen: "Despacho en contenedor refrigerado de 40 pies.",
@@ -194,6 +224,36 @@ const I18N = {
     welcomeLede:
       "Interactive catalog of CI Piscícola Botero SA. Choose product, packing and destination. The request reaches the seller on WhatsApp.",
     pdfLink: "Download printed catalog (PDF)",
+    certsTitle: "Quality certifications",
+    certsLede:
+      "Traceability, food safety and sustainability verified from farm to export plant. Antibiotic-free product.",
+    certs: {
+      bap: {
+        mark: "BAP 4★",
+        name: "Best Aquaculture Practices",
+        blurb: "Full chain: hatchery, grow-out, feed mill and processing plant.",
+      },
+      haccp: {
+        mark: "HACCP",
+        name: "Food safety",
+        blurb: "Preventive system at the export processing plant (INVIMA).",
+      },
+      asc: {
+        mark: "ASC",
+        name: "Aquaculture Stewardship Council",
+        blurb: "Responsible farming and chain of custody to the plant.",
+      },
+      globalgap: {
+        mark: "GLOBALG.A.P.",
+        name: "Good agricultural practices",
+        blurb: "CoC to processing plant. GRASP recertification.",
+      },
+      smeta: {
+        mark: "SMETA",
+        name: "Social audit",
+        blurb: "Annual review of labor, health, environment and ethics.",
+      },
+    },
     productsTitle: "Which product do you want?",
     productsLede: "First choose the type and how you want it. Then set packing and destination.",
     shipFrozen: "Shipped in a refrigerated 40-foot container.",
@@ -355,6 +415,36 @@ const I18N = {
     welcomeLede:
       "Catálogo interativo da CI Piscícola Botero SA. Escolha produto, embalagem e destino. O pedido chega ao vendedor pelo WhatsApp.",
     pdfLink: "Baixar catálogo impresso (PDF)",
+    certsTitle: "Certificações de qualidade",
+    certsLede:
+      "Rastreabilidade, inocuidade e sustentabilidade verificadas da granja à planta de exportação. Produto livre de antibióticos.",
+    certs: {
+      bap: {
+        mark: "BAP 4★",
+        name: "Best Aquaculture Practices",
+        blurb: "Cadeia completa: alevinos, engorda, ração e planta de processo.",
+      },
+      haccp: {
+        mark: "HACCP",
+        name: "Inocuidade alimentar",
+        blurb: "Sistema preventivo na planta de processo para exportação (INVIMA).",
+      },
+      asc: {
+        mark: "ASC",
+        name: "Aquaculture Stewardship Council",
+        blurb: "Criação responsável e cadeia de custódia até a planta.",
+      },
+      globalgap: {
+        mark: "GLOBALG.A.P.",
+        name: "Boas práticas agrícolas",
+        blurb: "CoC até a planta de processo. Recertificação GRASP.",
+      },
+      smeta: {
+        mark: "SMETA",
+        name: "Auditoria social",
+        blurb: "Revisão anual de trabalho, saúde, ambiente e ética.",
+      },
+    },
     productsTitle: "Qual produto deseja?",
     productsLede: "Primeiro escolha o tipo e como o quer. Depois indique embalagem e destino.",
     shipFrozen: "Despacho em contêiner refrigerado de 40 pés.",
@@ -515,6 +605,35 @@ const I18N = {
     socialLabel: "社交媒体",
     welcomeLede: "CI Piscícola Botero SA 互动产品目录。选择产品、包装和目的地。询盘将通过 WhatsApp 发送给销售人员。",
     pdfLink: "下载印刷版产品目录（PDF）",
+    certsTitle: "质量认证",
+    certsLede: "从养殖场到出口加工厂的可追溯性、食品安全与可持续性。产品不含抗生素。",
+    certs: {
+      bap: {
+        mark: "BAP 4★",
+        name: "Best Aquaculture Practices",
+        blurb: "全链条：苗种、养成、饲料与加工厂。",
+      },
+      haccp: {
+        mark: "HACCP",
+        name: "食品安全",
+        blurb: "出口加工厂的预防体系（INVIMA）。",
+      },
+      asc: {
+        mark: "ASC",
+        name: "Aquaculture Stewardship Council",
+        blurb: "负责任养殖及至加工厂的监管链。",
+      },
+      globalgap: {
+        mark: "GLOBALG.A.P.",
+        name: "良好农业规范",
+        blurb: "至加工厂的监管链。GRASP 复审。",
+      },
+      smeta: {
+        mark: "SMETA",
+        name: "社会责任审核",
+        blurb: "每年审核劳工、健康、环境与商业伦理。",
+      },
+    },
     productsTitle: "您需要哪类产品？",
     productsLede: "请先选择产品类型及其形态，然后再填写包装和目的地。",
     shipFrozen: "以 40 英尺冷藏集装箱发运。",
@@ -958,7 +1077,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "nov3";
+  const bust = "nov17";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
@@ -1107,6 +1226,7 @@ function applyI18n() {
     el.setAttribute("aria-label", t()[el.dataset.i18nAria]);
   });
   renderProducts();
+  renderCerts();
   if (state.group === "entera") renderColors();
   if (needsFilletChoice()) renderFilletVariants();
   if (state.group && state.option && (state.group !== "entera" || state.color) && (!needsFilletChoice() || (state.color && state.skin))) fillConfig();
@@ -1118,6 +1238,27 @@ function showStage(name) {
     el.classList.toggle("is-active", el.dataset.stage === name);
   });
   $("#homeBtn").hidden = name === "welcome";
+}
+
+const CERT_KEYS = ["bap", "haccp", "asc", "globalgap", "smeta"];
+
+function renderCerts() {
+  const dict = t();
+  const items = dict.certs;
+  const welcome = $("#certsWelcomeRow");
+  const grid = $("#certsGrid");
+  if (welcome) {
+    welcome.innerHTML = CERT_KEYS.map((id) => `<span class="cert-pill">${items[id].mark}</span>`).join("");
+  }
+  if (grid) {
+    grid.innerHTML = CERT_KEYS.map(
+      (id) => `<article class="cert-card">
+        <span class="cert-mark">${items[id].mark}</span>
+        <strong>${items[id].name}</strong>
+        <p>${items[id].blurb}</p>
+      </article>`
+    ).join("");
+  }
 }
 
 function renderProducts() {
@@ -1610,3 +1751,4 @@ $("#orderForm").addEventListener("submit", (event) => {
 
 applyI18n();
 renderProducts();
+renderCerts();
