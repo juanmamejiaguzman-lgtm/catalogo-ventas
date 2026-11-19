@@ -95,6 +95,8 @@ const I18N = {
     sendWhatsapp: "Enviar pedido por WhatsApp",
     disclaimer: "Esto no confirma una venta ni un pago. Solo envía la solicitud al vendedor.",
     footerNote: "Pedido de cotización · no es una compra",
+    hs: "Partida arancelaria",
+    skinsIntl: "Solo se reciben pedidos de pieles para el mercado internacional.",
     fields: {
       product: "Producto",
       color: "Color",
@@ -104,6 +106,7 @@ const I18N = {
       freeze: "Tipo de congelación",
       incoterm: "Incoterm",
       scientific: "Nombre científico",
+      hs: "Partida arancelaria",
       packPrimary: "Empaque primario",
       packSecondary: "Empaque secundario",
       packExtra: "Empaque adicional",
@@ -206,6 +209,7 @@ const I18N = {
       (o.size ? `Talla: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelación: ${o.freeze}\n` : "") +
       `Nombre científico: ${o.scientific}\n` +
+      (o.hs ? `Partida arancelaria: ${o.hs}\n` : "") +
       (o.packSecondary ? `Empaque primario: ${o.packPrimary}\nEmpaque secundario: ${o.packSecondary}\n` : o.packPrimary ? `Empaque: ${o.packPrimary}\n` : "") +
       (o.packExtra ? `Empaque adicional: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Talla de la caja: ${o.termoSize}\n` : "") +
@@ -286,6 +290,8 @@ const I18N = {
     sendWhatsapp: "Send request on WhatsApp",
     disclaimer: "This does not confirm a sale or a payment. It only sends the request to the seller.",
     footerNote: "Quote request · not a purchase",
+    hs: "HS code",
+    skinsIntl: "Skin orders are accepted for the international market only.",
     fields: {
       product: "Product",
       color: "Color",
@@ -295,6 +301,7 @@ const I18N = {
       freeze: "Freezing type",
       incoterm: "Incoterm",
       scientific: "Scientific name",
+      hs: "HS code",
       packPrimary: "Primary packaging",
       packSecondary: "Secondary packaging",
       packExtra: "Additional packaging",
@@ -397,6 +404,7 @@ const I18N = {
       (o.size ? `Size: ${o.size}\n` : "") +
       (o.freeze ? `Freezing type: ${o.freeze}\n` : "") +
       `Scientific name: ${o.scientific}\n` +
+      (o.hs ? `HS code: ${o.hs}\n` : "") +
       (o.packSecondary ? `Primary packaging: ${o.packPrimary}\nSecondary packaging: ${o.packSecondary}\n` : o.packPrimary ? `Packaging: ${o.packPrimary}\n` : "") +
       (o.packExtra ? `Additional packaging: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Box size: ${o.termoSize}\n` : "") +
@@ -477,6 +485,8 @@ const I18N = {
     sendWhatsapp: "Enviar pedido pelo WhatsApp",
     disclaimer: "Isto não confirma uma venda nem um pagamento. Só envia o pedido ao vendedor.",
     footerNote: "Pedido de cotação · não é uma compra",
+    hs: "Classificação tarifária",
+    skinsIntl: "Pedidos de peles são aceitos apenas para o mercado internacional.",
     fields: {
       product: "Produto",
       color: "Cor",
@@ -486,6 +496,7 @@ const I18N = {
       freeze: "Tipo de congelamento",
       incoterm: "Incoterm",
       scientific: "Nome científico",
+      hs: "Classificação tarifária",
       packPrimary: "Embalagem primária",
       packSecondary: "Embalagem secundária",
       packExtra: "Embalagem adicional",
@@ -588,6 +599,7 @@ const I18N = {
       (o.size ? `Tamanho: ${o.size}\n` : "") +
       (o.freeze ? `Tipo de congelamento: ${o.freeze}\n` : "") +
       `Nome científico: ${o.scientific}\n` +
+      (o.hs ? `Classificação tarifária: ${o.hs}\n` : "") +
       (o.packSecondary ? `Embalagem primária: ${o.packPrimary}\nEmbalagem secundária: ${o.packSecondary}\n` : o.packPrimary ? `Embalagem: ${o.packPrimary}\n` : "") +
       (o.packExtra ? `Embalagem adicional: ${o.packExtra}\n` : "") +
       (o.termoSize ? `Tamanho da caixa térmica: ${o.termoSize}\n` : "") +
@@ -666,6 +678,8 @@ const I18N = {
     sendWhatsapp: "通过 WhatsApp 发送询盘",
     disclaimer: "这不会确认成交或付款，只是把询盘发给销售人员。",
     footerNote: "询价请求 · 并非购买",
+    hs: "税则号列",
+    skinsIntl: "鱼皮订单仅接受国际市场。",
     fields: {
       product: "产品",
       color: "颜色",
@@ -675,6 +689,7 @@ const I18N = {
       freeze: "冻结方式",
       incoterm: "贸易术语",
       scientific: "学名",
+      hs: "税则号列",
       packPrimary: "内包装",
       packSecondary: "外包装",
       packExtra: "附加包装",
@@ -777,6 +792,7 @@ const I18N = {
       (o.size ? `规格：${o.size}\n` : "") +
       (o.freeze ? `冻结方式：${o.freeze}\n` : "") +
       `学名：${o.scientific}\n` +
+      (o.hs ? `税则号列：${o.hs}\n` : "") +
       (o.packSecondary ? `内包装：${o.packPrimary}\n外包装：${o.packSecondary}\n` : o.packPrimary ? `包装：${o.packPrimary}\n` : "") +
       (o.packExtra ? `附加包装：${o.packExtra}\n` : "") +
       (o.termoSize ? `保温箱规格：${o.termoSize}\n` : "") +
@@ -810,6 +826,22 @@ const GROUPS = {
     options: ["pieles"],
   },
 };
+
+const HS_CODES = {
+  entera: { fresco: "0302.71.00.00", congelado: "0303.23.00.00" },
+  filete: { fresco: "0304.31.00.00", congelado: "0304.61.00.00" },
+  subproductos: { pieles: "0511.91.20.00" },
+};
+
+function hsCodeFor(group, option) {
+  return (HS_CODES[group] && HS_CODES[group][option]) || "";
+}
+
+function hsLine(group, option) {
+  const code = hsCodeFor(group, option);
+  if (!code) return "";
+  return `<small class="hs">${t().hs}: ${code}</small>`;
+}
 
 const DESTINATIONS = [
   { city: "Bogotá", country: "Colombia" },
@@ -1077,7 +1109,7 @@ const PHOTO_FILES = new Set([
 ]);
 
 function mediaBox(folder, keys, fallback) {
-  const bust = "nov17";
+  const bust = "nov19";
   const srcs = [];
   for (const key of keys) {
     [".jpg", ".jpeg", ".png", ".webp"].forEach((ext) => {
@@ -1272,12 +1304,15 @@ function renderProducts() {
           (option) => `<button class="choice" type="button" data-group="${id}" data-option="${option}">
             ${productMedia({ group: id, option, slot: "card" })}
             <span>${copy.options[option]}</span>
+            ${hsLine(id, option)}
           </button>`
         )
         .join("");
+      const skinsNote = id === "subproductos" ? `<p class="note family-note">${t().skinsIntl}</p>` : "";
       return `<article class="family${group.options.length === 1 ? " family--solo" : ""}">
         <h3>${copy.name}</h3>
         <p class="sci">${copy.sci}</p>
+        ${skinsNote}
         <div class="choices">${options}</div>
       </article>`;
     })
@@ -1300,6 +1335,7 @@ function renderFilletVariants() {
         ${productMedia({ group: "filete", option: state.option, color, skin })}
         <span>${dict.filletVariants[`${color}-${skin}`]}</span>
         <small class="sci">${dict.colorSci[color]}</small>
+        ${hsLine("filete", state.option)}
       </button>`);
     });
   });
@@ -1307,6 +1343,7 @@ function renderFilletVariants() {
     ${productMedia({ group: "filete", option: state.option, color: "roja", skin: "sin", monoxido: true, slot: "card" })}
     <span>${dict.filletVariants["roja-sin-monoxido"]}</span>
     <small class="sci">${dict.colorSci.roja}</small>
+    ${hsLine("filete", state.option)}
   </button>`);
   $("#filletCards").innerHTML = cards.join("");
 }
@@ -1320,6 +1357,7 @@ function renderColors() {
         ${productMedia({ group: "entera", option: state.option, color, slot: "color" })}
         <span>${dict.colors[color]}</span>
         <small class="sci">${dict.colorSci[color]}</small>
+        ${hsLine("entera", state.option)}
       </button>`
     )
     .join("");
@@ -1351,12 +1389,17 @@ function fillConfig() {
         .join(" · ");
   $("#configTitle").textContent = title;
   $("#configSci").textContent = scientificName();
+  const configHs = $("#configHs");
+  const hs = hsCodeFor(id, state.option);
+  configHs.hidden = !hs;
+  configHs.textContent = hs ? `${dict.hs}: ${hs}` : "";
   $("#configLede").textContent = groupCopy.lede;
   updateMediaFrames();
   const ship = shippingCopy(id, state.option);
   const shipHint = $("#shipHint");
-  shipHint.hidden = !ship;
-  shipHint.textContent = ship;
+  const skinsNote = id === "subproductos" ? dict.skinsIntl : "";
+  shipHint.hidden = !ship && !skinsNote;
+  shipHint.textContent = [skinsNote, ship].filter(Boolean).join(" ");
 
   const processField = $("#processField");
   const needsProcess = id === "entera";
@@ -1469,6 +1512,7 @@ function formattedOrder() {
     size: sizesFor(o.group) ? sizeLabel(o.size) : "",
     freeze: o.freeze ? dict.freezes[o.freeze] : "",
     scientific: o.color && (o.group === "entera" || o.group === "filete") ? dict.colorSci[o.color] : dict.groups[o.group].sci,
+    hs: hsCodeFor(o.group, o.option),
     packPrimary,
     packSecondary,
     packExtra: o.packExtra && o.packExtra !== "ninguno" ? dict.packExtra[o.packExtra] : "",
@@ -1492,6 +1536,7 @@ function renderTicket() {
     ${o.size ? `<dt>${dict.fields.size}</dt><dd>${o.size}</dd>` : ""}
     ${o.freeze ? `<dt>${dict.fields.freeze}</dt><dd>${o.freeze}</dd>` : ""}
     <dt>${dict.fields.scientific}</dt><dd class="sci">${o.scientific}</dd>
+    ${o.hs ? `<dt>${dict.fields.hs}</dt><dd>${o.hs}</dd>` : ""}
     ${
       o.packSecondary
         ? `<dt>${dict.fields.packPrimary}</dt><dd>${o.packPrimary}</dd><dt>${dict.fields.packSecondary}</dt><dd>${o.packSecondary}</dd>${o.termoSize ? `<dt>${dict.fields.termoSize}</dt><dd>${o.termoSize}</dd>` : ""}${o.packExtra ? `<dt>${dict.fields.packExtra}</dt><dd>${o.packExtra}</dd>` : ""}`

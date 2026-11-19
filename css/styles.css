@@ -732,6 +732,23 @@ html.is-zh h3 {
   font-weight: 500;
 }
 
+.hs,
+.choice .hs,
+#configHs {
+  display: block;
+  margin: 6px 0 0;
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--cyan-deep);
+}
+
+.family-note {
+  margin: 0 0 12px;
+  text-align: left;
+}
+
 .cards-2 {
   grid-template-columns: 1fr 1fr;
 }
